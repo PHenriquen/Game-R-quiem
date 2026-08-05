@@ -1,0 +1,35 @@
+# Godot 4+
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+
+# Godot C# / .NET
+.mono/
+data_*/
+mono_crash.*.json
+*.sln
+*.csproj.old
+bin/
+obj/
+
+# IDE
+.vscode/
+.idea/
+.vs/
+*.user
+*.userprefs
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Builds
+build/
+dist/
+exports/
+
+# Temporary files
+*.tmp
+*.bak
