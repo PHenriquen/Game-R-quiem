@@ -1,6 +1,6 @@
 # Contributing
 
-REQUIEM PULSE is in early pre-production. Contributions should keep the Pulse prototype small, testable and data-driven.
+**VESPER: SILENT REQUIEM** (pt-BR: **Véspera: Ecos do Silêncio**) is in early pre-production. Contributions should keep the Pulse prototype small, testable and data-driven.
 
 ## Workflow
 
