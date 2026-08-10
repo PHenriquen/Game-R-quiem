@@ -1,5 +1,7 @@
-# REQUIEM PULSE
+# VÉSPERA: ECOS DO SILÊNCIO
 
+> **International title: VESPER: SILENT REQUIEM**
+>
 > **Every death rewrites the music.**
 
 A rhythm-driven 2D action roguelite where attacks, cards and an adaptive soundtrack become one combat system.
@@ -82,7 +84,7 @@ A Score holds up to eight cards. Three cards from one family create a Harmony; c
 | Spectral blue | `#54C7CE` |
 | Aged gold | `#C4A35A` |
 
-The emblem is a cracked white mask crossed by a pulse line. The REQUIEM wordmark is elegant and distressed; PULSE is thin and modern.
+The emblem remains a cracked white mask crossed by a pulse line. The title identity now centers **Vesper** as the world and **Silent Requiem** as the international subtitle, preserving REQUIEM as a core term of the game's systems and atmosphere.
 
 ## License
 
