@@ -1,12 +1,12 @@
-# VÉSPERA: ECOS DO SILÊNCIO — Game Design Document
+# RÉQUIEM: ECOS DO SILÊNCIO — Game Design Document
 
-> **Título internacional:** VESPER: SILENT REQUIEM
+> **Título internacional:** REQUIEM: ECHOES OF SILENCE
 >
 > **Elevator pitch:** roguelite de ação 2D em que acertar ataques e esquivas no ritmo fortalece a build, adiciona camadas à música e transforma cada combate em uma apresentação.
 
 ## 1. Visão
 
-**VÉSPERA: ECOS DO SILÊNCIO** mistura a fluidez e a progressão narrativa de um action roguelite, a melancolia de uma fantasia em ruínas, a liberdade de builds de um card game e a precisão viciante de um jogo rítmico.
+**RÉQUIEM: ECOS DO SILÊNCIO** mistura a fluidez e a progressão narrativa de um action roguelite, a melancolia de uma fantasia em ruínas, a liberdade de builds de um card game e a precisão viciante de um jogo rítmico.
 
 O jogo não exige que todas as ações sejam feitas no ritmo. O combate continua responsivo fora do pulso; jogar no tempo correto oferece domínio, eficiência e espetáculo.
 

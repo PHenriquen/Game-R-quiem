@@ -1,6 +1,6 @@
 using Godot;
 
-namespace RequiemPulse.Bootstrap;
+namespace RequiemEcosDoSilencio.Bootstrap;
 
 public partial class Bootstrap : Control
 {
@@ -10,6 +10,6 @@ public partial class Bootstrap : Control
     {
         var statusLabel = GetNode<Label>("Layout/Status");
         statusLabel.Text = StatusText;
-        GD.Print("Requiem Pulse bootstrap ready.");
+        GD.Print("Réquiem: Ecos do Silêncio bootstrap ready.");
     }
 }

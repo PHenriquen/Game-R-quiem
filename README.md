@@ -1,6 +1,6 @@
-# VÉSPERA: ECOS DO SILÊNCIO
+# RÉQUIEM: ECOS DO SILÊNCIO
 
-> **International title: VESPER: SILENT REQUIEM**
+> **International title: REQUIEM: ECHOES OF SILENCE**
 >
 > **Every death rewrites the music.**
 
@@ -84,7 +84,7 @@ A Score holds up to eight cards. Three cards from one family create a Harmony; c
 | Spectral blue | `#54C7CE` |
 | Aged gold | `#C4A35A` |
 
-The emblem remains a cracked white mask crossed by a pulse line. The title identity now centers **Vesper** as the world and **Silent Requiem** as the international subtitle, preserving REQUIEM as a core term of the game's systems and atmosphere.
+The emblem remains a cracked white mask crossed by a pulse line. **Réquiem** is now the central title, directly connecting the game's identity to death, repetition, music and the REQUIEM cadence rank. **Vesper** remains the name of the world where the story takes place.
 
 ## License
 
