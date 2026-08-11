@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace Requiem.Engineering;
+namespace RequiemEcosDoSilencio.Engineering;
 
 /// <summary>
 /// Local-only gameplay telemetry for balancing and profiling runs.
