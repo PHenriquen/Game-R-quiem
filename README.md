@@ -4,57 +4,83 @@
 >
 > **Every death rewrites the music.**
 
-A rhythm-driven 2D action roguelite where attacks, cards and an adaptive soundtrack become one combat system.
+A compact rhythm-driven 2D action roguelite where attacks, cards and an adaptive soundtrack become one combat system.
 
-[Game Design](docs/GAME_DESIGN.md) · [Engineering](docs/ENGINEERING.md) · [Roadmap](docs/ROADMAP.md) · [Contributing](CONTRIBUTING.md)
+[Game Design](docs/GAME_DESIGN.md) · [Story](docs/STORY.md) · [Art Bible](docs/ART_BIBLE.md) · [Engineering](docs/ENGINEERING.md) · [Roadmap](docs/ROADMAP.md)
 
 ## The game
 
-The World Heart has shattered, leaving Vesper trapped in supernatural silence. Nox carries its last living fragment and must cross corrupted ruins, defeat the Dissonants and discover why his own heart beats in time with the machine.
+Vesper was once stabilized by the World Heart, an ancient machine whose music held memory, matter and time together. When it shattered, entire regions fell into supernatural silence and their inhabitants became trapped inside incomplete memories.
 
-Each run is a new performance of the same requiem. Death restarts the song, but changes the cards, paths and story.
+Nox awakens in the Sanctuary of the Last Sound with no memory of his past and a fragment of the Heart pulsing inside his chest. Each death returns him to the Sanctuary. Each run recovers new Echoes. Some of them recognize him.
+
+The first version asks one question: **did Nox destroy the World Heart, or was he trying to save it?**
 
 ## Core pillars
 
-- **Action on the pulse** — combat works freely, but precise timing rewards damage, energy and invulnerability.
-- **Build your score** — equip, upgrade and fuse technique cards instead of drawing during combat.
-- **Hear your mastery** — the soundtrack gains instruments and intensity as Cadence rises.
-- **Death moves the story** — characters and the sanctuary evolve between runs.
-- **Readable depth** — dark, melancholic environments contrast with clean geometric combat effects.
+- **Action first, rhythm second** — combat always works; good timing makes it stronger.
+- **Simple builds** — six equipped cards, short descriptions, three families in the first version.
+- **Adaptive music** — Cadence adds musical layers as the player performs better.
+- **Short runs** — 10–15 minutes for the first complete slice.
+- **Small story, strong mystery** — short Echoes and one clear reveal instead of long cutscenes.
+- **Readable pixel art** — dark, melancholic environments with clear combat feedback.
 
 ## Signature systems
 
 ### Pulse
 
-A subtle ring around Nox communicates the beat. Attacking, dodging or defending inside its timing window creates a Perfect action. Missing never stops the player; mastery enhances the action instead of gating it.
+A visual/music pulse communicates timing. Attack or dodge close to the beat for a Good or Perfect action. Missing never blocks the command.
 
 ### Cadence
 
 **D → C → B → A → S → REQUIEM**
 
-Long perfect sequences raise Cadence. Higher ranks add musical layers, improve rewards and unlock card effects. Repeated misses cause temporary Dissonance.
+Cadence rises through well-timed actions and progressively enriches music and effects.
 
 ### Score and cards
 
-A Score holds up to eight cards. Three cards from one family create a Harmony; combining families creates hybrid builds.
+The first version has **12 cards**, **6 slots** and **3 families**:
 
 | Family | Identity | Playstyle |
 |---|---|---|
-| Blood | Crimson | damage, sacrifice, lifesteal |
-| Veil | Violet | speed, clones, evasion |
-| Bell | Aged gold | guard, impact, counters |
-| Grave | Pale blue | curses, spirits, control |
-| Noise | Broken white | unstable rhythm manipulation |
+| Blood | Crimson | damage, risk, recovery |
+| Veil | Violet | movement, dodge, speed |
+| Bell | Aged gold | impact, defense, shockwaves |
 
-## Vertical slice
+Grave and Noise remain future expansion space.
 
-- 1 playable character and 1 weapon;
-- 24 cards across five families;
-- 8–10 rooms in the Drowned Cathedral;
-- 4 regular enemies, 1 miniboss and 1 boss;
-- a 15-minute complete run;
-- adaptive music, progression and save data;
+## Nox
+
+The only playable character in the first version.
+
+Visual identity:
+
+- dark irregular hair;
+- blue-black short coat;
+- crimson scarf;
+- small aged-gold bell;
+- spectral-blue Heart fragment;
+- narrow spectral blade.
+
+Nox is quiet, observant and uncertain about his own past. His identity is rebuilt through the Echoes found during runs.
+
+## First playable slice
+
+- 1 playable character;
+- 1 weapon: **Agulha de Vesper**;
+- 1 small hub: **Sanctuary of the Last Sound**;
+- 1 region: **Drowned Cathedral**;
+- 12 cards;
+- 3 enemy types;
+- 1 optional elite;
+- 1 boss: **Guardian of the Bells**;
+- 5–6 authored rooms in small route variations;
+- 10–15 minute complete run;
+- 1 adaptive music track;
+- basic save data;
 - keyboard and controller support.
+
+No advanced procedural generation, multiple characters, multiple complete regions or giant progression trees in the first version.
 
 ## Technology
 
@@ -63,25 +89,25 @@ A Score holds up to eight cards. Three cards from one family create a Harmony; c
 - **Architecture:** component-driven gameplay, finite-state machines and data-driven resources;
 - **Performance:** explicit runtime frame-budget monitoring;
 - **Data:** local gameplay telemetry exported to JSON for balancing/profiling;
-- **Target:** Windows first, with Linux support planned.
+- **Target:** Windows first.
 
 ## Engineering layer
 
-Réquiem is also the portfolio project used to demonstrate engineering specific to real-time games.
+Réquiem also demonstrates engineering specific to real-time games.
 
-`src/engineering/PerformanceBudget.cs` tracks average/worst frame time against a configurable FPS target. `src/engineering/RunTelemetry.cs` records local combat, Cadence and room events so balancing decisions can be based on actual run data rather than intuition alone.
+`src/engineering/PerformanceBudget.cs` tracks average/worst frame time against a configurable FPS target. `src/engineering/RunTelemetry.cs` records local combat, Cadence and room events so balancing decisions can use actual run data.
 
 ```text
-gameplay -> telemetry local -> JSON -> análise/balanceamento
+gameplay -> local telemetry -> JSON -> balancing
         \
          -> frame budget -> profiling/optimization
 ```
 
-The telemetry layer has no network transport by design. Details are documented in [`docs/ENGINEERING.md`](docs/ENGINEERING.md).
+Telemetry has no network transport by design.
 
 ## Visual identity
 
-The visual direction is evolving toward **modern pixel-art readability with a darker, melancholic and mystical identity**. The objective is to combine authored 2D sprites with controlled lighting, spectral particles and clean combat feedback, rather than chase expensive 3D realism.
+Direction: **modern pixel art, melancholic fantasy, strong silhouettes, restrained lighting and spectral effects**.
 
 | Role | Color |
 |---|---|
@@ -90,12 +116,15 @@ The visual direction is evolving toward **modern pixel-art readability with a da
 | Crimson | `#9E1738` |
 | Spectral blue | `#54C7CE` |
 | Aged gold | `#C4A35A` |
+| Veil violet | `#6651A6` |
 
-The emblem remains a cracked white mask crossed by a pulse line. **Réquiem** is the central title, connecting death, repetition, music and the REQUIEM cadence rank. **Vesper** remains the name of the world.
+The recurring symbols are bell, pulse, fracture, Echo and the ivory mask as a secondary narrative emblem.
+
+See [`docs/ART_BIBLE.md`](docs/ART_BIBLE.md).
 
 ## Current status
 
-**Pre-production / foundation.** The next milestone remains the Pulse combat prototype, now with performance and local telemetry foundations ready to accompany gameplay development.
+**Pre-production / focused vertical slice.** The project is intentionally reducing scope before expanding content. The next objective is a polished Pulse combat prototype with Nox, one room, one enemy and adaptive music before building the complete 10–15 minute slice.
 
 ## Running locally
 
@@ -103,18 +132,6 @@ The emblem remains a cracked white mask crossed by a pulse line. **Réquiem** is
 2. Clone this repository.
 3. Open `project.godot` in Godot.
 4. Press F6 or F5 to run the bootstrap scene.
-
-## Portfolio coverage
-
-Réquiem adds a technical surface that the other projects do not cover directly:
-
-- game loops and real-time logic;
-- C# / .NET;
-- Godot;
-- gameplay/state-machine architecture;
-- rhythm/audio synchronization;
-- profiling and optimization;
-- data-driven balancing and telemetry.
 
 ## License
 
