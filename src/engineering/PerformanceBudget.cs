@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace Requiem.Engineering;
+namespace RequiemEcosDoSilencio.Engineering;
 
 /// <summary>
 /// Lightweight runtime performance budget monitor.
