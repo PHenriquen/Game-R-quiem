@@ -2,118 +2,192 @@
 
 ## Premissa
 
-Vesper já foi mantida em equilíbrio pelo **Coração do Mundo**, uma máquina ancestral cuja música estabilizava memória, matéria e tempo.
+Vesper não era sustentada apenas por pedra, máquinas ou magia.
 
-Quando o Coração se rompeu, parte do mundo ficou presa em um silêncio impossível. Pessoas perderam pedaços de identidade, lugares repetem acontecimentos antigos e criaturas chamadas **Dissonantes** vagam presas às últimas memórias que conseguiram conservar.
+No centro do mundo existia o **Coração**, uma estrutura antiga capaz de transformar padrões de memória em música. Enquanto essa música continuava, matéria, tempo e identidade permaneciam coerentes.
 
-## Protagonista — Nox
+Então veio o **Último Acorde**.
 
-Nox desperta no Santuário do Último Som sem lembrar o próprio passado. No peito, um fragmento do Coração pulsa junto ao seu coração natural.
+A música foi interrompida antes de terminar.
 
-Ele descobre três fatos rapidamente:
+O que nasceu depois ficou conhecido apenas como **Silêncio**.
 
-1. o fragmento o impede de desaparecer como os outros Dissonantes;
-2. cada morte o devolve ao Santuário;
-3. alguns Ecos do mundo reconhecem Nox, embora ele não reconheça ninguém.
+Silêncio não é ausência total de som. É uma falha na continuidade do mundo: corredores repetem o mesmo instante, objetos guardam lembranças que não são deles, pessoas esquecem onde terminam e criaturas continuam executando a última intenção que conseguiram preservar.
 
-Nox não é um escolhido heroico tradicional. Ele é parte do problema e talvez também seja a única pessoa capaz de encerrá-lo.
+## Nox
 
-## Santuário do Último Som
+Nox desperta sozinho no **Santuário do Último Som**.
 
-Um pequeno refúgio onde o silêncio não dominou completamente.
+Ele não lembra de onde veio, quem o colocou ali ou por que um fragmento azul do Coração pulsa próximo ao seu coração natural.
 
-### Elia — guardiã do Santuário
+Descobre aos poucos que:
 
-Calma, firme e pragmática. Foi quem encontrou Nox após a ruptura. Ela evita contar tudo o que sabe sobre ele porque teme que a verdade destrua a pouca estabilidade que ele possui.
+1. o fragmento impede que ele seja apagado pelo Silêncio;
+2. morrer não encerra sua jornada — ele retorna ao Santuário;
+3. certos Ecos o reconhecem;
+4. existe uma melodia que parece reagir especificamente à presença dele.
 
-Função narrativa: orientar sem despejar exposição.
+Nox não é um escolhido tradicional. Ele é uma evidência viva de que algo deu errado.
 
-### Orin — restaurador
+A primeira pergunta é:
 
-Repara objetos e instrumentos recuperados. Tem humor seco e trata o fim do mundo como um problema mecânico enorme demais para resolver de uma vez.
+**Nox quebrou o Coração ou tentou impedir que ele fosse quebrado?**
 
-Função narrativa: aliviar o tom e transformar Ecos em pequenas descobertas.
+A pergunta maior é:
+
+**por que Nox escolheu esquecer?**
+
+## Regra de solidão
+
+Nox é a única presença humana clara durante quase toda a história.
+
+O Santuário não possui comerciantes, guardiões ou uma fila de NPCs esperando diálogo. Ele muda à medida que Nox retorna: objetos aparecem, sinos recuperam som, portas reagem e memórias passam a ocupar espaços antes vazios.
+
+Quando uma voz humana é ouvida, isso precisa importar.
+
+Quando alguém disser o nome de Nox, isso precisa importar.
+
+Quando outra pessoa finalmente estiver diante dele, isso deve parecer um acontecimento.
+
+## A segunda presença
+
+Há outra pessoa ligada ao Último Acorde e a Nox.
+
+Durante a maior parte do jogo, o jogador só conhece essa pessoa por fragmentos:
+
+- uma voz incompleta;
+- uma silhueta em um Eco;
+- uma segunda marca em objetos que claramente pertenciam a duas pessoas;
+- uma melodia recorrente;
+- mensagens cujo destinatário foi apagado;
+- memórias que parecem ser de Nox, mas possuem detalhes incompatíveis com ele.
+
+A história não confirma cedo se essa pessoa está viva, morta, presa ao Coração ou se é apenas uma lembrança.
+
+Ela só ganha presença física perto do final.
+
+O nome e a relação exata não serão fechados antes de a função emocional dessa revelação estar pronta.
 
 ## Catedral Afogada
 
 Primeira região jogável.
 
-Era um centro onde os sinos sincronizavam parte da cidade com o Coração do Mundo. Após a ruptura, a região afundou parcialmente e seus sinos continuam tentando tocar uma música que já não existe.
+Antes do Silêncio, os grandes sinos da Catedral sincronizavam parte de Vesper com o Coração. Hoje a região está parcialmente submersa e continua tentando completar uma sequência que nunca termina.
 
-O Guardião dos Sinos protege um fragmento importante do Coração.
+Tema da região: **apego**.
 
-## Estrutura narrativa da primeira versão
+A água preserva, mas também prende.
 
-### Abertura
+Objetos permanecem intactos sob a superfície. Ecos repetem despedidas. O Guardião dos Sinos protege uma função que já perdeu o sentido porque foi incapaz de abandoná-la.
 
-Tela escura. Um sino toca uma única vez.
+## Estrutura da vertical slice
 
-Nox acorda no Santuário. O fragmento no peito responde ao som.
+### 1. Despertar
 
-Elia diz apenas que ele já tentou sair antes.
+Tela escura.
 
-### Primeiras runs
+Um sino toca uma vez.
 
-O jogador encontra Ecos incompletos:
+Nox desperta sozinho. Não existe tutorial falado. Movimento, cartas e Pulso são apresentados através do próprio espaço.
 
-- uma criança esperando alguém voltar;
-- um músico repetindo os mesmos quatro compassos;
-- uma figura sem rosto chamando Nox por outro nome, inaudível.
+Ao atravessar a saída do Santuário, ele ouve uma voz muito baixa dizendo uma palavra que não consegue compreender.
 
-Não há cutscenes longas. A narrativa aparece em 5–15 segundos por encontro.
+### 2. Nave Silenciosa
 
-### Primeira pista
+Primeira área de combate.
 
-Um Eco toca o fragmento de Nox e diz:
+O jogador entende que os Dissonantes não são monstros comuns. Eles repetem gestos e intenções de pessoas que já existiram.
 
-> “Você voltou para terminar?”
+Um deles interrompe o ataque por um instante ao ver o fragmento no peito de Nox.
 
-Antes que Nox responda, a memória se desfaz.
+### 3. Primeiro Eco
 
-### Guardião dos Sinos
+Em uma sala opcional, dois lugares estão preparados lado a lado, mas apenas um possui uma sombra.
 
-O Guardião não ataca imediatamente. Primeiro reconhece o fragmento.
+Ao interagir, uma memória muito curta toca a mesma melodia que acompanha Nox desde o começo.
 
-Durante a luta, seus ataques seguem a mesma sequência que Nox ouve em flashes de memória.
+Nenhuma explicação é dada.
 
-Após derrotá-lo, o fragmento absorve uma memória preservada.
+### 4. O Guardião
 
-### Revelação final da vertical slice
+O Guardião dos Sinos reconhece o fragmento antes de atacar.
 
-Nox vê o Coração do Mundo antes de quebrar.
+Seus padrões usam a mesma sequência musical vista em pistas da Catedral. O jogador atento pode reconhecer o ritmo antes da fase mais difícil.
 
-Vê a própria mão apoiada sobre a máquina.
+### 5. Revelação
 
-O som cresce.
+Após a vitória, o fragmento recupera uma lembrança preservada.
 
-Outra pessoa grita algo que não pode ser ouvido.
+Nox vê o Coração antes da ruptura.
 
-Então Nox faz um movimento — mas a memória termina antes de revelar se ele estava **destruindo o Coração ou tentando impedir sua destruição**.
+Vê a própria mão apoiada sobre ele.
 
-Fim da primeira versão.
+Há outra pessoa do outro lado.
 
-## Tema
+Ela grita algo que o jogador não consegue ouvir.
 
-Réquiem não é uma história sobre simplesmente salvar o mundo.
+Nox faz um movimento.
 
-É sobre:
+A memória termina antes de mostrar se ele estava destruindo o Coração, tentando desligá-lo ou tentando salvar a pessoa diante dele.
 
-- memória;
-- culpa sem certeza;
-- identidade;
-- repetição;
-- aceitar que restaurar algo não significa fazê-lo voltar a ser exatamente como era.
+Fim da vertical slice.
+
+## Temas
+
+Réquiem não deve dizer ao jogador qual lição tirar.
+
+Seus temas aparecem através de consequências:
+
+- **memória:** lembrar não é o mesmo que continuar vivendo;
+- **culpa:** uma culpa esquecida ainda pertence a você?;
+- **apego:** preservar algo pode impedir que ele termine;
+- **identidade:** somos mais do que a versão de nós que conseguimos lembrar;
+- **mudança:** consertar não significa restaurar exatamente o que existia;
+- **seguir em frente:** aceitar o passado não exige apagá-lo.
 
 ## Forma de contar
 
-Para manter o jogo simples:
+Prioridade:
 
-- diálogos curtos;
-- retratos/sprites simples;
-- Ecos ambientais;
-- 1 cena de abertura curta;
-- 1 revelação curta ao derrotar o chefe;
-- sem dublagem obrigatória;
-- sem cutscenes cinematográficas complexas.
+1. cenário;
+2. comportamento de inimigos;
+3. objetos;
+4. som e música;
+5. Ecos muito curtos;
+6. texto apenas quando realmente acrescenta algo.
 
-A história deve enriquecer a run, não interrompê-la.
+Não usar exposição longa para explicar algo que pode ser percebido.
+
+Não interromper combate para entregar lore.
+
+Não transformar mensagem em frase motivacional.
+
+## Segredos narrativos
+
+Algumas das melhores informações da história não fazem parte do caminho obrigatório.
+
+Um segredo pode exigir:
+
+- tocar sinos na ordem correta;
+- permanecer sem atacar durante uma sequência;
+- levar uma carta específica até determinado objeto;
+- retornar a uma sala depois de uma morte;
+- perceber que uma melodia já apareceu em outro contexto.
+
+A recompensa pode ser apenas uma cena, som ou detalhe que muda a interpretação do jogador. Nem todo segredo precisa dar poder.
+
+## Regiões futuras — direção, não escopo atual
+
+### Teatro dos Sem-Rosto
+
+Tema: identidade.
+
+Uma plateia continua interpretando papéis mesmo depois de esquecer quem deveria desempenhá-los.
+
+### Jardim das Vozes Mortas
+
+Tema: memória.
+
+Plantas repetem frases preservadas de pessoas desaparecidas. Algumas lembranças são incompletas; outras podem ser falsas.
+
+Essas regiões só entram em produção depois que a Catedral Afogada estiver fechada e divertida.
