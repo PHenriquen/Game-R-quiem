@@ -127,7 +127,7 @@ public partial class PulseClock : Node
         // Preserve a monotonic gameplay clock across loops when stream length is known.
         if (raw + 0.10 < _lastRawPlayback)
         {
-            double length = _musicPlayer.Stream?.GetLength() ?? 0.0;
+            double length = _musicPlayer.Stream?.GetLength() ?? 0.0f;
             if (length > 0.0)
                 _loopOffset += length;
         }
