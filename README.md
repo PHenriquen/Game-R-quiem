@@ -4,134 +4,219 @@
 >
 > **Every death rewrites the music.**
 
-A compact rhythm-driven 2D action roguelite where attacks, cards and an adaptive soundtrack become one combat system.
+A solitary 2D action roguelite where Nox moves freely, fights through a real-time hand of action cards and gradually returns music to a world that forgot how to sound.
 
-[Game Design](docs/GAME_DESIGN.md) · [Story](docs/STORY.md) · [Art Bible](docs/ART_BIBLE.md) · [Engineering](docs/ENGINEERING.md) · [Roadmap](docs/ROADMAP.md)
+[Creative Direction](docs/DIRECTION_V2.md) · [Game Design](docs/GAME_DESIGN.md) · [Combat Spec](docs/COMBAT_SPEC.md) · [Story](docs/STORY.md) · [Art Bible](docs/ART_BIBLE.md) · [Engineering](docs/ENGINEERING.md) · [Roadmap](docs/ROADMAP.md)
 
-## The game
+## The identity
 
-Vesper was once stabilized by the World Heart, an ancient machine whose music held memory, matter and time together. When it shattered, entire regions fell into supernatural silence and their inhabitants became trapped inside incomplete memories.
+Réquiem is built around three feelings:
 
-Nox awakens in the Sanctuary of the Last Sound with no memory of his past and a fragment of the Heart pulsing inside his chest. Each death returns him to the Sanctuary. Each run recovers new Echoes. Some of them recognize him.
+- **alone while exploring**;
+- **clever while discovering secrets**;
+- **powerful while mastering combat**.
 
-The first version asks one question: **did Nox destroy the World Heart, or was he trying to save it?**
+The game uses lessons, symbols and narrative secrets without turning them into lectures. The world should communicate before dialogue does.
 
-## Core pillars
+## The world
 
-- **Action first, rhythm second** — combat always works; good timing makes it stronger.
-- **Simple builds** — six equipped cards, short descriptions, three families in the first version.
-- **Adaptive music** — Cadence adds musical layers as the player performs better.
-- **Short runs** — 10–15 minutes for the first complete slice.
-- **Small story, strong mystery** — short Echoes and one clear reveal instead of long cutscenes.
-- **Readable pixel art** — dark, melancholic environments with clear combat feedback.
+Vesper was stabilized by the **World Heart**, an ancient structure able to transform patterns of memory into music. When its final composition — the **Last Chord** — was interrupted, parts of the world entered the **Silence**.
 
-## Signature systems
+Silence is not simply lack of sound. It breaks continuity: places repeat moments, objects retain чуж? memories and people lose pieces of identity.
 
-### Pulse
+Nox awakens alone in the Sanctuary of the Last Sound with a fragment of the Heart pulsing near his own.
 
-A visual/music pulse communicates timing. Attack or dodge close to the beat for a Good or Perfect action. Missing never blocks the command.
+Some Echoes recognize him.
 
-### Cadence
+He recognizes none of them.
 
-**D → C → B → A → S → REQUIEM**
+The first question is:
 
-Cadence rises through well-timed actions and progressively enriches music and effects.
+**Did Nox break the Heart, or was he trying to stop it from breaking?**
 
-### Score and cards
+The larger one is:
 
-The first version has **12 cards**, **6 slots** and **3 families**:
+**Why did Nox choose to forget?**
 
-| Family | Identity | Playstyle |
-|---|---|---|
-| Blood | Crimson | damage, risk, recovery |
-| Veil | Violet | movement, dodge, speed |
-| Bell | Aged gold | impact, defense, shockwaves |
+## Combat
 
-Grave and Noise remain future expansion space.
+Movement and universal evasion are direct. Offensive actions come from a **four-card hand** used in real time.
+
+Using a card:
+
+1. immediately executes its action;
+2. sends it to the discard;
+3. leaves the slot empty for a short draw delay;
+4. draws the next card from a small deck.
+
+The first prototype deck has eight cards — two copies of four actions:
+
+| Action | Role |
+|---|---|
+| **Corte Breve** | fast close-range link |
+| **Agulha** | linear medium-range pressure |
+| **Passo Fantasma** | offensive repositioning |
+| **Sino Partido** | heavy circular impact |
+
+The goal is not to make a traditional card game. The player should make quick combat decisions from the hand while still positioning Nox freely.
+
+## Pulse
+
+A shared musical Pulse gives every action a timing grade:
+
+- **Perfect**;
+- **Good**;
+- **Free**.
+
+Missing the beat never blocks an action. Rhythm rewards mastery instead of replacing the action game.
+
+The first toy runs at 100 BPM with provisional ±65 ms Perfect and ±140 ms Good windows.
+
+## Cadence
+
+**D → C → B → A → S → RÉQUIEM**
+
+Cadence rises when the player maintains clean pressure and performs near the Pulse.
+
+RÉQUIEM is not a screen-filling transformation. For a few seconds Nox appears to remember exactly how he used to fight: posture becomes more confident, effects get cleaner, the Heart fragment opens into light fractures and the soundtrack receives its missing layer.
+
+Power should feel like **control**, not noise.
+
+## Solitude
+
+Nox is the only clear human presence for almost the entire game.
+
+The Sanctuary is not a town full of shops and NPCs. It is an empty, reactive place that changes through objects, bells, Echoes and new passages.
+
+A second person is present indirectly through the story — voice fragments, silhouettes, memories and recurring objects — and only gains physical presence near the end.
+
+## First region — Drowned Cathedral
+
+Theme: **attachment**.
+
+The Cathedral once used enormous bells to synchronize part of Vesper with the World Heart. Now it is partially submerged and still attempts to finish a sequence that no longer has an ending.
+
+Visual language:
+
+- monumental gothic shapes;
+- dark blue stone;
+- black water and spectral reflections;
+- broken bells and aged bronze;
+- rare warm-gold memory points;
+- strong negative space and readable combat silhouettes.
+
+## Secrets
+
+Secrets are part of the game identity, not just bonus loot.
+
+They can be:
+
+- small visual references;
+- mechanical discoveries involving bells, cards or movement;
+- hidden rooms;
+- short Echoes that change the meaning of earlier scenes.
+
+A good secret should make the player say **“I noticed that”**.
 
 ## Nox
 
-The only playable character in the first version.
+Current design language:
 
-Visual identity:
-
-- dark irregular hair;
-- blue-black short coat;
-- crimson scarf;
+- light build;
+- irregular dark hair;
+- short asymmetric blue-black clothing;
+- restrained crimson cloth detail;
 - small aged-gold bell;
 - spectral-blue Heart fragment;
-- narrow spectral blade.
+- narrow spectral weapon: **Agulha de Vesper**.
 
-Nox is quiet, observant and uncertain about his own past. His identity is rebuilt through the Echoes found during runs.
-
-## First playable slice
-
-- 1 playable character;
-- 1 weapon: **Agulha de Vesper**;
-- 1 small hub: **Sanctuary of the Last Sound**;
-- 1 region: **Drowned Cathedral**;
-- 12 cards;
-- 3 enemy types;
-- 1 optional elite;
-- 1 boss: **Guardian of the Bells**;
-- 5–6 authored rooms in small route variations;
-- 10–15 minute complete run;
-- 1 adaptive music track;
-- basic save data;
-- keyboard and controller support.
-
-No advanced procedural generation, multiple characters, multiple complete regions or giant progression trees in the first version.
-
-## Technology
-
-- **Engine:** Godot 4.x with .NET support;
-- **Language:** C# / .NET;
-- **Architecture:** component-driven gameplay, finite-state machines and data-driven resources;
-- **Performance:** explicit runtime frame-budget monitoring;
-- **Data:** local gameplay telemetry exported to JSON for balancing/profiling;
-- **Target:** Windows first.
-
-## Engineering layer
-
-Réquiem also demonstrates engineering specific to real-time games.
-
-`src/engineering/PerformanceBudget.cs` tracks average/worst frame time against a configurable FPS target. `src/engineering/RunTelemetry.cs` records local combat, Cadence and room events so balancing decisions can use actual run data.
-
-```text
-gameplay -> local telemetry -> JSON -> balancing
-        \
-         -> frame budget -> profiling/optimization
-```
-
-Telemetry has no network transport by design.
+Signature rule: fragment + bell + crimson detail. Avoid ornamental overload.
 
 ## Visual identity
 
-Direction: **modern pixel art, melancholic fantasy, strong silhouettes, restrained lighting and spectral effects**.
+Direction: **modern readable pixel art, melancholic fantasy, monumental environments and restrained spectral effects**.
 
 | Role | Color |
 |---|---|
 | Night black | `#090B12` |
 | Ivory | `#E9E2D0` |
-| Crimson | `#9E1738` |
 | Spectral blue | `#54C7CE` |
 | Aged gold | `#C4A35A` |
+| Crimson | `#9E1738` |
 | Veil violet | `#6651A6` |
 
-The recurring symbols are bell, pulse, fracture, Echo and the ivory mask as a secondary narrative emblem.
+Color carries meaning and is not used everywhere at once.
 
-See [`docs/ART_BIBLE.md`](docs/ART_BIBLE.md).
+## Playable prototype V2
 
-## Current status
+The current branch prototype is intentionally asset-free and uses custom-drawn shapes so combat can be tested before final art.
 
-**Pre-production / focused vertical slice.** The project is intentionally reducing scope before expanding content. The next objective is a polished Pulse combat prototype with Nox, one room, one enemy and adaptive music before building the complete 10–15 minute slice.
+Current target:
+
+- free movement;
+- universal evasion;
+- four-card hand;
+- eight-card prototype deck;
+- four actions;
+- Pulse;
+- Cadence D–RÉQUIEM;
+- one telegraphed melee enemy;
+- provisional combat HUD;
+- local-only project architecture.
+
+Controls:
+
+- `WASD` — movement;
+- `Space` — evade;
+- `1–4` — use cards;
+- mouse click — use a card;
+- `R` — reset arena.
+
+The combat toy lives in `src/prototype/CombatPrototype.cs` and starts from `src/prototype/CombatPrototype.tscn`.
+
+## Vertical slice target
+
+After the toy proves the combat:
+
+- Nox with original art;
+- Sanctuary of the Last Sound;
+- 5–6 authored Drowned Cathedral rooms;
+- 8–12 total cards, depending on testing;
+- 3 enemies;
+- 1 optional elite;
+- 1 boss: **Guardian of the Bells**;
+- 1 adaptive music composition;
+- environmental secret(s);
+- short narrative Echoes;
+- save data;
+- keyboard + controller;
+- 10–15 minute complete run.
+
+## Technology
+
+- **Engine:** Godot 4.7.x with .NET support;
+- **Language:** C# / .NET 8;
+- **Target:** Windows first;
+- **Architecture direction:** component-driven gameplay, finite-state machines and data-driven definitions after prototype validation;
+- **Performance:** local frame-budget monitoring;
+- **Balancing:** local JSON telemetry, no network transport.
+
+The project intentionally stays on Godot instead of migrating engines during pre-production. The current goal is to validate combat and identity, not to spend the vertical-slice budget rebuilding infrastructure.
+
+## Status
+
+**Pre-production / playable combat toy V2.**
+
+The project has been upgraded from its earlier Godot 4.3 setup toward Godot 4.7.1. The new prototype code has been statically checked against the current Godot API, but still requires its first build/playtest inside a local Godot 4.7.1 .NET editor before compilation is considered verified.
 
 ## Running locally
 
-1. Install Godot 4.x with .NET support.
-2. Clone this repository.
-3. Open `project.godot` in Godot.
-4. Press F6 or F5 to run the bootstrap scene.
+1. Install **Godot 4.7.1 .NET**.
+2. Clone this repository and checkout `work/vertical-slice-v2` while the prototype is under review.
+3. Open `project.godot`.
+4. Let Godot restore/build the C# project.
+5. Press `F6`/`F5`.
+6. Report compile errors or, if it opens, test movement and card feel before judging visuals.
 
 ## License
 
