@@ -6,8 +6,8 @@ config_version=5
 [application]
 
 config/name="Réquiem: Ecos do Silêncio"
-run/main_scene="res://src/bootstrap/Bootstrap.tscn"
-config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
+run/main_scene="res://src/prototype/CombatPrototype.tscn"
+config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 
 [display]
 
