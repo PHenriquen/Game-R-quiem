@@ -1,0 +1,36 @@
+name: Godot C# Build Check
+
+on:
+  push:
+    branches:
+      - main
+      - "work/**"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build C# project
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+          cache: true
+          cache-dependency-path: RequiemEcosDoSilencio.csproj
+
+      - name: Restore
+        run: dotnet restore RequiemEcosDoSilencio.csproj
+
+      - name: Build
+        run: dotnet build RequiemEcosDoSilencio.csproj --configuration Release --no-restore --warnaserror
