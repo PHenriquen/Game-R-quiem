@@ -2,79 +2,110 @@
 
 > **Every death rewrites the music.**
 
-Réquiem é um action roguelite 2D em pré-produção. A ideia é combinar combate rápido, uma camada leve de ritmo e cartas de ação sem transformar o jogo num rhythm game tradicional.
+Réquiem é um action roguelite 2D em desenvolvimento. A ideia central é misturar combate em tempo real com uma mão pequena de cartas de ação, exploração solitária e uma narrativa que aparece mais pelo mundo do que por diálogos.
 
-Nox acorda em Vesper sem lembrar o que aconteceu com o Coração do Mundo. O cenário, os inimigos e pequenas memórias espalhadas pelo caminho contam a maior parte da história; o protagonista não precisa explicar tudo em diálogos.
+Nox acorda em Vesper sem lembrar por que o mundo perdeu parte de sua música. Conforme avança, encontra lugares presos a memórias incompletas e sinais de que o próprio passado está ligado ao Silêncio.
 
-## A ideia do combate
+## O que já existe
 
-O jogador se move e ataca em tempo real. O **Pulso** marca o ritmo da música, mas errar esse timing nunca bloqueia uma ação.
+O projeto ainda está em pré-produção, mas esta branch já tem um **combat toy jogável** feito em Godot/C# para testar o núcleo antes de investir em arte final.
 
-Acertar perto do Pulso melhora a execução e aumenta a **Cadência**:
+Hoje ele inclui:
 
-```text
-D → C → B → A → S → RÉQUIEM
-```
+- movimento livre e esquiva;
+- mão de 4 cartas usada em tempo real;
+- baralho inicial com 8 cartas;
+- quatro ações: Corte Breve, Agulha, Passo Fantasma e Sino Partido;
+- sistema de Pulso a 100 BPM;
+- Cadência de D até RÉQUIEM;
+- inimigo simples com ataque telegrafado;
+- arena e efeitos provisórios desenhados por código;
+- gerador de áudio temporário para testar o Pulso e camadas da trilha.
 
-As cartas representam ações — ataques, movimento ou impacto — e não uma pilha de buffs passivos. Quero que a mão mude as decisões do combate sem parar o jogo a cada poucos segundos.
+O protótipo visual é propositalmente simples. Quero validar se mover, escolher cartas e acertar o ritmo é divertido antes de transformar isso em uma fase completa.
 
-## Direção atual
+## Como o combate funciona
 
-O primeiro recorte do jogo está sendo pensado em torno de:
+As cartas não pausam o jogo. Cada carta executa uma ação imediatamente e depois abre espaço para outra compra.
 
-- um único personagem jogável;
-- exploração mais solitária;
-- uma região principal, a **Catedral Afogada**;
-- combate em tempo real com cartas;
-- Pulso/Cadência como camada de domínio;
-- poucos inimigos bem legíveis;
-- segredos e narrativa ambiental;
-- pixel art moderna com efeitos usados com moderação.
+O Pulso dá três resultados de timing:
 
-A prioridade é fechar um protótipo de combate pequeno antes de produzir salas, inimigos e arte em quantidade.
+- **Perfect**
+- **Good**
+- **Free**
 
-## Nox
+Errar o ritmo nunca impede o ataque. Jogar perto do Pulso só melhora a execução e ajuda a aumentar a Cadência.
 
-Nox é o protagonista e permanece em silêncio durante boa parte da experiência.
+Quando a Cadência chega a **RÉQUIEM**, a ideia não é virar uma transformação cheia de efeitos. Nox entra por alguns segundos num estado de controle maior, como se lembrasse exatamente de como lutava antes.
 
-A identidade visual planejada usa uma silhueta pequena, roupa escura, um detalhe carmesim, um pequeno sino envelhecido e efeitos azul-espectrais. O ambiente deve chamar mais atenção pelo tamanho e atmosfera do que o personagem por complexidade visual.
+## Controles do protótipo
 
-## Tecnologia
+| Tecla | Ação |
+|---|---|
+| `WASD` | mover |
+| `Space` | esquivar |
+| `1–4` | usar uma carta |
+| clique esquerdo | usar a carta clicada |
+| `R` | reiniciar a arena |
 
-- Godot 4.x com suporte .NET;
-- C# / .NET;
-- Windows como primeiro alvo.
+## Código
 
-O repositório também tem alguns experimentos de telemetria local e orçamento de frame para ajudar no ajuste do jogo. Eles são ferramentas de desenvolvimento, não funcionalidades para o jogador.
+Os arquivos principais do toy ficam em:
 
-## Estrutura
+- [`src/prototype/CombatPrototype.cs`](src/prototype/CombatPrototype.cs) — lógica do protótipo;
+- [`src/prototype/CombatPrototype.Draw.cs`](src/prototype/CombatPrototype.Draw.cs) — desenho provisório da arena/HUD;
+- [`src/prototype/CombatPrototype.tscn`](src/prototype/CombatPrototype.tscn) — cena do protótipo;
+- [`src/audio/PulseClock.cs`](src/audio/PulseClock.cs) — relógio musical que deve substituir o timer provisório quando a trilha real entrar.
 
-```text
-src/       código do jogo e protótipos
-docs/      história, combate, arte e decisões de design
-assets/    recursos do projeto
-tools/     utilitários de desenvolvimento
-```
+Stack atual:
 
-As anotações que mais ajudam a entender a direção atual estão em:
+- Godot 4.7.x .NET;
+- C# / .NET 8;
+- Python apenas para gerar os stems temporários de áudio.
 
-- [`docs/GAME_DESIGN.md`](docs/GAME_DESIGN.md)
-- [`docs/STORY.md`](docs/STORY.md)
-- [`docs/ART_BIBLE.md`](docs/ART_BIBLE.md)
+## Direção do jogo
+
+Quero que o Réquiem passe principalmente três sensações:
+
+**solidão ao explorar, curiosidade ao descobrir segredos e domínio durante o combate.**
+
+A primeira região planejada é a **Catedral Afogada**, um lugar parcialmente submerso onde sinos antigos continuam tentando terminar uma sequência que não possui mais um final.
+
+A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. O azul espectral, ouro envelhecido e um detalhe carmesim formam a identidade principal do Nox.
 
 ## Rodando localmente
 
-1. instale uma versão do Godot 4 com suporte .NET;
-2. clone o repositório;
-3. abra `project.godot`;
-4. execute a cena configurada no projeto.
+Esta versão ainda precisa do primeiro build/playtest confirmado em um editor Godot 4.7.1 .NET.
+
+Para testar:
+
+1. instale o Godot 4.7.1 .NET;
+2. abra `project.godot`;
+3. deixe o Godot restaurar o projeto C#;
+4. pressione `F5`.
+
+Para gerar os áudios temporários:
+
+```bash
+python tools/generate_prototype_audio.py
+```
+
+## Documentação
+
+As anotações mais detalhadas ficam em `docs/`. As que mais importam agora são:
+
+- [`GAME_DESIGN.md`](docs/GAME_DESIGN.md) — estrutura geral;
+- [`COMBAT_SPEC.md`](docs/COMBAT_SPEC.md) — valores e regras do toy;
+- [`STORY.md`](docs/STORY.md) — narrativa sem os principais spoilers;
+- [`ART_BIBLE.md`](docs/ART_BIBLE.md) — direção visual;
+- [`AUDIO_DIRECTION.md`](docs/AUDIO_DIRECTION.md) — Pulso e música adaptativa.
 
 ## Status
 
-**Pré-produção.**
+**Pré-produção / primeiro combat toy.**
 
-Existe uma branch separada onde estou testando o primeiro combat toy. Ela só deve virar a base principal depois de eu confirmar o build no Godot e jogar o protótipo de verdade. Até lá, a `main` representa a direção do projeto, não uma promessa de vertical slice pronta.
+A prioridade agora é confirmar build, jogar o protótipo e ajustar sensação de movimento, cartas, Pulso e Cadência. Depois disso entram arte própria, primeira sala de verdade e inimigos mais completos.
 
-## Licença
+## License
 
-O código-fonte está sob a [MIT License](LICENSE). Nomes, personagens, história, arte, música e outros elementos criativos originais permanecem reservados ao autor do projeto.
+O código-fonte está sob a [MIT License](LICENSE). Nomes, personagens, história, arte, música e demais elementos criativos originais continuam reservados ao autor do projeto.

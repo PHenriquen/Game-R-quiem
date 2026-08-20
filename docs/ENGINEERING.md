@@ -1,62 +1,335 @@
-# Engineering Notes
+# RÉQUIEM — Engineering Notes V2
 
-Réquiem is the portfolio project focused on game-development engineering rather than web/backend breadth. Its technical goal is to demonstrate C#/.NET, real-time systems, gameplay architecture, performance discipline and data-driven balancing inside Godot.
+Réquiem is a real-time game engineering project built around C#/.NET, Godot, responsive combat, audio synchronization and data-driven balancing.
 
-## Runtime performance budget
+The engineering goal is not to maximize the number of architectural patterns. It is to build a small game whose systems are explicit, measurable and replaceable without losing iteration speed.
 
-`src/engineering/PerformanceBudget.cs` measures average and worst frame time over a configurable interval and warns when the game exceeds the target frame budget.
+## 1. Current stack
 
-For a 60 FPS target, the practical budget is about 16.67 ms per frame. The monitor is not a replacement for the Godot profiler; it makes performance expectations explicit during normal gameplay development.
+- Godot 4.7.x .NET target;
+- C# / .NET 8;
+- Windows first;
+- 2D top-down/3/4;
+- local JSON telemetry;
+- GitHub Actions build check;
+- Python standard-library tooling for temporary audio generation.
 
-Future extensions:
+## 2. Prototype rule
 
-- per-system timing for combat, particles and AI;
-- object-count budgets;
-- memory/GC allocation snapshots;
-- automated performance scenes in CI.
+`src/prototype/CombatPrototype.cs` is intentionally more monolithic than the final architecture.
 
-## Local gameplay telemetry
+Reason:
 
-`src/engineering/RunTelemetry.cs` records local events such as combat actions, Perfect timing, Cadence progression, room duration and damage taken. It can export a run to JSON for balancing and offline analysis.
+The first question is whether **movement + four action cards + Pulse + Cadence** feels good. Splitting an unproven mechanic across ten abstractions slows down tuning and makes deletion expensive.
+
+After the first successful playtest, responsibilities move out in this order:
+
+1. Pulse clock;
+2. card data;
+3. hand/deck runtime;
+4. player state machine;
+5. hitbox/hurtbox/damage;
+6. enemy behavior;
+7. HUD presentation.
+
+`src/audio/PulseClock.cs` is the first extracted production-oriented component because musical timing is shared infrastructure.
+
+## 3. Pulse clock
+
+All rhythm-sensitive systems must eventually consult one clock.
+
+Do not allow:
+
+- cards to accumulate their own `delta` beat timer;
+- enemies to maintain a separate beat phase;
+- UI to animate from an unrelated timer;
+- audio to restart when Cadence changes.
+
+When music is present, `PulseClock` uses the playback position plus time since the last audio mix and compensates for output latency. It also preserves monotonic time across stream loops.
+
+Consumers should ask questions such as:
+
+- current beat index;
+- current bar;
+- phase inside beat;
+- timing grade for current action.
+
+They should not reimplement BPM math.
+
+## 4. Future card data model
+
+After feel is validated, action definitions should become Godot `Resource` data rather than switch statements.
+
+Proposed fields:
 
 ```text
-run -> local events -> JSON -> balancing notebook/tool -> gameplay decisions
+id
+name
+family/tags
+icon
+recovery
+redraw_delay
+timing_behavior
+action_scene_or_executor
+base_damage
+range
+debug_description
 ```
 
-There is deliberately no network transport in this layer. Player data should not be uploaded without an explicit future opt-in design.
+The data resource chooses parameters. Gameplay code owns behavior rules that would otherwise become impossible to validate.
 
-## Architecture direction
+Avoid turning every card into a unique script unless it genuinely has unique behavior.
 
-The project remains centered on:
+## 5. Hand/deck runtime
 
-- component-driven gameplay;
-- finite-state machines;
-- data-driven cards/resources;
-- deterministic run seeds where possible;
-- local save/progression;
-- adaptive audio synchronized with combat;
-- profiling before premature optimization.
+Production responsibilities:
 
-## Visual engineering direction
+- deterministic shuffle from run seed when useful;
+- four live slots;
+- discard;
+- redraw timers;
+- signals for HUD;
+- queryable recent action history / Frase;
+- no direct rendering code.
 
-The art direction is moving toward modern 2D pixel-art readability with a darker, melancholic identity: restrained silhouettes, strong lighting, spectral effects and clean combat feedback. The target is a style that remains feasible for a small project while still looking authored rather than generic.
+The HUD listens to state rather than owning deck rules.
 
-Rendering work should prioritize:
+## 6. Nox state machine
 
-1. readable silhouettes and hit effects;
-2. stable pixel scale/camera movement;
-3. controlled particles and bloom;
-4. lighting that supports gameplay instead of obscuring it;
-5. a consistent performance budget on target hardware.
+Expected high-level states:
 
-## Portfolio coverage
+```text
+Free
+Attack
+Dash
+Hit
+Dead
+Interaction
+```
 
-Réquiem demonstrates a different engineering surface from the other projects:
+RÉQUIEM is better represented as a combat modifier/state layer rather than replacing the entire player FSM.
 
-- C# / .NET;
-- Godot and real-time game loops;
-- gameplay architecture;
-- state machines and data-driven content;
-- audio/rhythm systems;
-- profiling and optimization;
-- local telemetry for balancing.
+Cancel rules need to be explicit:
+
+- Free -> any action;
+- light recovery -> Dash when allowed;
+- heavy startup cannot always be cancelled;
+- Hit interrupts most actions;
+- Dead owns reset/transition.
+
+Do not create a state per animation frame or per card.
+
+## 7. Combat collision
+
+Prototype uses direct distance tests for speed of iteration.
+
+Production should move to explicit layers:
+
+- PlayerBody;
+- PlayerHurtbox;
+- PlayerHitbox;
+- EnemyBody;
+- EnemyHurtbox;
+- EnemyHitbox;
+- World;
+- Interactable.
+
+Damage events should contain enough context for hit feel/telemetry without hard-coupling attacker and victim.
+
+Suggested payload:
+
+```text
+source_id
+damage
+stagger
+world_position
+direction
+card_id
+timing_grade
+is_echo
+```
+
+## 8. Hit-stop
+
+Do not pause the full SceneTree for every attack if that makes UI/audio timing unstable.
+
+Preferred direction:
+
+- keep the musical clock/audio running;
+- freeze or scale relevant gameplay actors briefly;
+- visual/camera response remains controllable;
+- heavy attacks receive longer local freeze than light attacks.
+
+This matters because a rhythm-linked game cannot casually stop its master clock every time a hit lands.
+
+## 9. Adaptive audio
+
+Prototype audio can be generated by `tools/generate_prototype_audio.py`.
+
+Production direction:
+
+- stems share exact length/start point;
+- one playback timeline;
+- Cadence controls layer volume/parameters;
+- S/RÉQUIEM transitions do not restart the song;
+- environmental 2D SFX are separate from music timing.
+
+Investigate `AudioStreamSynchronized` for synchronized stems.
+
+## 10. Runtime performance budget
+
+`src/engineering/PerformanceBudget.cs` measures average and worst frame time over a configurable interval.
+
+For a 60 FPS target, frame budget is approximately 16.67 ms.
+
+The monitor is not a profiler replacement. It makes regressions visible during normal play.
+
+Future budgets:
+
+- active enemies;
+- transient VFX count;
+- active audio voices;
+- allocation/GC spikes;
+- room-load time.
+
+## 11. Local gameplay telemetry
+
+`src/engineering/RunTelemetry.cs` is the local-only balancing layer.
+
+Desired V2 events:
+
+- action/card id;
+- timing grade;
+- Cadence rank transition;
+- damage given/received;
+- room entry/exit;
+- death;
+- secret found;
+- boss phase;
+- Frase/sequence summaries.
+
+Pipeline:
+
+```text
+playtest -> local events -> JSON -> small analysis tool/notebook -> tuning decision
+```
+
+There is deliberately no network transport.
+
+## 12. Save data
+
+Do not build a large persistence framework during combat toy phase.
+
+Vertical slice minimum:
+
+- schema version;
+- unlocked cards;
+- discovered narrative Echoes;
+- settings/calibration;
+- minimal progression flags.
+
+Run-state and permanent-state must be separate.
+
+## 13. Determinism
+
+Full combat determinism is not a requirement.
+
+Useful deterministic pieces:
+
+- deck shuffle seed;
+- room route seed if route variation is introduced;
+- reward selection seed for reproducible balancing sessions.
+
+Store the seed in telemetry so an interesting/broken run can be reproduced when practical.
+
+## 14. Accessibility as architecture
+
+Do not bolt these on at the end:
+
+- remappable controls;
+- controller glyph abstraction;
+- visual Pulse;
+- timing assist multiplier;
+- flash/shake intensity;
+- color-independent telegraphs;
+- audio offset/input calibration.
+
+Combat code should consume settings rather than checking accessibility modes everywhere.
+
+## 15. Asset boundaries
+
+External/blockout art may be replaced at any time.
+
+Gameplay logic should not depend on sprite dimensions or exact filenames where avoidable.
+
+Every external asset belongs in `docs/ASSET_REGISTRY.md` with source/license/status.
+
+Generated audio WAVs are ignored by Git and recreated from source script.
+
+## 16. CI
+
+`.github/workflows/dotnet-build.yml` performs restore/build for the C# project.
+
+This validates C# compilation but is not a substitute for:
+
+- opening the Godot project;
+- importing resources;
+- scene loading;
+- input testing;
+- audiovisual playtest.
+
+A later CI stage can run a Godot headless smoke scene when the environment/tooling is stable.
+
+## 17. First playtest protocol
+
+Do not begin by asking “is the game good?”.
+
+Test separately:
+
+### Movement
+
+- stop/start responsiveness;
+- diagonal speed;
+- direction changes;
+- dash distance;
+- feeling of control.
+
+### Cards
+
+- can the hand be read without stopping?;
+- does each action solve a different situation?;
+- does redraw create decisions or frustration?;
+- can player spam one slot and ignore hand composition?
+
+### Pulse
+
+- can beat be anticipated?;
+- are Good/Perfect windows too generous/tight?;
+- does missing beat still feel normal?;
+
+### Cadence
+
+- how long to reach A/S/RÉQUIEM?;
+- does taking one hit destroy too much momentum?;
+- does RÉQUIEM feel earned?;
+
+### Enemy
+
+- can telegraph be understood without color?;
+- can dash reliably answer it?;
+- does enemy spend too much time walking?;
+
+## 18. Definition of “prototype validated”
+
+The toy graduates when:
+
+1. the project compiles and opens consistently;
+2. movement alone feels responsive;
+3. four cards are distinguishable by function and feel;
+4. the player sometimes changes plan because of the current hand;
+5. rhythm enhances rather than gates combat;
+6. RÉQUIEM is noticeable without giant UI;
+7. fighting the first enemy repeatedly remains useful/fun for a short tuning session;
+8. telemetry can explain at least some balancing decisions.
+
+Until then, new areas are lower priority than fixing feel.

@@ -1,68 +1,139 @@
-# Roadmap
+# RÉQUIEM — Roadmap V2
 
-O roadmap prioriza provar a mecânica principal antes de produzir conteúdo.
+O roadmap prova a sensação do jogo antes de aumentar conteúdo.
 
-## M0 — Fundação
+## M0 — Direção e fundação
 
-- [x] Definir conceito, pilares e identidade
-- [x] Criar repositório e documentação inicial
-- [x] Adicionar bootstrap Godot/C#
-- [ ] Criar guia visual de Nox
-- [ ] Produzir protótipo de áudio com stems
+- [x] Nome e premissa-base
+- [x] Repositório e documentação inicial
+- [x] Godot + C#
+- [x] Direção criativa V2
+- [x] Regra de solidão / elenco reduzido
+- [x] Cartas redefinidas como ações em tempo real
+- [x] Especificação inicial de combate
+- [x] Protótipo de arena sem assets finais
+- [ ] Validar compilação no Godot 4.7.1
+- [ ] Guia visual final de Nox
+- [ ] Protótipo sonoro original
 
-## M1 — Protótipo do Pulso
+**Saída:** projeto abre direto em uma arena funcional e a direção não possui contradições principais.
 
-- [ ] Relógio musical baseado no tempo de reprodução
-- [ ] Eventos de beat e subdivisão
-- [ ] Indicador visual ao redor do personagem
-- [ ] Ataque e esquiva com janelas Perfeito/Bom/Livre
-- [ ] Calibração de latência
-- [ ] Métricas simples de precisão
+## M1 — Combat toy
 
-**Critério de saída:** mover, atacar e esquivar por três minutos é divertido mesmo sem cartas ou arte final.
+- [x] Movimento provisório
+- [x] Evasão universal provisória
+- [x] Mão de 4 cartas
+- [x] Baralho inicial de 8 cartas
+- [x] Corte Breve
+- [x] Agulha
+- [x] Passo Fantasma
+- [x] Sino Partido
+- [x] Pulso provisório a 100 BPM
+- [x] Cadência D–RÉQUIEM provisória
+- [x] Peregrino Oco provisório
+- [ ] Corrigir problemas encontrados no primeiro playtest
+- [ ] Transformar valores mágicos em dados editáveis
+- [ ] Separar relógio de Pulso da cena
+- [ ] Separar mão/baralho da cena
+- [ ] FSM simples de Nox
+- [ ] hitbox/hurtbox de produção
+- [ ] suporte inicial a controle
 
-## M2 — Arena de combate
+**Saída:** jogar por 3 minutos é divertido usando apenas formas provisórias.
 
-- [ ] Máquina de estados de Nox
-- [ ] Agulha de Vesper
-- [ ] Dois inimigos sincronizados
-- [ ] Vida, dano, invulnerabilidade e morte
-- [ ] Cadência D–REQUIEM
-- [ ] Primeira faixa adaptativa
+## M2 — Hit feel + som
 
-## M3 — Sistema de builds
+- [ ] Primeiro sprite/animatic de Nox
+- [ ] poses-chave das quatro ações
+- [ ] hit-stop refinado
+- [ ] câmera leve
+- [ ] telegraphs por forma e movimento
+- [ ] primeira camada ambiente
+- [ ] metrônomo/Pulso sincronizado a áudio real
+- [ ] stems de Cadência
+- [ ] camada RÉQUIEM
+- [ ] calibração inicial de latência
 
-- [ ] Recursos de dados para cartas
-- [ ] Partitura de oito espaços
-- [ ] Cinco famílias e Harmonia
-- [ ] 12 cartas de protótipo
-- [ ] Recompensa e troca
+**Saída:** subir de D para RÉQUIEM é claramente perceptível com olhos e ouvidos.
 
-**Critério de saída:** pelo menos três builds claramente diferentes são viáveis.
+## M3 — Nave Silenciosa
 
-## M4 — Run curta
+- [ ] blockout autoral da sala
+- [ ] tiles temporários ou CC0 documentados
+- [ ] água / reflexos provisórios
+- [ ] sino interativo
+- [ ] porta/foco visual
+- [ ] Peregrino Oco final do slice
+- [ ] Cantor Partido
+- [ ] primeiro segredo mecânico
+- [ ] primeiro micro-Eco
 
-- [ ] Sequência de salas
-- [ ] Combate, descanso, evento e recompensa
-- [ ] Economia temporária
-- [ ] Miniboss e Guardião dos Sinos
-- [ ] Vitória, derrota e retorno ao Santuário
+**Saída:** uma sala já transmite exploração, combate e mistério de Réquiem.
 
-## M5 — Vertical slice
+## M4 — Nox e identidade visual
 
-- [ ] 24 cartas e 4 inimigos
-- [ ] 8–10 salas
-- [ ] Progressão permanente e save
-- [ ] Narrativa mínima no Santuário
-- [ ] Arte e áudio consistentes
-- [ ] Teclado, controle e acessibilidade básica
-- [ ] Build para Windows
-- [ ] Trailer curto e página do projeto
+- [ ] concept sheet de Nox
+- [ ] silhuetas alternativas
+- [ ] paleta fechada
+- [ ] sprite-base final
+- [ ] idle / walk / dash
+- [ ] quatro ações-base
+- [ ] estado RÉQUIEM
+- [ ] ícones das quatro cartas
+- [ ] frame visual das cartas
+- [ ] linguagem visual dos Dissonantes
 
-## Princípios de produção
+**Saída:** screenshot sem logo já parece do mesmo jogo.
 
-1. Não produzir dezenas de cartas antes de validar o Pulso.
-2. Não criar outra região antes da primeira run estar completa.
-3. Cada sistema deve funcionar com assets temporários.
-4. Dados de cartas e inimigos ficam fora da lógica principal.
-5. Toda milestone termina com uma build jogável.
+## M5 — Catedral curta
+
+- [ ] Santuário vazio e reativo
+- [ ] 5–6 salas autorais
+- [ ] terceiro inimigo
+- [ ] elite opcional
+- [ ] recompensas simples
+- [ ] transições entre salas
+- [ ] morte e retorno
+- [ ] Ecos persistentes
+- [ ] save básico
+
+**Saída:** run completa sem chefe funciona do início ao retorno.
+
+## M6 — Guardião dos Sinos
+
+- [ ] design visual
+- [ ] três padrões centrais
+- [ ] sequência de sinos antecipada em segredo/ambiente
+- [ ] segunda metade musical
+- [ ] memória final do slice
+- [ ] balanceamento
+
+**Saída:** 10–15 minutos culminam em um chefe que testa o que o jogo ensinou.
+
+## M7 — Vertical slice pública
+
+- [ ] 8–12 cartas finais para o slice
+- [ ] mix de áudio consistente
+- [ ] acessibilidade básica
+- [ ] teclado + controle
+- [ ] performance estável
+- [ ] telemetria local revisada
+- [ ] opções e pausa
+- [ ] build Windows
+- [ ] sessão de playtest externa
+- [ ] correções
+- [ ] trailer curto
+- [ ] página itch.io atualizada
+
+**Saída:** build que pode ser entregue a alguém sem precisar explicar como imaginar o jogo pronto.
+
+## Regras de produção
+
+1. Não criar outra região antes de fechar a Catedral.
+2. Não criar dezenas de cartas antes de as quatro ações-base funcionarem.
+3. Nenhum asset temporário pode definir a identidade final por acidente.
+4. Todo asset externo precisa de fonte/licença documentada.
+5. Dados de gameplay saem da lógica principal assim que o protótipo provar a mecânica.
+6. Toda milestone termina com algo executável ou verificável.
+7. Bugs de sensação têm prioridade sobre conteúdo novo.
+8. Se uma feature prejudicar solidão, leitura ou impacto, ela precisa justificar a existência.
