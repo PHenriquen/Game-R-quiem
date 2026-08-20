@@ -1,239 +1,111 @@
 # RÉQUIEM: ECOS DO SILÊNCIO
 
-> **International title: REQUIEM: ECHOES OF SILENCE**
->
 > **Every death rewrites the music.**
 
-A solitary 2D action roguelite where Nox moves freely, fights through a real-time hand of action cards and gradually returns music to a world that forgot how to sound.
+Réquiem é um action roguelite 2D em desenvolvimento. A ideia central é misturar combate em tempo real com uma mão pequena de cartas de ação, exploração solitária e uma narrativa que aparece mais pelo mundo do que por diálogos.
 
-[Creative Direction](docs/DIRECTION_V2.md) · [Game Design](docs/GAME_DESIGN.md) · [Combat Spec](docs/COMBAT_SPEC.md) · [Level Slice](docs/LEVEL_SLICE.md) · [Story](docs/STORY.md) · [Art Bible](docs/ART_BIBLE.md) · [Audio](docs/AUDIO_DIRECTION.md) · [Engineering](docs/ENGINEERING.md) · [Roadmap](docs/ROADMAP.md) · [Assets](docs/ASSET_REGISTRY.md)
+Nox acorda em Vesper sem lembrar por que o mundo perdeu parte de sua música. Conforme avança, encontra lugares presos a memórias incompletas e sinais de que o próprio passado está ligado ao Silêncio.
 
-## Identity
+## O que já existe
 
-Réquiem is built around three feelings:
+O projeto ainda está em pré-produção, mas esta branch já tem um **combat toy jogável** feito em Godot/C# para testar o núcleo antes de investir em arte final.
 
-- **alone while exploring**;
-- **clever while discovering secrets**;
-- **powerful while mastering combat**.
+Hoje ele inclui:
 
-The game uses lessons, symbols and narrative secrets without turning them into lectures. The world should communicate before dialogue does.
+- movimento livre e esquiva;
+- mão de 4 cartas usada em tempo real;
+- baralho inicial com 8 cartas;
+- quatro ações: Corte Breve, Agulha, Passo Fantasma e Sino Partido;
+- sistema de Pulso a 100 BPM;
+- Cadência de D até RÉQUIEM;
+- inimigo simples com ataque telegrafado;
+- arena e efeitos provisórios desenhados por código;
+- gerador de áudio temporário para testar o Pulso e camadas da trilha.
 
-## World
+O protótipo visual é propositalmente simples. Quero validar se mover, escolher cartas e acertar o ritmo é divertido antes de transformar isso em uma fase completa.
 
-Vesper was stabilized by the **World Heart**, an ancient structure able to transform patterns of memory into music. When its final composition — the **Last Chord** — was interrupted, parts of the world entered the **Silence**.
+## Como o combate funciona
 
-Silence is not simply lack of sound. It breaks continuity: places repeat moments, objects retain memories that are not theirs and people lose pieces of identity.
+As cartas não pausam o jogo. Cada carta executa uma ação imediatamente e depois abre espaço para outra compra.
 
-Nox awakens alone in the Sanctuary of the Last Sound with a fragment of the Heart pulsing near his own.
+O Pulso dá três resultados de timing:
 
-Some Echoes recognize him. He recognizes none of them.
+- **Perfect**
+- **Good**
+- **Free**
 
-The first question is:
+Errar o ritmo nunca impede o ataque. Jogar perto do Pulso só melhora a execução e ajuda a aumentar a Cadência.
 
-**Did Nox break the Heart, or was he trying to stop it from breaking?**
+Quando a Cadência chega a **RÉQUIEM**, a ideia não é virar uma transformação cheia de efeitos. Nox entra por alguns segundos num estado de controle maior, como se lembrasse exatamente de como lutava antes.
 
-The larger one is:
+## Controles do protótipo
 
-**Why did Nox choose to forget?**
-
-## Combat
-
-Movement and universal evasion are direct. Offensive actions come from a **four-card hand** used in real time.
-
-Using a card immediately executes its action, sends it to the discard and opens that slot for a short draw delay. A small deck keeps the current hand readable enough for fast decisions.
-
-The first combat toy uses eight cards — two copies of four actions:
-
-| Action | Role |
+| Tecla | Ação |
 |---|---|
-| **Corte Breve** | fast close-range link |
-| **Agulha** | linear medium-range pressure |
-| **Passo Fantasma** | offensive repositioning |
-| **Sino Partido** | heavy circular impact |
+| `WASD` | mover |
+| `Space` | esquivar |
+| `1–4` | usar uma carta |
+| clique esquerdo | usar a carta clicada |
+| `R` | reiniciar a arena |
 
-This is not intended to play like a turn-based deckbuilder or a mobile gacha. The hand changes the choices available **inside** an action game.
+## Código
 
-## Pulse
+Os arquivos principais do toy ficam em:
 
-A shared musical Pulse gives actions one of three timing grades:
+- [`src/prototype/CombatPrototype.cs`](src/prototype/CombatPrototype.cs) — lógica do protótipo;
+- [`src/prototype/CombatPrototype.Draw.cs`](src/prototype/CombatPrototype.Draw.cs) — desenho provisório da arena/HUD;
+- [`src/prototype/CombatPrototype.tscn`](src/prototype/CombatPrototype.tscn) — cena do protótipo;
+- [`src/audio/PulseClock.cs`](src/audio/PulseClock.cs) — relógio musical que deve substituir o timer provisório quando a trilha real entrar.
 
-- **Perfect**;
-- **Good**;
-- **Free**.
+Stack atual:
 
-Missing the beat never blocks an action. Rhythm rewards mastery instead of replacing the action game.
+- Godot 4.7.x .NET;
+- C# / .NET 8;
+- Python apenas para gerar os stems temporários de áudio.
 
-The first toy uses 100 BPM with provisional ±65 ms Perfect and ±140 ms Good windows.
+## Direção do jogo
 
-`src/audio/PulseClock.cs` is the direction for the production clock: once real music is playing, gameplay timing should derive from the audio playback clock and compensate for output latency instead of every system maintaining an independent timer.
+Quero que o Réquiem passe principalmente três sensações:
 
-## Cadence
+**solidão ao explorar, curiosidade ao descobrir segredos e domínio durante o combate.**
 
-**D → C → B → A → S → RÉQUIEM**
+A primeira região planejada é a **Catedral Afogada**, um lugar parcialmente submerso onde sinos antigos continuam tentando terminar uma sequência que não possui mais um final.
 
-Cadence rises when the player maintains clean pressure and performs near the Pulse.
+A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. O azul espectral, ouro envelhecido e um detalhe carmesim formam a identidade principal do Nox.
 
-RÉQUIEM is not a screen-filling transformation. For a few seconds Nox appears to remember exactly how he used to fight: posture becomes calmer, effects get cleaner, the Heart fragment opens into light fractures and the soundtrack receives its missing layer.
+## Rodando localmente
 
-Power should feel like **control**, not noise.
+Esta versão ainda precisa do primeiro build/playtest confirmado em um editor Godot 4.7.1 .NET.
 
-## Solitude
+Para testar:
 
-Nox is the only clear human presence for almost the entire game.
+1. instale o Godot 4.7.1 .NET;
+2. abra `project.godot`;
+3. deixe o Godot restaurar o projeto C#;
+4. pressione `F5`.
 
-The Sanctuary is not a town full of shops and NPCs. It is an empty, reactive place that changes through objects, bells, Echoes and new passages.
-
-A second person is present indirectly through voice fragments, silhouettes, memories and recurring objects, gaining physical presence only near the end.
-
-## First region — Drowned Cathedral
-
-Theme: **attachment**.
-
-The Cathedral once used enormous bells to synchronize part of Vesper with the World Heart. Now it is partially submerged and still attempts to finish a sequence that no longer has an ending.
-
-The first vertical-slice route is designed as:
-
-**Sanctuary → Silent Nave → Gallery of Four Bells → Submerged Cloister → optional elite → Corridor Without Echo → Bell Guardian.**
-
-See [`docs/LEVEL_SLICE.md`](docs/LEVEL_SLICE.md).
-
-## Secrets
-
-Secrets are part of the identity, not just bonus loot.
-
-They can be visual references, mechanical discoveries, hidden rooms or short Echoes that change the meaning of earlier scenes.
-
-A good secret should make the player think:
-
-> **“I noticed that.”**
-
-## Nox
-
-Current design language:
-
-- light/athletic build;
-- irregular dark hair;
-- short asymmetric blue-black clothing;
-- restrained crimson cloth detail;
-- small aged-gold bell;
-- spectral-blue Heart fragment;
-- narrow spectral weapon: **Agulha de Vesper**.
-
-Signature rule: **fragment + bell + crimson detail**. Avoid ornamental overload.
-
-## Visual identity
-
-Direction: **modern readable pixel art, melancholic fantasy, monumental environments and restrained spectral effects**.
-
-| Role | Color |
-|---|---|
-| Night black | `#090B12` |
-| Ivory | `#E9E2D0` |
-| Spectral blue | `#54C7CE` |
-| Aged gold | `#C4A35A` |
-| Crimson | `#9E1738` |
-| Veil violet | `#6651A6` |
-
-Color carries meaning and is not used everywhere at once.
-
-## Adaptive audio prototype
-
-`tools/generate_prototype_audio.py` creates original procedural placeholder stems without third-party Python packages:
-
-- cathedral_ambient.wav;
-- cathedral_memory.wav;
-- cathedral_pulse.wav;
-- cathedral_bells.wav;
-- cathedral_requiem.wav;
-- cathedral_full_preview.wav.
-
-They share the same 100 BPM / 8-bar timeline and exist only to validate Pulse, mixing and Cadence before final music is composed.
-
-Run:
+Para gerar os áudios temporários:
 
 ```bash
 python tools/generate_prototype_audio.py
 ```
 
-Generated files are placed under `assets/audio/prototype/`.
+## Documentação
 
-## Playable combat toy V2
+As anotações mais detalhadas ficam em `docs/`. As que mais importam agora são:
 
-The prototype is intentionally asset-free and uses shapes drawn by code so combat can be judged before final art.
-
-Current implementation includes:
-
-- free movement;
-- universal evasion;
-- four-card hand;
-- eight-card prototype deck;
-- four actions;
-- Pulse;
-- Cadence D–RÉQUIEM;
-- telegraphed melee enemy;
-- provisional HUD;
-- placeholder arena composition.
-
-Controls:
-
-- `WASD` — movement;
-- `Space` — evade;
-- `1–4` — use cards;
-- mouse click — use a card;
-- `R` — reset arena.
-
-Main files:
-
-- `src/prototype/CombatPrototype.cs`;
-- `src/prototype/CombatPrototype.tscn`;
-- `src/audio/PulseClock.cs`.
-
-## Vertical slice target
-
-After the combat toy proves the core feel:
-
-- Nox with original art;
-- Sanctuary of the Last Sound;
-- 5–6 authored Drowned Cathedral rooms;
-- 8–12 total cards depending on testing;
-- 3 enemies;
-- 1 optional elite;
-- 1 boss: **Guardian of the Bells**;
-- adaptive music;
-- environmental secrets;
-- short narrative Echoes;
-- basic save;
-- keyboard + controller;
-- 10–15 minute complete run.
-
-## Technology
-
-- **Engine:** Godot 4.7.x .NET;
-- **Language:** C# / .NET 8;
-- **Target:** Windows first;
-- **Architecture direction:** component-driven gameplay, finite-state machines and data-driven definitions after the combat toy validates feel;
-- **Performance:** local frame-budget monitoring;
-- **Balancing:** local JSON telemetry with no network transport.
-
-The project stays on Godot instead of migrating engines during pre-production. The current budget is better spent validating combat and identity than rebuilding infrastructure.
+- [`GAME_DESIGN.md`](docs/GAME_DESIGN.md) — estrutura geral;
+- [`COMBAT_SPEC.md`](docs/COMBAT_SPEC.md) — valores e regras do toy;
+- [`STORY.md`](docs/STORY.md) — narrativa sem os principais spoilers;
+- [`ART_BIBLE.md`](docs/ART_BIBLE.md) — direção visual;
+- [`AUDIO_DIRECTION.md`](docs/AUDIO_DIRECTION.md) — Pulso e música adaptativa.
 
 ## Status
 
-**Pre-production / playable combat toy V2.**
+**Pré-produção / primeiro combat toy.**
 
-The branch has been upgraded from its earlier Godot 4.3 setup toward Godot 4.7.1. The new code has been statically checked against relevant Godot APIs, but compilation is not considered verified until the first local build/playtest in a Godot 4.7.1 .NET editor.
-
-## Running locally
-
-1. Install **Godot 4.7.1 .NET**.
-2. Clone this repository.
-3. Checkout `work/vertical-slice-v2` while the prototype is under review.
-4. Optionally run `python tools/generate_prototype_audio.py` to generate temporary stems.
-5. Open `project.godot`.
-6. Let Godot restore/build the C# project.
-7. Press `F5`.
-8. Test movement/card feel before judging placeholder visuals.
+A prioridade agora é confirmar build, jogar o protótipo e ajustar sensação de movimento, cartas, Pulso e Cadência. Depois disso entram arte própria, primeira sala de verdade e inimigos mais completos.
 
 ## License
 
-Source code is available under the [MIT License](LICENSE). Original game names, characters, narrative, visual art, music and other creative assets are reserved by the project author unless explicitly stated otherwise.
+O código-fonte está sob a [MIT License](LICENSE). Nomes, personagens, história, arte, música e demais elementos criativos originais continuam reservados ao autor do projeto.
