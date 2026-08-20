@@ -125,7 +125,7 @@ public partial class CombatPrototype : Node2D
     private float _requiemLock;
     private TimingGrade _lastGrade = TimingGrade.Free;
     private float _gradeDisplay;
-    private string _lastAction = "";
+    private string _lastAction = string.Empty;
     private EnemyState _enemy = new();
     private int _kills;
     private int _actions;
@@ -179,17 +179,17 @@ public partial class CombatPrototype : Node2D
             if (physical == (Key)82) ResetArena();   // R
         }
 
-        if (@event is InputEventMouseButton mouse && mouse.Pressed && mouse.ButtonIndex == MouseButton.Left)
+        if (@event is not InputEventMouseButton mouse || !mouse.Pressed || mouse.ButtonIndex != MouseButton.Left)
+            return;
+
+        Vector2 position = GetLocalMousePosition();
+        for (int i = 0; i < _hand.Length; i++)
         {
-            Vector2 position = GetLocalMousePosition();
-            for (int i = 0; i < 4; i++)
-            {
-                if (GetCardRect(i).HasPoint(position))
-                {
-                    TryPlayCard(i);
-                    break;
-                }
-            }
+            if (!GetCardRect(i).HasPoint(position))
+                continue;
+
+            TryPlayCard(i);
+            break;
         }
     }
 
@@ -204,6 +204,7 @@ public partial class CombatPrototype : Node2D
         _cadenceIdle = 0f;
         _requiemLock = 0f;
         _dashCooldown = 0f;
+        _dashRemaining = 0f;
         _actionLock = 0f;
         _hitStop = 0f;
         _kills = 0;
@@ -211,13 +212,16 @@ public partial class CombatPrototype : Node2D
         _goodActions = 0;
         _perfectActions = 0;
         _effects.Clear();
+
         SpawnEnemy();
         RebuildDeck();
-        for (int i = 0; i < 4; i++)
+
+        for (int i = 0; i < _hand.Length; i++)
         {
             _hand[i] = DrawCard();
             _drawTimers[i] = 0f;
         }
+
         QueueRedraw();
     }
 
@@ -227,10 +231,7 @@ public partial class CombatPrototype : Node2D
         {
             Position = _arena.GetCenter() + new Vector2(230f, -10f),
             Health = EnemyState.MaxHealth,
-            AttackCooldown = 0.75f,
-            TelegraphRemaining = 0f,
-            HitFlash = 0f,
-            Telegraphing = false
+            AttackCooldown = 0.75f
         };
     }
 
@@ -244,13 +245,9 @@ public partial class CombatPrototype : Node2D
             _brokenBell, _brokenBell
         };
 
-        for (int i = cards.Count - 1; i > 0; i--)
-        {
-            int j = _random.Next(i + 1);
-            (cards[i], cards[j]) = (cards[j], cards[i]);
-        }
-
+        Shuffle(cards);
         _deck.Clear();
+
         foreach (CardDefinition card in cards)
             _deck.Enqueue(card);
     }
@@ -259,30 +256,35 @@ public partial class CombatPrototype : Node2D
     {
         if (_deck.Count == 0)
         {
-            if (_discard.Count > 0)
+            if (_discard.Count == 0)
             {
-                var refill = new List<CardDefinition>(_discard);
-                _discard.Clear();
-                for (int i = refill.Count - 1; i > 0; i--)
-                {
-                    int j = _random.Next(i + 1);
-                    (refill[i], refill[j]) = (refill[j], refill[i]);
-                }
-                foreach (CardDefinition card in refill)
-                    _deck.Enqueue(card);
+                RebuildDeck();
             }
             else
             {
-                RebuildDeck();
+                var refill = new List<CardDefinition>(_discard);
+                _discard.Clear();
+                Shuffle(refill);
+                foreach (CardDefinition card in refill)
+                    _deck.Enqueue(card);
             }
         }
 
         return _deck.Dequeue();
     }
 
+    private void Shuffle(List<CardDefinition> cards)
+    {
+        for (int i = cards.Count - 1; i > 0; i--)
+        {
+            int j = _random.Next(i + 1);
+            (cards[i], cards[j]) = (cards[j], cards[i]);
+        }
+    }
+
     private void UpdateCards(float dt)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < _hand.Length; i++)
         {
             if (_hand[i] != null || _drawTimers[i] <= 0f)
                 continue;
@@ -342,13 +344,11 @@ public partial class CombatPrototype : Node2D
         if (_dashCooldown > 0f)
             return;
 
-        Vector2 direction = _playerFacing;
-        if (direction.LengthSquared() < 0.01f)
-            direction = Vector2.Right;
-
+        Vector2 direction = _playerFacing.LengthSquared() < 0.01f ? Vector2.Right : _playerFacing;
         _dashDirection = direction.Normalized();
         _dashRemaining = 0.15f;
         _dashCooldown = 0.65f;
+
         TimingGrade grade = EvaluateTiming();
         if (grade == TimingGrade.Good) AddCadence(2f);
         if (grade == TimingGrade.Perfect) AddCadence(4f);
@@ -421,15 +421,7 @@ public partial class CombatPrototype : Node2D
         if (toEnemy.Length() <= range && toEnemy.LengthSquared() > 0.01f && _playerFacing.Dot(toEnemy.Normalized()) > 0.05f)
             DamageEnemy(damage, grade == TimingGrade.Perfect ? 0.045f : 0.035f);
 
-        _effects.Add(new EffectState
-        {
-            Start = _playerPosition + _playerFacing * 18f,
-            End = _playerPosition + _playerFacing * range,
-            Lifetime = 0.13f,
-            MaxLifetime = 0.13f,
-            Color = grade == TimingGrade.Perfect ? Ivory : Spectral,
-            Line = true
-        });
+        AddLineEffect(_playerPosition + _playerFacing * 18f, _playerPosition + _playerFacing * range, grade == TimingGrade.Perfect ? Ivory : Spectral, 0.13f);
     }
 
     private void ExecuteNeedle(TimingGrade grade)
@@ -437,6 +429,7 @@ public partial class CombatPrototype : Node2D
         _actionLock = 0.28f;
         Vector2 end = _playerPosition + _playerFacing * 230f;
         float distance = DistancePointToSegment(_enemy.Position, _playerPosition, end);
+
         if (distance <= 22f && (_enemy.Position - _playerPosition).Dot(_playerFacing) > 0f)
         {
             DamageEnemy(11f, 0.025f);
@@ -444,15 +437,7 @@ public partial class CombatPrototype : Node2D
                 DamageEnemy(4.95f, 0.018f);
         }
 
-        _effects.Add(new EffectState
-        {
-            Start = _playerPosition + _playerFacing * 14f,
-            End = end,
-            Lifetime = 0.16f,
-            MaxLifetime = 0.16f,
-            Color = grade == TimingGrade.Perfect ? Ivory : Spectral,
-            Line = true
-        });
+        AddLineEffect(_playerPosition + _playerFacing * 14f, end, grade == TimingGrade.Perfect ? Ivory : Spectral, 0.16f);
     }
 
     private void ExecutePhantomStep(TimingGrade grade)
@@ -468,16 +453,7 @@ public partial class CombatPrototype : Node2D
             DamageEnemy(9f, 0.025f);
 
         _playerPosition = end;
-
-        _effects.Add(new EffectState
-        {
-            Start = start,
-            End = end,
-            Lifetime = 0.20f,
-            MaxLifetime = 0.20f,
-            Color = Violet,
-            Line = true
-        });
+        AddLineEffect(start, end, Violet, 0.20f);
 
         if (grade == TimingGrade.Perfect && _enemy.Health > 0f && _enemy.Position.DistanceTo(start) <= 78f)
             DamageEnemy(5f, 0.02f);
@@ -493,13 +469,31 @@ public partial class CombatPrototype : Node2D
                 DamageEnemy(9.6f, 0.025f);
         }
 
+        AddRingEffect(_playerPosition, 105f, grade == TimingGrade.Perfect ? Ivory : Gold, 0.28f);
+    }
+
+    private void AddLineEffect(Vector2 start, Vector2 end, Color color, float lifetime)
+    {
         _effects.Add(new EffectState
         {
-            Start = _playerPosition,
-            Radius = 105f,
-            Lifetime = 0.28f,
-            MaxLifetime = 0.28f,
-            Color = grade == TimingGrade.Perfect ? Ivory : Gold,
+            Start = start,
+            End = end,
+            Lifetime = lifetime,
+            MaxLifetime = lifetime,
+            Color = color,
+            Line = true
+        });
+    }
+
+    private void AddRingEffect(Vector2 position, float radius, Color color, float lifetime)
+    {
+        _effects.Add(new EffectState
+        {
+            Start = position,
+            Radius = radius,
+            Lifetime = lifetime,
+            MaxLifetime = lifetime,
+            Color = color,
             Ring = true
         });
     }
@@ -513,26 +507,24 @@ public partial class CombatPrototype : Node2D
         _enemy.HitFlash = 0.08f;
         _hitStop = MathF.Max(_hitStop, hitStop);
 
-        if (_enemy.Health <= 0f)
-        {
-            _kills++;
-            AddCadence(5f);
-            SpawnEnemyAtRandomEdge();
-        }
+        if (_enemy.Health > 0f)
+            return;
+
+        _kills++;
+        AddCadence(5f);
+        SpawnEnemyAtRandomEdge();
     }
 
     private void SpawnEnemyAtRandomEdge()
     {
         float x = _random.Next(0, 2) == 0 ? _arena.Position.X + 110f : _arena.End.X - 110f;
         float y = (float)(_arena.Position.Y + 90f + _random.NextDouble() * Math.Max(40f, _arena.Size.Y - 180f));
+
         _enemy = new EnemyState
         {
             Position = new Vector2(x, y),
             Health = EnemyState.MaxHealth,
-            AttackCooldown = 0.9f,
-            TelegraphRemaining = 0f,
-            HitFlash = 0f,
-            Telegraphing = false
+            AttackCooldown = 0.9f
         };
     }
 
@@ -549,26 +541,7 @@ public partial class CombatPrototype : Node2D
         {
             _enemy.TelegraphRemaining -= dt;
             if (_enemy.TelegraphRemaining <= 0f)
-            {
-                _enemy.Telegraphing = false;
-                _enemy.AttackCooldown = 0.82f;
-
-                if (_enemy.Position.DistanceTo(_playerPosition) <= 125f && _dashRemaining <= 0f)
-                {
-                    _playerHealth = MathF.Max(0f, _playerHealth - 18f);
-                    _cadence = MathF.Max(0f, _cadence - 20f);
-                    _hitStop = MathF.Max(_hitStop, 0.045f);
-                    _effects.Add(new EffectState
-                    {
-                        Start = _enemy.Position,
-                        Radius = 92f,
-                        Lifetime = 0.18f,
-                        MaxLifetime = 0.18f,
-                        Color = Crimson,
-                        Ring = true
-                    });
-                }
-            }
+                FinishEnemyAttack();
             return;
         }
 
@@ -591,6 +564,20 @@ public partial class CombatPrototype : Node2D
         }
     }
 
+    private void FinishEnemyAttack()
+    {
+        _enemy.Telegraphing = false;
+        _enemy.AttackCooldown = 0.82f;
+
+        if (_enemy.Position.DistanceTo(_playerPosition) > 125f || _dashRemaining > 0f)
+            return;
+
+        _playerHealth = MathF.Max(0f, _playerHealth - 18f);
+        _cadence = MathF.Max(0f, _cadence - 20f);
+        _hitStop = MathF.Max(_hitStop, 0.045f);
+        AddRingEffect(_enemy.Position, 92f, Crimson, 0.18f);
+    }
+
     private void UpdateCadence(float dt)
     {
         _cadenceIdle += dt;
@@ -605,25 +592,19 @@ public partial class CombatPrototype : Node2D
     {
         float before = _cadence;
         _cadence = Mathf.Clamp(_cadence + amount, 0f, 100f);
-        if (before < 90f && _cadence >= 90f)
-        {
-            _requiemLock = 6f;
-            _effects.Add(new EffectState
-            {
-                Start = _playerPosition,
-                Radius = 145f,
-                Lifetime = 0.65f,
-                MaxLifetime = 0.65f,
-                Color = Ivory,
-                Ring = true
-            });
-        }
+
+        if (before >= 90f || _cadence < 90f)
+            return;
+
+        _requiemLock = 6f;
+        AddRingEffect(_playerPosition, 145f, Ivory, 0.65f);
     }
 
     private TimingGrade EvaluateTiming()
     {
         float phase = _elapsed % BeatPeriod;
         float distance = MathF.Min(phase, BeatPeriod - phase);
+
         if (distance <= PerfectWindow)
             return TimingGrade.Perfect;
         if (distance <= GoodWindow)
@@ -651,200 +632,5 @@ public partial class CombatPrototype : Node2D
         float t = Mathf.Clamp((point - start).Dot(segment) / lengthSquared, 0f, 1f);
         Vector2 projection = start + segment * t;
         return point.DistanceTo(projection);
-    }
-
-    private Rect2 GetCardRect(int index)
-    {
-        Vector2 size = GetViewportRect().Size;
-        const float width = 205f;
-        const float height = 108f;
-        const float gap = 18f;
-        float total = width * 4f + gap * 3f;
-        float startX = (size.X - total) * 0.5f;
-        return new Rect2(startX + index * (width + gap), size.Y - height - 24f, width, height);
-    }
-
-    public override void _Draw()
-    {
-        DrawBackground();
-        DrawArenaDecoration();
-        DrawEnemy();
-        DrawPlayer();
-        DrawEffects();
-        DrawHud();
-    }
-
-    private void DrawBackground()
-    {
-        Vector2 size = GetViewportRect().Size;
-        DrawRect(new Rect2(Vector2.Zero, size), Night);
-        DrawRect(_arena, Stone);
-        DrawRect(_arena.Grow(-10f), Water.Darkened(0.28f), false, 2f);
-
-        for (float y = _arena.Position.Y + 34f; y < _arena.End.Y; y += 46f)
-            DrawLine(new Vector2(_arena.Position.X + 18f, y), new Vector2(_arena.End.X - 18f, y), Water.Lightened(0.06f), 1f);
-    }
-
-    private void DrawArenaDecoration()
-    {
-        // Broken bells / cathedral markers. Prototype shapes only.
-        DrawCircle(new Vector2(_arena.Position.X + 78f, _arena.Position.Y + 72f), 28f, Gold.Darkened(0.60f));
-        DrawArc(new Vector2(_arena.Position.X + 78f, _arena.Position.Y + 72f), 34f, 0f, Mathf.Tau * 0.84f, 28, Gold.Darkened(0.28f), 2f);
-
-        Vector2 rightBell = new(_arena.End.X - 82f, _arena.End.Y - 70f);
-        DrawCircle(rightBell, 22f, Gold.Darkened(0.68f));
-        DrawLine(rightBell + new Vector2(-24f, 20f), rightBell + new Vector2(24f, -18f), Night, 5f);
-
-        // A distant sealed door as a narrative focal point.
-        Rect2 door = new(_arena.GetCenter().X - 44f, _arena.Position.Y + 8f, 88f, 58f);
-        DrawRect(door, Night.Lightened(0.02f));
-        DrawArc(new Vector2(door.GetCenter().X, door.Position.Y + 26f), 20f, Mathf.Pi, Mathf.Tau, 20, Ivory.Darkened(0.58f), 2f);
-    }
-
-    private void DrawPlayer()
-    {
-        bool requiem = _cadence >= 90f;
-        Color body = requiem ? Ivory.Darkened(0.70f) : new Color(0.07f, 0.12f, 0.18f, 1f);
-
-        DrawCircle(_playerPosition + new Vector2(2f, 9f), 19f, new Color(0f, 0f, 0f, 0.28f));
-        DrawRect(new Rect2(_playerPosition + new Vector2(-12f, -13f), new Vector2(24f, 33f)), body);
-        DrawCircle(_playerPosition + new Vector2(0f, -19f), 11f, new Color(0.035f, 0.035f, 0.05f, 1f));
-
-        // Crimson signature cloth, kept small on purpose.
-        DrawLine(_playerPosition + new Vector2(-6f, -8f), _playerPosition - _playerFacing * 28f + new Vector2(-4f, 4f), Crimson, 4f);
-
-        // Heart fragment.
-        float pulse = 3.6f + (MathF.Sin(_elapsed * 6f) + 1f) * 0.8f;
-        DrawCircle(_playerPosition + new Vector2(4f, -4f), pulse, requiem ? Ivory : Spectral);
-
-        // Vesper Needle.
-        Vector2 bladeStart = _playerPosition + _playerFacing * 13f;
-        Vector2 bladeEnd = _playerPosition + _playerFacing * 42f;
-        DrawLine(bladeStart, bladeEnd, requiem ? Ivory : Spectral, 3f);
-
-        if (requiem)
-        {
-            DrawArc(_playerPosition, 28f, 0f, Mathf.Tau, 40, Spectral, 2f);
-            DrawLine(_playerPosition + new Vector2(-8f, -4f), _playerPosition + new Vector2(-20f, 12f), Gold, 1.5f);
-        }
-
-        DrawPulseIndicator();
-    }
-
-    private void DrawPulseIndicator()
-    {
-        float phase = _elapsed % BeatPeriod;
-        float normalized = phase / BeatPeriod;
-        float radius = 31f + normalized * 16f;
-        float alpha = 0.48f * (1f - normalized);
-        Color color = new(Spectral.R, Spectral.G, Spectral.B, alpha);
-        DrawArc(_playerPosition, radius, 0f, Mathf.Tau, 40, color, 1.6f);
-    }
-
-    private void DrawEnemy()
-    {
-        Color mask = _enemy.HitFlash > 0f ? Ivory : new Color(0.58f, 0.60f, 0.59f, 1f);
-        Color cloth = new Color(0.16f, 0.17f, 0.19f, 1f);
-
-        DrawCircle(_enemy.Position + new Vector2(0f, 8f), 20f, new Color(0f, 0f, 0f, 0.25f));
-        DrawRect(new Rect2(_enemy.Position + new Vector2(-14f, -10f), new Vector2(28f, 35f)), cloth);
-        DrawCircle(_enemy.Position + new Vector2(0f, -18f), 12f, mask);
-        DrawLine(_enemy.Position + new Vector2(-6f, -20f), _enemy.Position + new Vector2(7f, -17f), Night, 2f);
-
-        if (_enemy.Telegraphing)
-        {
-            float t = 1f - Mathf.Clamp(_enemy.TelegraphRemaining / 0.48f, 0f, 1f);
-            DrawArc(_enemy.Position, 42f + t * 40f, -0.25f, Mathf.Pi + 0.25f, 30, Crimson, 3f);
-        }
-
-        float hpRatio = _enemy.Health / EnemyState.MaxHealth;
-        Rect2 bar = new(_enemy.Position + new Vector2(-30f, -43f), new Vector2(60f, 5f));
-        DrawRect(bar, Night.Lightened(0.10f));
-        DrawRect(new Rect2(bar.Position, new Vector2(bar.Size.X * hpRatio, bar.Size.Y)), Ivory.Darkened(0.25f));
-    }
-
-    private void DrawEffects()
-    {
-        foreach (EffectState effect in _effects)
-        {
-            float alpha = Mathf.Clamp(effect.Lifetime / effect.MaxLifetime, 0f, 1f);
-            Color color = new(effect.Color.R, effect.Color.G, effect.Color.B, alpha * 0.85f);
-
-            if (effect.Line)
-                DrawLine(effect.Start, effect.End, color, 3f + alpha * 3f);
-
-            if (effect.Ring)
-            {
-                float radius = effect.Radius * (1f + (1f - alpha) * 0.15f);
-                DrawArc(effect.Start, radius, 0f, Mathf.Tau, 48, color, 2f + alpha * 2f);
-            }
-        }
-    }
-
-    private void DrawHud()
-    {
-        Vector2 size = GetViewportRect().Size;
-
-        // Header.
-        DrawString(_font, new Vector2(28f, 30f), "RÉQUIEM // NAVE SILENCIOSA — PROTÓTIPO V2", HorizontalAlignment.Left, -1f, 18, Ivory.Darkened(0.12f));
-        DrawString(_font, new Vector2(28f, 54f), "WASD mover  ·  ESPAÇO esquiva  ·  1–4 cartas  ·  clique nas cartas  ·  R reiniciar", HorizontalAlignment.Left, -1f, 14, Ivory.Darkened(0.42f));
-
-        // Health.
-        Rect2 healthBack = new(28f, 76f, 210f, 12f);
-        DrawRect(healthBack, Night.Lightened(0.11f));
-        DrawRect(new Rect2(healthBack.Position, new Vector2(healthBack.Size.X * (_playerHealth / 100f), healthBack.Size.Y)), Crimson);
-        DrawString(_font, new Vector2(28f, 110f), $"VIDA {MathF.Round(_playerHealth)}", HorizontalAlignment.Left, 120f, 14, Ivory.Darkened(0.12f));
-
-        // Cadence.
-        Rect2 cadenceBack = new(265f, 76f, 300f, 12f);
-        DrawRect(cadenceBack, Night.Lightened(0.11f));
-        Color cadenceColor = _cadence >= 90f ? Ivory : Spectral;
-        DrawRect(new Rect2(cadenceBack.Position, new Vector2(cadenceBack.Size.X * (_cadence / 100f), cadenceBack.Size.Y)), cadenceColor);
-        DrawString(_font, new Vector2(265f, 110f), $"CADÊNCIA  {GetCadenceRank()}  {MathF.Round(_cadence)}", HorizontalAlignment.Left, 300f, 14, cadenceColor);
-
-        string accuracy = _actions == 0 ? "—" : $"{MathF.Round((_goodActions + _perfectActions) * 100f / _actions)}%";
-        DrawString(_font, new Vector2(size.X - 265f, 32f), $"ABATES {_kills}   //   NO PULSO {accuracy}", HorizontalAlignment.Left, 240f, 14, Ivory.Darkened(0.28f));
-
-        if (_gradeDisplay > 0f)
-        {
-            string grade = _lastGrade switch
-            {
-                TimingGrade.Perfect => "PERFEITO",
-                TimingGrade.Good => "BOM",
-                _ => "LIVRE"
-            };
-            Color gradeColor = _lastGrade == TimingGrade.Perfect ? Ivory : (_lastGrade == TimingGrade.Good ? Spectral : Ivory.Darkened(0.55f));
-            DrawString(_font, _playerPosition + new Vector2(-70f, -58f), $"{grade} · {_lastAction}", HorizontalAlignment.Center, 140f, 13, gradeColor);
-        }
-
-        // Card hand.
-        for (int i = 0; i < 4; i++)
-            DrawCardSlot(i);
-    }
-
-    private void DrawCardSlot(int index)
-    {
-        Rect2 rect = GetCardRect(index);
-        CardDefinition? card = _hand[index];
-
-        Color baseColor = card?.Accent ?? Ivory.Darkened(0.72f);
-        DrawRect(rect, new Color(0.025f, 0.03f, 0.05f, 0.96f));
-        DrawRect(rect, baseColor.Darkened(0.15f), false, 2f);
-        DrawRect(new Rect2(rect.Position, new Vector2(5f, rect.Size.Y)), baseColor);
-
-        DrawString(_font, rect.Position + new Vector2(14f, 24f), (index + 1).ToString(), HorizontalAlignment.Left, 24f, 14, baseColor);
-
-        if (card == null)
-        {
-            float maxDelay = 0.38f;
-            float p = 1f - Mathf.Clamp(_drawTimers[index] / maxDelay, 0f, 1f);
-            DrawString(_font, rect.Position + new Vector2(46f, 50f), "COMPRANDO...", HorizontalAlignment.Left, 130f, 14, Ivory.Darkened(0.55f));
-            DrawRect(new Rect2(rect.Position + new Vector2(14f, 82f), new Vector2((rect.Size.X - 28f) * p, 3f)), baseColor.Darkened(0.12f));
-            return;
-        }
-
-        DrawString(_font, rect.Position + new Vector2(40f, 28f), card.ShortName, HorizontalAlignment.Left, 150f, 18, Ivory);
-        DrawString(_font, rect.Position + new Vector2(14f, 57f), card.Name, HorizontalAlignment.Left, rect.Size.X - 28f, 14, Ivory.Darkened(0.14f));
-        DrawString(_font, rect.Position + new Vector2(14f, 83f), card.Description, HorizontalAlignment.Left, rect.Size.X - 28f, 12, Ivory.Darkened(0.42f));
     }
 }
