@@ -1,138 +1,80 @@
 # RÉQUIEM: ECOS DO SILÊNCIO
 
-> **International title: REQUIEM: ECHOES OF SILENCE**
->
 > **Every death rewrites the music.**
 
-A compact rhythm-driven 2D action roguelite where attacks, cards and an adaptive soundtrack become one combat system.
+Réquiem é um action roguelite 2D em pré-produção. A ideia é combinar combate rápido, uma camada leve de ritmo e cartas de ação sem transformar o jogo num rhythm game tradicional.
 
-[Game Design](docs/GAME_DESIGN.md) · [Story](docs/STORY.md) · [Art Bible](docs/ART_BIBLE.md) · [Engineering](docs/ENGINEERING.md) · [Roadmap](docs/ROADMAP.md)
+Nox acorda em Vesper sem lembrar o que aconteceu com o Coração do Mundo. O cenário, os inimigos e pequenas memórias espalhadas pelo caminho contam a maior parte da história; o protagonista não precisa explicar tudo em diálogos.
 
-## The game
+## A ideia do combate
 
-Vesper was once stabilized by the World Heart, an ancient machine whose music held memory, matter and time together. When it shattered, entire regions fell into supernatural silence and their inhabitants became trapped inside incomplete memories.
+O jogador se move e ataca em tempo real. O **Pulso** marca o ritmo da música, mas errar esse timing nunca bloqueia uma ação.
 
-Nox awakens in the Sanctuary of the Last Sound with no memory of his past and a fragment of the Heart pulsing inside his chest. Each death returns him to the Sanctuary. Each run recovers new Echoes. Some of them recognize him.
+Acertar perto do Pulso melhora a execução e aumenta a **Cadência**:
 
-The first version asks one question: **did Nox destroy the World Heart, or was he trying to save it?**
+```text
+D → C → B → A → S → RÉQUIEM
+```
 
-## Core pillars
+As cartas representam ações — ataques, movimento ou impacto — e não uma pilha de buffs passivos. Quero que a mão mude as decisões do combate sem parar o jogo a cada poucos segundos.
 
-- **Action first, rhythm second** — combat always works; good timing makes it stronger.
-- **Simple builds** — six equipped cards, short descriptions, three families in the first version.
-- **Adaptive music** — Cadence adds musical layers as the player performs better.
-- **Short runs** — 10–15 minutes for the first complete slice.
-- **Small story, strong mystery** — short Echoes and one clear reveal instead of long cutscenes.
-- **Readable pixel art** — dark, melancholic environments with clear combat feedback.
+## Direção atual
 
-## Signature systems
+O primeiro recorte do jogo está sendo pensado em torno de:
 
-### Pulse
+- um único personagem jogável;
+- exploração mais solitária;
+- uma região principal, a **Catedral Afogada**;
+- combate em tempo real com cartas;
+- Pulso/Cadência como camada de domínio;
+- poucos inimigos bem legíveis;
+- segredos e narrativa ambiental;
+- pixel art moderna com efeitos usados com moderação.
 
-A visual/music pulse communicates timing. Attack or dodge close to the beat for a Good or Perfect action. Missing never blocks the command.
-
-### Cadence
-
-**D → C → B → A → S → REQUIEM**
-
-Cadence rises through well-timed actions and progressively enriches music and effects.
-
-### Score and cards
-
-The first version has **12 cards**, **6 slots** and **3 families**:
-
-| Family | Identity | Playstyle |
-|---|---|---|
-| Blood | Crimson | damage, risk, recovery |
-| Veil | Violet | movement, dodge, speed |
-| Bell | Aged gold | impact, defense, shockwaves |
-
-Grave and Noise remain future expansion space.
+A prioridade é fechar um protótipo de combate pequeno antes de produzir salas, inimigos e arte em quantidade.
 
 ## Nox
 
-The only playable character in the first version.
+Nox é o protagonista e permanece em silêncio durante boa parte da experiência.
 
-Visual identity:
+A identidade visual planejada usa uma silhueta pequena, roupa escura, um detalhe carmesim, um pequeno sino envelhecido e efeitos azul-espectrais. O ambiente deve chamar mais atenção pelo tamanho e atmosfera do que o personagem por complexidade visual.
 
-- dark irregular hair;
-- blue-black short coat;
-- crimson scarf;
-- small aged-gold bell;
-- spectral-blue Heart fragment;
-- narrow spectral blade.
+## Tecnologia
 
-Nox is quiet, observant and uncertain about his own past. His identity is rebuilt through the Echoes found during runs.
+- Godot 4.x com suporte .NET;
+- C# / .NET;
+- Windows como primeiro alvo.
 
-## First playable slice
+O repositório também tem alguns experimentos de telemetria local e orçamento de frame para ajudar no ajuste do jogo. Eles são ferramentas de desenvolvimento, não funcionalidades para o jogador.
 
-- 1 playable character;
-- 1 weapon: **Agulha de Vesper**;
-- 1 small hub: **Sanctuary of the Last Sound**;
-- 1 region: **Drowned Cathedral**;
-- 12 cards;
-- 3 enemy types;
-- 1 optional elite;
-- 1 boss: **Guardian of the Bells**;
-- 5–6 authored rooms in small route variations;
-- 10–15 minute complete run;
-- 1 adaptive music track;
-- basic save data;
-- keyboard and controller support.
-
-No advanced procedural generation, multiple characters, multiple complete regions or giant progression trees in the first version.
-
-## Technology
-
-- **Engine:** Godot 4.x with .NET support;
-- **Language:** C# / .NET;
-- **Architecture:** component-driven gameplay, finite-state machines and data-driven resources;
-- **Performance:** explicit runtime frame-budget monitoring;
-- **Data:** local gameplay telemetry exported to JSON for balancing/profiling;
-- **Target:** Windows first.
-
-## Engineering layer
-
-Réquiem also demonstrates engineering specific to real-time games.
-
-`src/engineering/PerformanceBudget.cs` tracks average/worst frame time against a configurable FPS target. `src/engineering/RunTelemetry.cs` records local combat, Cadence and room events so balancing decisions can use actual run data.
+## Estrutura
 
 ```text
-gameplay -> local telemetry -> JSON -> balancing
-        \
-         -> frame budget -> profiling/optimization
+src/       código do jogo e protótipos
+docs/      história, combate, arte e decisões de design
+assets/    recursos do projeto
+tools/     utilitários de desenvolvimento
 ```
 
-Telemetry has no network transport by design.
+As anotações que mais ajudam a entender a direção atual estão em:
 
-## Visual identity
+- [`docs/GAME_DESIGN.md`](docs/GAME_DESIGN.md)
+- [`docs/STORY.md`](docs/STORY.md)
+- [`docs/ART_BIBLE.md`](docs/ART_BIBLE.md)
 
-Direction: **modern pixel art, melancholic fantasy, strong silhouettes, restrained lighting and spectral effects**.
+## Rodando localmente
 
-| Role | Color |
-|---|---|
-| Night black | `#090B12` |
-| Ivory | `#E9E2D0` |
-| Crimson | `#9E1738` |
-| Spectral blue | `#54C7CE` |
-| Aged gold | `#C4A35A` |
-| Veil violet | `#6651A6` |
+1. instale uma versão do Godot 4 com suporte .NET;
+2. clone o repositório;
+3. abra `project.godot`;
+4. execute a cena configurada no projeto.
 
-The recurring symbols are bell, pulse, fracture, Echo and the ivory mask as a secondary narrative emblem.
+## Status
 
-See [`docs/ART_BIBLE.md`](docs/ART_BIBLE.md).
+**Pré-produção.**
 
-## Current status
+Existe uma branch separada onde estou testando o primeiro combat toy. Ela só deve virar a base principal depois de eu confirmar o build no Godot e jogar o protótipo de verdade. Até lá, a `main` representa a direção do projeto, não uma promessa de vertical slice pronta.
 
-**Pre-production / focused vertical slice.** The project is intentionally reducing scope before expanding content. The next objective is a polished Pulse combat prototype with Nox, one room, one enemy and adaptive music before building the complete 10–15 minute slice.
+## Licença
 
-## Running locally
-
-1. Install Godot 4.x with .NET support.
-2. Clone this repository.
-3. Open `project.godot` in Godot.
-4. Press F6 or F5 to run the bootstrap scene.
-
-## License
-
-Source code is available under the [MIT License](LICENSE). Original game names, characters, narrative, visual art, music and other creative assets are reserved by the project author unless explicitly stated otherwise.
+O código-fonte está sob a [MIT License](LICENSE). Nomes, personagens, história, arte, música e outros elementos criativos originais permanecem reservados ao autor do projeto.
