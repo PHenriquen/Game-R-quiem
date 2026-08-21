@@ -18,17 +18,18 @@ public partial class CombatPrototype
 
     public override void _EnterTree()
     {
-        _combatRhythmBridge = new CombatRhythmBridge(this)
+        _combatRhythmBridge = new CombatRhythmBridge
         {
             Name = "CombatRhythmBridge",
             ZIndex = 100
         };
+        _combatRhythmBridge.Bind(this);
         AddChild(_combatRhythmBridge);
     }
 
     private sealed partial class CombatRhythmBridge : Node2D
     {
-        private readonly CombatPrototype _owner;
+        private CombatPrototype? _owner;
         private readonly RhythmJudge _judge = new();
         private readonly ScoreTracker _score = new();
         private readonly Font _font = ThemeDB.FallbackFont;
@@ -41,13 +42,21 @@ public partial class CombatPrototype
         private RhythmJudgement _lastJudgement;
         private bool _hasJudgement;
 
-        public CombatRhythmBridge(CombatPrototype owner)
+        public void Bind(CombatPrototype owner)
         {
             _owner = owner;
         }
 
         public override void _Ready()
         {
+            if (_owner is null)
+            {
+                GD.PushError("CombatRhythmBridge entered the tree without a CombatPrototype owner.");
+                SetProcess(false);
+                SetProcessInput(false);
+                return;
+            }
+
             _observedActions = _owner._actions;
 
             _clock = new PulseClock
@@ -72,6 +81,9 @@ public partial class CombatPrototype
 
         public override void _Process(double delta)
         {
+            if (_owner is null)
+                return;
+
             _cueLife = Mathf.Max(0f, _cueLife - (float)delta);
 
             // Fallback in case an action was triggered by a path we did not observe
@@ -88,14 +100,14 @@ public partial class CombatPrototype
             {
                 Key physical = key.PhysicalKeycode;
                 if (physical is (Key)49 or (Key)50 or (Key)51 or (Key)52)
-                    CallDeferred(MethodName.CaptureSuccessfulActions);
+                    CallDeferred(nameof(CaptureSuccessfulActions));
 
                 if (physical == (Key)82) // R
-                    CallDeferred(MethodName.RestartTrial);
+                    CallDeferred(nameof(RestartTrial));
             }
             else if (@event is InputEventMouseButton mouse && mouse.Pressed && mouse.ButtonIndex == MouseButton.Left)
             {
-                CallDeferred(MethodName.CaptureSuccessfulActions);
+                CallDeferred(nameof(CaptureSuccessfulActions));
             }
         }
 
@@ -124,7 +136,7 @@ public partial class CombatPrototype
 
         private void CaptureSuccessfulActions()
         {
-            if (_clock is null)
+            if (_clock is null || _owner is null)
                 return;
 
             while (_observedActions < _owner._actions)
@@ -142,6 +154,9 @@ public partial class CombatPrototype
 
         private void RestartTrial()
         {
+            if (_owner is null)
+                return;
+
             _score.Reset();
             _hasJudgement = false;
             _observedActions = _owner._actions;
