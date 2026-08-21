@@ -36,6 +36,8 @@ A foundation de Echo Trials adiciona:
 - `ScoreTracker` com accuracy/combo/rank;
 - `EchoTrialDirector` para disparar eventos sem acoplar inimigo/arena ao formato;
 - primeiro chart de 32 segundos (`Primeiro Eco de Vesper`);
+- cena de debug independente para visualizar beat/phase/eventos sem depender de áudio;
+- editor visual local em `tools/echo_editor/index.html` para importar, editar e exportar beatmaps;
 - `beatmap_seed.py` para gerar uma grade inicial;
 - `beatmap_lint.py` rodando no CI.
 
@@ -79,12 +81,14 @@ Rhythm platform:
 - [`src/rhythm/RhythmJudge.cs`](src/rhythm/RhythmJudge.cs)
 - [`src/rhythm/ScoreTracker.cs`](src/rhythm/ScoreTracker.cs)
 - [`src/rhythm/EchoTrialDirector.cs`](src/rhythm/EchoTrialDirector.cs)
+- [`src/rhythm/debug/EchoTrialDebug.tscn`](src/rhythm/debug/EchoTrialDebug.tscn)
 
 Stack:
 
 - Godot 4.7.x .NET;
 - C# / .NET 8;
-- Python para ferramentas offline simples.
+- Python para ferramentas offline simples;
+- HTML/CSS/JS puro para o editor local de charts.
 
 ## Direção do jogo
 
@@ -103,7 +107,11 @@ Esta versão ainda precisa do build/playtest confirmado em um editor Godot 4.7.1
 1. instale Godot 4.7.1 .NET;
 2. abra `project.godot`;
 3. deixe o Godot restaurar o projeto C#;
-4. pressione `F5`.
+4. pressione `F5` para o combat toy atual.
+
+Para testar apenas a nova timeline sem mexer no toy, abra `src/rhythm/debug/EchoTrialDebug.tscn` e execute a cena (`F6`). Ela usa o fallback clock e não precisa da música para mostrar os eventos.
+
+Para editar um Echo Trial visualmente, abra `tools/echo_editor/index.html` no navegador e importe um JSON de `assets/beatmaps/`.
 
 Ferramentas:
 
@@ -129,7 +137,7 @@ python tools/beatmap_seed.py --bpm 120 --duration 60 --out assets/beatmaps/test.
 
 **Pré-produção / combat toy + rhythm platform foundation.**
 
-Próximo gate: confirmar build e jogar o toy. Depois, conectar um Echo Trial real ao combate atual, calibrar sensação e só então investir em editor visual, arte final e mais conteúdo.
+Próximo gate: confirmar build e jogar o toy. Depois, conectar um Echo Trial real ao combate atual, calibrar sensação e só então investir em arte final, mais conteúdo e recursos comunitários.
 
 ## License
 
