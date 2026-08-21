@@ -6,37 +6,52 @@ Réquiem é um action roguelite 2D em desenvolvimento. A ideia central é mistur
 
 Nox acorda em Vesper sem lembrar por que o mundo perdeu parte de sua música. Conforme avança, encontra lugares presos a memórias incompletas e sinais de que o próprio passado está ligado ao Silêncio.
 
+## Duas camadas, um mesmo combate
+
+O projeto passa a separar claramente:
+
+- **Campanha** — experiência autoral e finita; história, Nox, Catedral Afogada, exploração, cartas, inimigos, bosses e narrativa ambiental.
+- **Echo Trials** — desafios curtos e replayable construídos sobre música + timeline + precisão + combo + score + ranks.
+
+A influência de rhythm games entra no loop de domínio e replay, não em copiar a interface ou trocar o combate por círculos para clicar. Nox continua se movendo, esquivando e usando cartas em tempo real.
+
 ## O que já existe
 
-O projeto ainda está em pré-produção, mas esta branch já tem um **combat toy jogável** feito em Godot/C# para testar o núcleo antes de investir em arte final.
-
-Hoje ele inclui:
+A base atual tem um **combat toy jogável** em Godot/C# para testar o núcleo antes de investir em arte final:
 
 - movimento livre e esquiva;
 - mão de 4 cartas usada em tempo real;
 - baralho inicial com 8 cartas;
-- quatro ações: Corte Breve, Agulha, Passo Fantasma e Sino Partido;
-- sistema de Pulso a 100 BPM;
-- Cadência de D até RÉQUIEM;
+- Corte Breve, Agulha, Passo Fantasma e Sino Partido;
+- Pulso e Cadência de D até RÉQUIEM;
 - inimigo simples com ataque telegrafado;
 - arena e efeitos provisórios desenhados por código;
-- gerador de áudio temporário para testar o Pulso e camadas da trilha.
+- relógio musical com compensação de latência.
 
-O protótipo visual é propositalmente simples. Quero validar se mover, escolher cartas e acertar o ritmo é divertido antes de transformar isso em uma fase completa.
+A foundation de Echo Trials adiciona:
+
+- formato JSON versionado para beatmaps;
+- loader e validação;
+- `RhythmJudge` independente do combate;
+- `ScoreTracker` com accuracy/combo/rank;
+- `EchoTrialDirector` para disparar eventos sem acoplar inimigo/arena ao formato;
+- primeiro chart de 32 segundos (`Primeiro Eco de Vesper`);
+- `beatmap_seed.py` para gerar uma grade inicial;
+- `beatmap_lint.py` rodando no CI.
 
 ## Como o combate funciona
 
 As cartas não pausam o jogo. Cada carta executa uma ação imediatamente e depois abre espaço para outra compra.
 
-O Pulso dá três resultados de timing:
+O Pulso usa três resultados para ações normais:
 
 - **Perfect**
 - **Good**
 - **Free**
 
-Errar o ritmo nunca impede o ataque. Jogar perto do Pulso só melhora a execução e ajuda a aumentar a Cadência.
+Agir fora do ritmo nunca bloqueia o ataque. Jogar perto do Pulso melhora execução, score e Cadência. **Miss** só entra quando um Echo Trial explicitamente espera uma resposta em um momento do chart.
 
-Quando a Cadência chega a **RÉQUIEM**, a ideia não é virar uma transformação cheia de efeitos. Nox entra por alguns segundos num estado de controle maior, como se lembrasse exatamente de como lutava antes.
+Quando a Cadência chega a **RÉQUIEM**, Nox entra por alguns segundos num estado de controle maior, como se lembrasse exatamente de como lutava antes.
 
 ## Controles do protótipo
 
@@ -50,61 +65,71 @@ Quando a Cadência chega a **RÉQUIEM**, a ideia não é virar uma transformaç�
 
 ## Código
 
-Os arquivos principais do toy ficam em:
+Toy atual:
 
-- [`src/prototype/CombatPrototype.cs`](src/prototype/CombatPrototype.cs) — lógica do protótipo;
-- [`src/prototype/CombatPrototype.Draw.cs`](src/prototype/CombatPrototype.Draw.cs) — desenho provisório da arena/HUD;
-- [`src/prototype/CombatPrototype.tscn`](src/prototype/CombatPrototype.tscn) — cena do protótipo;
-- [`src/audio/PulseClock.cs`](src/audio/PulseClock.cs) — relógio musical que deve substituir o timer provisório quando a trilha real entrar.
+- [`src/prototype/CombatPrototype.cs`](src/prototype/CombatPrototype.cs)
+- [`src/prototype/CombatPrototype.Draw.cs`](src/prototype/CombatPrototype.Draw.cs)
+- [`src/prototype/CombatPrototype.tscn`](src/prototype/CombatPrototype.tscn)
+- [`src/audio/PulseClock.cs`](src/audio/PulseClock.cs)
 
-Stack atual:
+Rhythm platform:
+
+- [`src/rhythm/BeatmapModels.cs`](src/rhythm/BeatmapModels.cs)
+- [`src/rhythm/BeatmapLoader.cs`](src/rhythm/BeatmapLoader.cs)
+- [`src/rhythm/RhythmJudge.cs`](src/rhythm/RhythmJudge.cs)
+- [`src/rhythm/ScoreTracker.cs`](src/rhythm/ScoreTracker.cs)
+- [`src/rhythm/EchoTrialDirector.cs`](src/rhythm/EchoTrialDirector.cs)
+
+Stack:
 
 - Godot 4.7.x .NET;
 - C# / .NET 8;
-- Python apenas para gerar os stems temporários de áudio.
+- Python para ferramentas offline simples.
 
 ## Direção do jogo
 
-Quero que o Réquiem passe principalmente três sensações:
+Réquiem deve passar principalmente:
 
 **solidão ao explorar, curiosidade ao descobrir segredos e domínio durante o combate.**
 
-A primeira região planejada é a **Catedral Afogada**, um lugar parcialmente submerso onde sinos antigos continuam tentando terminar uma sequência que não possui mais um final.
+A primeira região planejada é a **Catedral Afogada**, parcialmente submersa, onde sinos antigos continuam tentando terminar uma sequência que não possui mais um final.
 
-A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. O azul espectral, ouro envelhecido e um detalhe carmesim formam a identidade principal do Nox.
+A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. O azul espectral, ouro envelhecido e o **cachecol carmesim** são âncoras importantes da identidade de Nox.
 
 ## Rodando localmente
 
-Esta versão ainda precisa do primeiro build/playtest confirmado em um editor Godot 4.7.1 .NET.
+Esta versão ainda precisa do build/playtest confirmado em um editor Godot 4.7.1 .NET.
 
-Para testar:
-
-1. instale o Godot 4.7.1 .NET;
+1. instale Godot 4.7.1 .NET;
 2. abra `project.godot`;
 3. deixe o Godot restaurar o projeto C#;
 4. pressione `F5`.
 
-Para gerar os áudios temporários:
+Ferramentas:
 
 ```bash
 python tools/generate_prototype_audio.py
+python tools/beatmap_lint.py
+python tools/beatmap_seed.py --bpm 120 --duration 60 --out assets/beatmaps/test.json
 ```
 
-## Documentação
+## Documentação principal
 
-As anotações mais detalhadas ficam em `docs/`. As que mais importam agora são:
-
-- [`GAME_DESIGN.md`](docs/GAME_DESIGN.md) — estrutura geral;
-- [`COMBAT_SPEC.md`](docs/COMBAT_SPEC.md) — valores e regras do toy;
-- [`STORY.md`](docs/STORY.md) — narrativa sem os principais spoilers;
-- [`ART_BIBLE.md`](docs/ART_BIBLE.md) — direção visual;
-- [`AUDIO_DIRECTION.md`](docs/AUDIO_DIRECTION.md) — Pulso e música adaptativa.
+- [`docs/canon/CANON_LOCK.md`](docs/canon/CANON_LOCK.md) — o que a expansão técnica não pode apagar;
+- [`docs/RHYTHM_PLATFORM.md`](docs/RHYTHM_PLATFORM.md) — arquitetura de ritmo;
+- [`docs/ECHO_TRIALS.md`](docs/ECHO_TRIALS.md) — modo replayable;
+- [`docs/CONTENT_PIPELINE.md`](docs/CONTENT_PIPELINE.md) — como escalar conteúdo sem automatizar autoria;
+- [`docs/GAME_DESIGN.md`](docs/GAME_DESIGN.md) — estrutura geral;
+- [`docs/COMBAT_SPEC.md`](docs/COMBAT_SPEC.md) — regras do toy;
+- [`docs/STORY.md`](docs/STORY.md) — narrativa;
+- [`docs/ART_BIBLE.md`](docs/ART_BIBLE.md) — direção visual;
+- [`docs/AUDIO_DIRECTION.md`](docs/AUDIO_DIRECTION.md) — Pulso e música adaptativa.
 
 ## Status
 
-**Pré-produção / primeiro combat toy.**
+**Pré-produção / combat toy + rhythm platform foundation.**
 
-A prioridade agora é confirmar build, jogar o protótipo e ajustar sensação de movimento, cartas, Pulso e Cadência. Depois disso entram arte própria, primeira sala de verdade e inimigos mais completos.
+Próximo gate: confirmar build e jogar o toy. Depois, conectar um Echo Trial real ao combate atual, calibrar sensação e só então investir em editor visual, arte final e mais conteúdo.
 
 ## License
 
