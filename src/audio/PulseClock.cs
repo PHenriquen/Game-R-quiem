@@ -35,6 +35,9 @@ public partial class PulseClock : Node
     [Export(PropertyHint.Range, "-2,2,0.001")]
     public double BeatOffsetSeconds { get; set; }
 
+    [Export(PropertyHint.Range, "-0.25,0.25,0.001")]
+    public double InputCalibrationOffsetSeconds { get; set; }
+
     [Export(PropertyHint.Range, "0.01,0.25,0.001")]
     public double PerfectWindowSeconds { get; set; } = 0.065;
 
@@ -48,6 +51,7 @@ public partial class PulseClock : Node
     public bool CompensateOutputLatency { get; set; } = true;
 
     public double SongTimeSeconds { get; private set; }
+    public double JudgementTimeSeconds => SongTimeSeconds + InputCalibrationOffsetSeconds;
     public long BeatIndex { get; private set; } = -1;
     public long BarIndex { get; private set; } = -1;
 
@@ -81,9 +85,14 @@ public partial class PulseClock : Node
         BarIndex = -1;
     }
 
+    public void SetInputCalibrationMilliseconds(double milliseconds)
+    {
+        InputCalibrationOffsetSeconds = Math.Clamp(milliseconds / 1000.0, -0.250, 0.250);
+    }
+
     public PulseGrade GradeCurrentMoment()
     {
-        return GradeTime(SongTimeSeconds);
+        return GradeTime(JudgementTimeSeconds);
     }
 
     public PulseGrade GradeTime(double songTimeSeconds)
@@ -154,6 +163,8 @@ public partial class PulseClock : Node
 
     private void PublishBoundaries()
     {
+        // Calibration changes how player inputs are judged, not when authored
+        // beats, timeline events or VFX happen. Keep publication on raw song time.
         double gridTime = SongTimeSeconds - BeatOffsetSeconds;
         long newBeat = gridTime < 0.0 ? -1 : (long)Math.Floor(gridTime / SecondsPerBeat);
         if (newBeat != BeatIndex)
