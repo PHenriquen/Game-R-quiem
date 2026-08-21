@@ -45,6 +45,9 @@ public partial class CombatRhythmBridge : Node2D
     private float _cueLife;
     private RhythmJudgement _lastJudgement;
     private bool _hasJudgement;
+    private bool _capturePending;
+    private bool _restartPending;
+    private double _pendingActionTime;
 
     public void Bind(CombatPrototype owner)
     {
@@ -90,28 +93,49 @@ public partial class CombatRhythmBridge : Node2D
 
         _cueLife = Mathf.Max(0f, _cueLife - (float)delta);
 
-        // Fallback in case an action is triggered by a path we did not observe
-        // in _Input (for example future controller/UI bindings).
-        if (_owner.RhythmActionCount > _observedActions)
-            CaptureSuccessfulActions();
+        if (_restartPending)
+        {
+            _restartPending = false;
+            RestartTrial();
+        }
+
+        if (_capturePending)
+        {
+            _capturePending = false;
+            CaptureSuccessfulActions(_pendingActionTime);
+        }
+        else if (_owner.RhythmActionCount > _observedActions)
+        {
+            // Fallback for future controller/UI bindings. Keyboard and mouse paths
+            // preserve the exact input timestamp captured in _Input.
+            double fallbackTime = _clock?.JudgementTimeSeconds ?? 0.0;
+            CaptureSuccessfulActions(fallbackTime);
+        }
 
         QueueRedraw();
     }
 
     public override void _Input(InputEvent @event)
     {
+        if (_clock is null)
+            return;
+
         if (@event is InputEventKey key && key.Pressed && !key.Echo)
         {
             Key physical = key.PhysicalKeycode;
             if (physical is (Key)49 or (Key)50 or (Key)51 or (Key)52)
-                CallDeferred(nameof(CaptureSuccessfulActions));
+            {
+                _pendingActionTime = _clock.JudgementTimeSeconds;
+                _capturePending = true;
+            }
 
             if (physical == (Key)82) // R
-                CallDeferred(nameof(RestartTrial));
+                _restartPending = true;
         }
         else if (@event is InputEventMouseButton mouse && mouse.Pressed && mouse.ButtonIndex == MouseButton.Left)
         {
-            CallDeferred(nameof(CaptureSuccessfulActions));
+            _pendingActionTime = _clock.JudgementTimeSeconds;
+            _capturePending = true;
         }
     }
 
@@ -138,7 +162,7 @@ public partial class CombatRhythmBridge : Node2D
             DrawString(_font, panel.Position + new Vector2(14f, 116f), _cue, HorizontalAlignment.Left, 270f, 11, new Color("687385"));
     }
 
-    private void CaptureSuccessfulActions()
+    private void CaptureSuccessfulActions(double actionTimeSeconds)
     {
         if (_clock is null || _owner is null)
             return;
@@ -146,7 +170,7 @@ public partial class CombatRhythmBridge : Node2D
         while (_observedActions < _owner.RhythmActionCount)
         {
             _lastJudgement = _judge.JudgeAction(
-                _clock.JudgementTimeSeconds,
+                actionTimeSeconds,
                 _clock.Bpm,
                 _clock.BeatOffsetSeconds);
 
@@ -164,6 +188,7 @@ public partial class CombatRhythmBridge : Node2D
         _score.Reset();
         _hasJudgement = false;
         _observedActions = _owner.RhythmActionCount;
+        _capturePending = false;
         _cue = "trial reiniciado";
         _cueLife = 1.5f;
         _director?.StartTrial();
