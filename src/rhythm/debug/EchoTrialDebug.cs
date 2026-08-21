@@ -22,8 +22,10 @@ public partial class EchoTrialDebug : Node2D
 
     public override void _Ready()
     {
-        _clock = new PulseClock();
-        _clock.Name = "PulseClock";
+        _clock = new PulseClock
+        {
+            Name = "PulseClock"
+        };
         AddChild(_clock);
 
         _director = new EchoTrialDirector
@@ -32,11 +34,13 @@ public partial class EchoTrialDebug : Node2D
             BeatmapPath = "res://assets/beatmaps/first_echo_trial.json",
             PulseClockPath = _clock.GetPath()
         };
-        AddChild(_director);
 
+        // Subscribe before AddChild: Godot calls _Ready during tree entry and the
+        // director publishes TrialLoaded there.
         _director.TrialLoaded += OnTrialLoaded;
         _director.TimelineEvent += OnTimelineEvent;
         _director.TrialFinished += OnTrialFinished;
+        AddChild(_director);
         _director.StartTrial();
 
         GD.Print("Echo Trial debug running. R = restart.");
