@@ -1,6 +1,7 @@
 {
   "version": 1,
   "id": "echo_trial_vesper_01",
+  "setId": "vesper_first_echo",
   "title": "Primeiro Eco de Vesper",
   "artist": "prototype",
   "difficulty": "Echo",
