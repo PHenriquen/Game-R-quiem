@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "id": "vesper_first_echo",
+  "title": "Primeiro Eco de Vesper",
+  "artist": "prototype",
+  "audio": "res://assets/audio/prototype/pulse_foundation.wav",
+  "cover": "",
+  "previewTime": 12.25,
+  "difficulties": [
+    {
+      "id": "echo_trial_vesper_01",
+      "name": "Echo",
+      "chart": "res://assets/beatmaps/first_echo_trial.json",
+      "rating": 2.0
+    }
+  ]
+}
