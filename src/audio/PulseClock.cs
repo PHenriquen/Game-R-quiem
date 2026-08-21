@@ -15,8 +15,8 @@ public enum PulseGrade
 ///
 /// The combat toy can run without audio, but once a music player is assigned this
 /// clock derives its time from the actual playback position and compensates for
-/// audio mix/output latency. Cards, enemies and VFX should consult this source
-/// instead of maintaining independent beat timers.
+/// audio mix/output latency. Cards, enemies, VFX and Echo Trials should consult
+/// this source instead of maintaining independent beat timers.
 /// </summary>
 public partial class PulseClock : Node
 {
@@ -26,11 +26,14 @@ public partial class PulseClock : Node
     [Signal]
     public delegate void BarEventHandler(long barIndex);
 
-    [Export(PropertyHint.Range, "40,240,0.1")]
+    [Export(PropertyHint.Range, "40,300,0.1")]
     public double Bpm { get; set; } = 100.0;
 
     [Export(PropertyHint.Range, "1,12,1")]
     public int BeatsPerBar { get; set; } = 4;
+
+    [Export(PropertyHint.Range, "-2,2,0.001")]
+    public double BeatOffsetSeconds { get; set; }
 
     [Export(PropertyHint.Range, "0.01,0.25,0.001")]
     public double PerfectWindowSeconds { get; set; } = 0.065;
@@ -69,6 +72,15 @@ public partial class PulseClock : Node
         PublishBoundaries();
     }
 
+    public void ConfigureBeatGrid(double bpm, int beatsPerBar, double beatOffsetSeconds)
+    {
+        Bpm = Math.Clamp(bpm, 40.0, 300.0);
+        BeatsPerBar = Math.Clamp(beatsPerBar, 1, 12);
+        BeatOffsetSeconds = beatOffsetSeconds;
+        BeatIndex = -1;
+        BarIndex = -1;
+    }
+
     public PulseGrade GradeCurrentMoment()
     {
         return GradeTime(SongTimeSeconds);
@@ -77,7 +89,7 @@ public partial class PulseClock : Node
     public PulseGrade GradeTime(double songTimeSeconds)
     {
         double beatDuration = SecondsPerBeat;
-        double phase = PositiveModulo(songTimeSeconds, beatDuration);
+        double phase = PositiveModulo(songTimeSeconds - BeatOffsetSeconds, beatDuration);
         double distance = Math.Min(phase, beatDuration - phase);
 
         if (distance <= PerfectWindowSeconds)
@@ -91,13 +103,13 @@ public partial class PulseClock : Node
 
     public double SecondsUntilNextBeat()
     {
-        double phase = PositiveModulo(SongTimeSeconds, SecondsPerBeat);
+        double phase = PositiveModulo(SongTimeSeconds - BeatOffsetSeconds, SecondsPerBeat);
         return phase <= 0.000001 ? 0.0 : SecondsPerBeat - phase;
     }
 
     public double NormalizedBeatPhase()
     {
-        return PositiveModulo(SongTimeSeconds, SecondsPerBeat) / SecondsPerBeat;
+        return PositiveModulo(SongTimeSeconds - BeatOffsetSeconds, SecondsPerBeat) / SecondsPerBeat;
     }
 
     public void ResetFallbackClock()
@@ -123,8 +135,6 @@ public partial class PulseClock : Node
 
         raw = Math.Max(0.0, raw);
 
-        // A looping AudioStreamPlayer jumps its playback position back near zero.
-        // Preserve a monotonic gameplay clock across loops when stream length is known.
         if (raw + 0.10 < _lastRawPlayback)
         {
             double length = _musicPlayer.Stream?.GetLength() ?? 0.0f;
@@ -133,11 +143,8 @@ public partial class PulseClock : Node
         }
 
         _lastRawPlayback = raw;
-
         double clock = _loopOffset + raw;
 
-        // Audio callbacks and render frames are asynchronous. Never allow a tiny
-        // backward jitter to make gameplay publish the same beat twice.
         if (clock < _lastClockTime)
             clock = _lastClockTime;
 
@@ -147,11 +154,13 @@ public partial class PulseClock : Node
 
     private void PublishBoundaries()
     {
-        long newBeat = (long)Math.Floor(SongTimeSeconds / SecondsPerBeat);
+        double gridTime = SongTimeSeconds - BeatOffsetSeconds;
+        long newBeat = gridTime < 0.0 ? -1 : (long)Math.Floor(gridTime / SecondsPerBeat);
         if (newBeat != BeatIndex)
         {
             BeatIndex = newBeat;
-            EmitSignal(SignalName.Beat, BeatIndex);
+            if (BeatIndex >= 0)
+                EmitSignal(SignalName.Beat, BeatIndex);
         }
 
         int safeBeatsPerBar = Math.Max(1, BeatsPerBar);
@@ -159,7 +168,8 @@ public partial class PulseClock : Node
         if (newBar != BarIndex)
         {
             BarIndex = newBar;
-            EmitSignal(SignalName.Bar, BarIndex);
+            if (BarIndex >= 0)
+                EmitSignal(SignalName.Bar, BarIndex);
         }
     }
 
