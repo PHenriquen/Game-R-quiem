@@ -27,7 +27,7 @@ public partial class EchoTrialDirector : Node
     public NodePath PulseClockPath { get; set; } = new();
 
     [Export(PropertyHint.Range, "0,0.5,0.001")]
-    public double LookAheadSeconds { get; set; } = 0.0;
+    public double LookAheadSeconds { get; set; }
 
     public BeatmapDocument? Beatmap { get; private set; }
     public bool Running { get; private set; }
@@ -75,8 +75,7 @@ public partial class EchoTrialDirector : Node
 
         if (_clock is not null)
         {
-            _clock.Bpm = Beatmap.Bpm;
-            _clock.BeatsPerBar = Beatmap.BeatsPerBar;
+            _clock.ConfigureBeatGrid(Beatmap.Bpm, Beatmap.BeatsPerBar, Beatmap.OffsetSeconds);
             _clock.ResetFallbackClock();
         }
 
