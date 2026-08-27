@@ -25,6 +25,7 @@ A base atual tem um **combat toy jogável** em Godot/C# para testar o núcleo an
 - Corte Breve, Agulha, Passo Fantasma e Sino Partido;
 - Pulso e Cadência de D até RÉQUIEM;
 - inimigo simples com ataque telegrafado;
+- Prova do Primeiro Eco com objetivo de três confrontos, vitória, derrota, resumo e reinício;
 - arena e efeitos provisórios desenhados por código;
 - relógio musical com compensação de latência.
 
@@ -135,9 +136,9 @@ python tools/beatmap_seed.py --bpm 120 --duration 60 --out assets/beatmaps/test.
 
 ## Status
 
-**Pré-produção / combat toy + rhythm platform foundation.**
+**Pré-produção / protótipo jogável de duelo + rhythm platform foundation.**
 
-Próximo gate: confirmar build e jogar o toy. Depois, conectar um Echo Trial real ao combate atual, calibrar sensação e só então investir em arte final, mais conteúdo e recursos comunitários.
+A Prova do Primeiro Eco já fecha um loop curto: instruções, três confrontos, condição de vitória/derrota, resumo da tentativa e reinício. O próximo gate continua sendo confirmar o build no Godot 4.7.1 .NET e fazer o primeiro playtest de sensação. Depois disso, o chart autoral pode deixar o modo observacional e passar a dirigir uma sessão própria, com regras calibradas por evidência.
 
 ## License
 
