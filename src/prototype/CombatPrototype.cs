@@ -151,6 +151,13 @@ public partial class CombatPrototype : Node2D
 
         UpdateTransient(dt);
         UpdateCards(dt);
+        UpdateSession(dt);
+
+        if (!IsSessionRunning)
+        {
+            QueueRedraw();
+            return;
+        }
 
         if (_hitStop > 0f)
         {
@@ -212,6 +219,7 @@ public partial class CombatPrototype : Node2D
         _goodActions = 0;
         _perfectActions = 0;
         _effects.Clear();
+        StartSession();
 
         SpawnEnemy();
         RebuildDeck();
@@ -341,7 +349,7 @@ public partial class CombatPrototype : Node2D
 
     private void TryDash()
     {
-        if (_dashCooldown > 0f)
+        if (!IsSessionRunning || _dashCooldown > 0f)
             return;
 
         Vector2 direction = _playerFacing.LengthSquared() < 0.01f ? Vector2.Right : _playerFacing;
@@ -366,7 +374,7 @@ public partial class CombatPrototype : Node2D
 
     private void TryPlayCard(int slot)
     {
-        if (slot < 0 || slot >= _hand.Length || _hand[slot] == null || _actionLock > 0f || _playerHealth <= 0f)
+        if (!IsSessionRunning || slot < 0 || slot >= _hand.Length || _hand[slot] == null || _actionLock > 0f || _playerHealth <= 0f)
             return;
 
         CardDefinition card = _hand[slot]!;
@@ -512,6 +520,13 @@ public partial class CombatPrototype : Node2D
 
         _kills++;
         AddCadence(5f);
+
+        if (_kills >= TargetKills)
+        {
+            CompleteSession(SessionState.Victory);
+            return;
+        }
+
         SpawnEnemyAtRandomEdge();
     }
 
@@ -556,12 +571,6 @@ public partial class CombatPrototype : Node2D
             _enemy.TelegraphRemaining = 0.48f;
         }
 
-        if (_playerHealth <= 0f)
-        {
-            _playerHealth = 100f;
-            _cadence = 0f;
-            _playerPosition = _arena.GetCenter() + new Vector2(-210f, 20f);
-        }
     }
 
     private void FinishEnemyAttack()
@@ -576,6 +585,9 @@ public partial class CombatPrototype : Node2D
         _cadence = MathF.Max(0f, _cadence - 20f);
         _hitStop = MathF.Max(_hitStop, 0.045f);
         AddRingEffect(_enemy.Position, 92f, Crimson, 0.18f);
+
+        if (_playerHealth <= 0f)
+            CompleteSession(SessionState.Defeat);
     }
 
     private void UpdateCadence(float dt)
