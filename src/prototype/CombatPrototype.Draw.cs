@@ -24,6 +24,7 @@ public partial class CombatPrototype
         DrawPlayer();
         DrawEffects();
         DrawHud();
+        DrawSessionOverlay();
     }
 
     private void DrawBackground()
@@ -89,6 +90,9 @@ public partial class CombatPrototype
 
     private void DrawEnemy()
     {
+        if (_enemy.Health <= 0f)
+            return;
+
         Color mask = _enemy.HitFlash > 0f ? Ivory : new Color(0.58f, 0.60f, 0.59f, 1f);
         Color cloth = new Color(0.16f, 0.17f, 0.19f, 1f);
 
@@ -146,7 +150,7 @@ public partial class CombatPrototype
         DrawString(_font, new Vector2(265f, 110f), $"CADÊNCIA  {GetCadenceRank()}  {MathF.Round(_cadence)}", HorizontalAlignment.Left, 300f, 14, cadenceColor);
 
         string accuracy = _actions == 0 ? "—" : $"{MathF.Round((_goodActions + _perfectActions) * 100f / _actions)}%";
-        DrawString(_font, new Vector2(size.X - 265f, 32f), $"ABATES {_kills}   //   NO PULSO {accuracy}", HorizontalAlignment.Left, 240f, 14, Ivory.Darkened(0.28f));
+        DrawString(_font, new Vector2(size.X - 325f, 32f), $"PROVA {_kills}/{TargetKills}   //   NO PULSO {accuracy}", HorizontalAlignment.Left, 300f, 14, Ivory.Darkened(0.28f));
 
         if (_gradeDisplay > 0f)
         {
@@ -162,6 +166,35 @@ public partial class CombatPrototype
 
         for (int i = 0; i < 4; i++)
             DrawCardSlot(i);
+    }
+
+    private void DrawSessionOverlay()
+    {
+        if (IsSessionRunning)
+            return;
+
+        Vector2 size = GetViewportRect().Size;
+        DrawRect(new Rect2(Vector2.Zero, size), new Color(0.01f, 0.015f, 0.025f, 0.76f));
+
+        Rect2 panel = new(size * 0.5f - new Vector2(275f, 118f), new Vector2(550f, 236f));
+        Color accent = _sessionState == SessionState.Victory ? Spectral : Crimson;
+        DrawRect(panel, new Color(0.025f, 0.03f, 0.05f, 0.98f));
+        DrawRect(panel, accent.Darkened(0.15f), false, 2f);
+        DrawRect(new Rect2(panel.Position, new Vector2(6f, panel.Size.Y)), accent);
+
+        string title = _sessionState == SessionState.Victory
+            ? "O PRIMEIRO ECO RESPONDEU"
+            : "A NAVE VOLTOU AO SILÊNCIO";
+        string subtitle = _sessionState == SessionState.Victory
+            ? "Três Peregrinos cederam. A porta da Catedral reconhece o fragmento."
+            : "O fragmento ainda pulsa. Recomece e leia os sinais do Peregrino.";
+
+        float pulseAccuracy = _actions == 0 ? 0f : (_goodActions + _perfectActions) * 100f / _actions;
+        DrawString(_font, panel.Position + new Vector2(30f, 48f), title, HorizontalAlignment.Left, panel.Size.X - 60f, 24, Ivory);
+        DrawString(_font, panel.Position + new Vector2(30f, 82f), subtitle, HorizontalAlignment.Left, panel.Size.X - 60f, 14, Ivory.Darkened(0.32f));
+        DrawString(_font, panel.Position + new Vector2(30f, 124f), $"TEMPO {FormatSessionTime()}   ·   PULSO {pulseAccuracy:0}%   ·   PERFEITOS {_perfectActions}", HorizontalAlignment.Left, panel.Size.X - 60f, 15, accent);
+        DrawString(_font, panel.Position + new Vector2(30f, 164f), $"CADÊNCIA FINAL {GetCadenceRank()}   ·   AÇÕES {_actions}", HorizontalAlignment.Left, panel.Size.X - 60f, 14, Ivory.Darkened(0.18f));
+        DrawString(_font, panel.Position + new Vector2(30f, 207f), "R  REINICIAR A PROVA", HorizontalAlignment.Left, panel.Size.X - 60f, 16, Gold);
     }
 
     private void DrawCardSlot(int index)
