@@ -200,7 +200,7 @@ Marcar:
 - [ ] ataque impossível de ler;
 - [ ] ataque fácil demais;
 - [ ] inimigo passa tempo demais andando;
-- [ ] inimigo cola demais em Nox;
+- [ ] inimigo cola demais em Noah;
 - [ ] esquiva responde bem ao ataque;
 - [ ] dano recebido parece claro.
 
@@ -273,7 +273,7 @@ Notas rápidas:
 
 Estes pontos são conscientes e **não** devem ser confundidos com feature final:
 
-- o toy ainda usa formas primitivas, não sprite final de Nox;
+- o toy ainda usa formas primitivas, não sprite final de Noah;
 - não há trilha adaptativa ligada à cena;
 - `PulseClock` de produção existe, mas o toy ainda usa seu relógio provisório interno;
 - efeitos de Eco de algumas cartas ainda são simplificados;

@@ -14,9 +14,9 @@ O que nasceu depois ficou conhecido apenas como **Silêncio**.
 
 Silêncio não é ausência total de som. É uma falha na continuidade do mundo: corredores repetem o mesmo instante, objetos guardam lembranças que não são deles, pessoas esquecem onde terminam e criaturas continuam executando a última intenção que conseguiram preservar.
 
-## Nox
+## Noah
 
-Nox desperta sozinho no **Santuário do Último Som**.
+Noah desperta sozinho no **Santuário do Último Som**.
 
 Ele não lembra de onde veio, quem o colocou ali ou por que um fragmento azul do Coração pulsa próximo ao seu coração natural.
 
@@ -27,31 +27,31 @@ Descobre aos poucos que:
 3. certos Ecos o reconhecem;
 4. existe uma melodia que parece reagir especificamente à presença dele.
 
-Nox não é um escolhido tradicional. Ele é uma evidência viva de que algo deu errado.
+Noah não é um escolhido tradicional. Ele é uma evidência viva de que algo deu errado.
 
 A primeira pergunta é:
 
-**Nox quebrou o Coração ou tentou impedir que ele fosse quebrado?**
+**Noah quebrou o Coração ou tentou impedir que ele fosse quebrado?**
 
 A pergunta maior é:
 
-**por que Nox escolheu esquecer?**
+**por que Noah escolheu esquecer?**
 
 ## Regra de solidão
 
-Nox é a única presença humana clara durante quase toda a história.
+Noah é a única presença aliada clara durante quase toda a história.
 
-O Santuário não possui comerciantes, guardiões ou uma fila de NPCs esperando diálogo. Ele muda à medida que Nox retorna: objetos aparecem, sinos recuperam som, portas reagem e memórias passam a ocupar espaços antes vazios.
+O Santuário não possui comerciantes, guardiões ou uma fila de NPCs esperando diálogo. Ele muda à medida que Noah retorna: objetos aparecem, sinos recuperam som, portas reagem e memórias passam a ocupar espaços antes vazios.
 
 Quando uma voz humana é ouvida, isso precisa importar.
 
-Quando alguém disser o nome de Nox, isso precisa importar.
+Quando alguém disser o nome de Noah, isso precisa importar.
 
 Quando outra pessoa finalmente estiver diante dele, isso deve parecer um acontecimento.
 
 ## A segunda presença
 
-Há outra pessoa ligada ao Último Acorde e a Nox.
+Há outra pessoa ligada ao Último Acorde e a Noah.
 
 Durante a maior parte do jogo, o jogador só conhece essa pessoa por fragmentos:
 
@@ -60,7 +60,7 @@ Durante a maior parte do jogo, o jogador só conhece essa pessoa por fragmentos:
 - uma segunda marca em objetos que claramente pertenciam a duas pessoas;
 - uma melodia recorrente;
 - mensagens cujo destinatário foi apagado;
-- memórias que parecem ser de Nox, mas possuem detalhes incompatíveis com ele.
+- memórias que parecem ser de Noah, mas possuem detalhes incompatíveis com ele.
 
 A história não confirma cedo se essa pessoa está viva, morta, presa ao Coração ou se é apenas uma lembrança.
 
@@ -88,7 +88,7 @@ Tela escura.
 
 Um sino toca uma vez.
 
-Nox desperta sozinho. Não existe tutorial falado. Movimento, cartas e Pulso são apresentados através do próprio espaço.
+Noah desperta sozinho. Não existe tutorial falado. Movimento, cartas e Pulso são apresentados através do próprio espaço.
 
 Ao atravessar a saída do Santuário, ele ouve uma voz muito baixa dizendo uma palavra que não consegue compreender.
 
@@ -98,13 +98,13 @@ Primeira área de combate.
 
 O jogador entende que os Dissonantes não são monstros comuns. Eles repetem gestos e intenções de pessoas que já existiram.
 
-Um deles interrompe o ataque por um instante ao ver o fragmento no peito de Nox.
+Um deles interrompe o ataque por um instante ao ver o fragmento no peito de Noah.
 
 ### 3. Primeiro Eco
 
 Em uma sala opcional, dois lugares estão preparados lado a lado, mas apenas um possui uma sombra.
 
-Ao interagir, uma memória muito curta toca a mesma melodia que acompanha Nox desde o começo.
+Ao interagir, uma memória muito curta toca a mesma melodia que acompanha Noah desde o começo.
 
 Nenhuma explicação é dada.
 
@@ -118,7 +118,7 @@ Seus padrões usam a mesma sequência musical vista em pistas da Catedral. O jog
 
 Após a vitória, o fragmento recupera uma lembrança preservada.
 
-Nox vê o Coração antes da ruptura.
+Noah vê o Coração antes da ruptura.
 
 Vê a própria mão apoiada sobre ele.
 
@@ -126,7 +126,7 @@ Há outra pessoa do outro lado.
 
 Ela grita algo que o jogador não consegue ouvir.
 
-Nox faz um movimento.
+Noah faz um movimento.
 
 A memória termina antes de mostrar se ele estava destruindo o Coração, tentando desligá-lo ou tentando salvar a pessoa diante dele.
 

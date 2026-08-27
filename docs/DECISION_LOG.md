@@ -4,13 +4,13 @@
 
 ## 2026-08-14 — Escopo de personagem
 
-**Decisão:** Nox é o único personagem jogável e a única presença humana clara durante quase todo o jogo.
+**Decisão:** Noah é o único personagem jogável e a única presença aliada clara durante quase todo o jogo.
 
 Consequências:
 
 - sem elenco grande;
 - sem hub cheio de NPCs;
-- sem companheiro acompanhando Nox;
+- sem companheiro acompanhando Noah;
 - qualquer voz humana ganha peso;
 - a segunda pessoa aparece fisicamente apenas perto do final.
 
@@ -18,7 +18,7 @@ Consequências:
 
 **Decisão interna:** a segunda pessoa é **Elia**.
 
-**Relação V1:** Elia é irmã de Nox.
+**Relação V1:** Elia é irmã de Noah.
 
 Para o jogador, o nome e a relação são escondidos durante boa parte da história. Documentos públicos podem chamá-la apenas de “segunda presença”, mas isso é ocultação narrativa, não indefinição de produção.
 
@@ -28,7 +28,7 @@ A verdade completa está em `STORY_CORE_SPOILERS.md`.
 
 **Decisão:** cartas são **Memórias de Ação**, não itens mágicos, buffs passivos ou um card game separado.
 
-- Nox se move diretamente;
+- Noah se move diretamente;
 - esquiva universal fica fora do baralho;
 - quatro ações ofensivas ficam visíveis na mão;
 - usar uma carta executa uma memória motora;
@@ -69,13 +69,13 @@ RÉQUIEM deve ficar visualmente **mais preciso e confiante**, não mais poluído
 
 Elia descobre o Último Acorde, capaz de encerrar essa preservação. Como ela já funciona como âncora do Coração, concluir o processo significa perdê-la como pessoa contínua.
 
-Nox interrompe o processo tentando salvar a irmã.
+Noah interrompe o processo tentando salvar a irmã.
 
 Essa interrupção causa o Silêncio.
 
-Depois, as tentativas de Nox de reconstruir Elia tornam a situação pior. O Coração passa a usar as lembranças dele como modelo para recriá-la.
+Depois, as tentativas de Noah de reconstruir Elia tornam a situação pior. O Coração passa a usar as lembranças dele como modelo para recriá-la.
 
-Nox então escolhe fragmentar as próprias memórias para parar de alimentar essa prisão.
+Noah então escolhe fragmentar as próprias memórias para parar de alimentar essa prisão.
 
 ## 2026-08-14 — Tema central
 
@@ -133,7 +133,7 @@ Ele pode ser reconhecido em:
 
 O jogador atento recebe vantagem de compreensão, não uma seta de tutorial.
 
-## 2026-08-14 — Visual de Nox
+## 2026-08-14 — Visual de Noah
 
 **Decisão:** silhueta simples, leve e assimétrica.
 
@@ -169,7 +169,7 @@ Alvo atual da branch: Godot 4.7.1 .NET / .NET 8.
 
 **Decisão:** assets gratuitos/CC0 podem acelerar blockout, mas não definem identidade final.
 
-Nox, inimigos principais, UI, logo, símbolos narrativos e música final devem ser autorais.
+Noah, inimigos principais, UI, logo, símbolos narrativos e música final devem ser autorais.
 
 Todo asset externo precisa entrar no `ASSET_REGISTRY.md`.
 
@@ -198,7 +198,7 @@ Quando uma ideia nova for aprovada:
 - the protagonist now uses a dark non-human face with expressive ivory eye-shapes;
 - the costume hierarchy becomes white mantle, black underlayer, crimson scarf and a small collar bell;
 - visual detail is reduced to five recognition anchors;
-- `Nox` becomes a working name while Senn and Eiro remain candidates.
+- `Noah` becomes a working name while Senn and Eiro remain candidates.
 
 ### Why the prior rule failed
 
@@ -218,4 +218,29 @@ The protagonist can now communicate curiosity, playfulness, trust and combat foc
 
 ### Naming gate
 
-No code-wide rename occurs until the final name is selected. Story meaning, sound, spelling and UI readability must be checked together.
+This gate was closed by the later Noah decision below.
+
+## 2026-08-27 — Noah becomes canonical and gains a white hair silhouette
+
+### Changed
+
+- **Noah** replaces the working-name shortlist across current documentation;
+- the no-hair concept is superseded by a compact white hair mass;
+- spikes stay relaxed and mostly backward/downward, with two short front fringes;
+- the prototype blockout now carries the same readable mass;
+- after the first Peregrino falls, approaching the cathedral door produces the first visual bell response.
+
+### Why
+
+The selected name closes an unnecessary identity fork. The hair adds a strong top silhouette and a playful motion channel while the dark non-human face and original eye language remain intact.
+
+### Preserved
+
+- non-human anatomy and dark face;
+- original expressive ivory eyes;
+- white mantle, black underlayer, crimson scarf and aged-gold bell;
+- compact cartoon proportions and controlled visual effects.
+
+### Reference boundary
+
+Outside characters and personal visual references contribute only broad principles such as readable expression, grouped hair mass and motion. Noah's exact eye shapes, hair outline and proportions must remain original.

@@ -8,7 +8,7 @@ Echo Trials are short combat performances built around a song/timeline. They are
 
 The first attempt is survival. Later attempts become performance.
 
-A new player sees attacks and reacts. An experienced player recognizes the phrase, positions Nox early, holds the right card, dodges into the next beat and turns the same encounter into choreography.
+A new player sees attacks and reacts. An experienced player recognizes the phrase, positions Noah early, holds the right card, dodges into the next beat and turns the same encounter into choreography.
 
 ## Trial structure
 

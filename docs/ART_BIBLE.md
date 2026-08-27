@@ -11,7 +11,7 @@ A imagem de Réquiem precisa transmitir quatro coisas antes de qualquer texto:
 3. memória;
 4. presença conquistada no combate.
 
-O mundo é visualmente mais complexo que Nox. O protagonista é simples o bastante para continuar legível em movimento.
+O mundo é visualmente mais complexo que Noah. O protagonista é simples o bastante para continuar legível em movimento.
 
 ## 2. Regra de originalidade
 
@@ -32,16 +32,16 @@ Evitar personagem com excesso de cintos, placas, símbolos, aura permanente ou c
 - câmera top-down/3/4;
 - composição-base 1280×720;
 - tile-base inicial de 32 px;
-- Nox deve ler aproximadamente como personagem de 48–64 px de altura;
+- Noah deve ler aproximadamente como personagem de 48–64 px de altura;
 - efeitos podem ultrapassar a grade;
-- chefes podem ocupar 2–4× a massa visual de Nox;
+- chefes podem ocupar 2–4× a massa visual de Noah;
 - arquitetura deve parecer enorme mesmo em sala pequena.
 
 ### Regra de escala
 
 Sempre que possível, existir um elemento arquitetônico maior que o necessário para a função prática: porta alta, sino enorme, coluna espessa, vitral distante.
 
-Isso faz Nox parecer estar atravessando algo antigo demais para ter sido criado para ele.
+Isso faz Noah parecer estar atravessando algo antigo demais para ter sido criado para ele.
 
 ## 4. Paleta funcional
 
@@ -49,7 +49,7 @@ Isso faz Nox parecer estar atravessando algo antigo demais para ter sido criado 
 |---|---|---|
 | Night black | `#090B12` | silêncio, fundos, vazio |
 | Ivory | `#E9E2D0` | legibilidade, máscaras, RÉQUIEM |
-| Spectral blue | `#54C7CE` | Nox, memória, Ecos |
+| Spectral blue | `#54C7CE` | Noah, memória, Ecos |
 | Aged gold | `#C4A35A` | sino, calor, lembrança preservada |
 | Crimson | `#9E1738` | vínculo, perigo, ruptura |
 | Veil violet | `#6651A6` | distorção, mobilidade, estranheza |
@@ -66,10 +66,11 @@ Escolher:
 
 ## 5. Protagonista — objetivo
 
-`Nox` is a working name while **Senn** and **Eiro** remain candidates. The visual identity does not wait for the naming decision.
+**Noah** is the canonical name.
 
-The protagonist is a small non-human being built from five anchors:
+The protagonist is a small non-human being built from six anchors:
 
+- compact white hair mass;
 - large ivory eye-shapes on a dark face;
 - short white mantle;
 - black underlayer;
@@ -92,6 +93,14 @@ The world stays more detailed than the character. If the design needs surface sy
 The dark face is part of the being, not a removable mask. Ivory eye-shapes replace realistic facial anatomy and carry the performance through angle, width, spacing and asymmetry.
 
 Exploration favors curiosity. Friendly moments allow softer and playful shapes. Combat focus narrows the eyes. RÉQUIEM makes them calm and nearly symmetrical with a thin spectral edge.
+
+### White hair
+
+- one readable mass rather than separate realistic strands;
+- relaxed spikes fall mostly backward and downward;
+- two short front fringes frame the eyes without covering them;
+- silhouette remains original and must not reproduce the outline of any reference character;
+- movement is restrained in idle and briefly opens the silhouette during dash.
 
 ### White mantle
 
@@ -145,7 +154,7 @@ O Sino Partido é o contraste: o ataque parece pesado mesmo usando uma arma fina
 ### B/A
 
 - movimentos mais contínuos;
-- Nox deixa de “confirmar” cada ação com o corpo.
+- Noah deixa de “confirmar” cada ação com o corpo.
 
 ### S
 
@@ -244,7 +253,7 @@ Combate:
 RÉQUIEM:
 
 - não aumentar saturação de tudo;
-- deixar Nox e alguns contornos mais claros enquanto o restante fica mais calmo.
+- deixar Noah e alguns contornos mais claros enquanto o restante fica mais calmo.
 
 ## 12. UI e cartas
 
@@ -268,7 +277,7 @@ A animação de compra deve parecer uma **memória entrando em foco**, não uma 
 
 ### Pulso
 
-Preferencialmente perto de Nox ou integrado ao chão.
+Preferencialmente perto de Noah ou integrado ao chão.
 
 Nunca um círculo enorme no centro da tela.
 
@@ -304,7 +313,7 @@ Se a partícula impede leitura de inimigo ou próxima carta, cortar a partícula
 
 Composição para o primeiro ambiente autoral:
 
-- Nox no terço inferior/esquerdo;
+- Noah no terço inferior/esquerdo;
 - corredor de água conduzindo para uma porta alta ao fundo;
 - um sino quebrado grande fora do centro;
 - Peregrino Oco em espaço de contraste suficiente;
@@ -329,7 +338,7 @@ O jogador que revisita screenshots deve conseguir notar coisas que passaram desp
 
 ### Capa
 
-- Nox pequeno/médio, não close de rosto genérico;
+- Noah pequeno/médio, não close de rosto genérico;
 - arquitetura domina;
 - fragmento cria foco;
 - segunda presença pode existir apenas como composição/reflexo;
@@ -372,7 +381,7 @@ Todo asset externo precisa registrar:
 Antes de aprovar arte, perguntar:
 
 1. a silhueta funciona sem detalhe?;
-2. consigo separar Nox do cenário em movimento?;
+2. consigo separar Noah do cenário em movimento?;
 3. existe espaço negativo?;
 4. a cor usada tem função?;
 5. o efeito melhora impacto ou só adiciona ruído?;

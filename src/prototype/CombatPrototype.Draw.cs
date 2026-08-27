@@ -50,6 +50,18 @@ public partial class CombatPrototype
         Rect2 door = new(_arena.GetCenter().X - 44f, _arena.Position.Y + 8f, 88f, 58f);
         DrawRect(door, Night.Lightened(0.02f));
         DrawArc(new Vector2(door.GetCenter().X, door.Position.Y + 26f), 20f, Mathf.Pi, Mathf.Tau, 20, Ivory.Darkened(0.58f), 2f);
+
+        if (_bellResponseRemaining > 0f)
+        {
+            float progress = 1f - _bellResponseRemaining / 2.4f;
+            Vector2 responsePoint = GetBellResponsePoint();
+            float radius = 18f + progress * 42f;
+            float alpha = 0.82f * (1f - progress);
+            Color response = new(Gold.R, Gold.G, Gold.B, alpha);
+            DrawArc(responsePoint, radius, -Mathf.Pi * 0.86f, -Mathf.Pi * 0.14f, 32, response, 2.4f);
+            DrawArc(responsePoint, radius + 11f, -Mathf.Pi * 0.78f, -Mathf.Pi * 0.22f, 28, response.Darkened(0.16f), 1.4f);
+            DrawString(_font, responsePoint + new Vector2(-74f, 34f), "O SINO RESPONDE", HorizontalAlignment.Center, 148f, 12, Gold);
+        }
     }
 
     private void DrawPlayer()
@@ -70,6 +82,15 @@ public partial class CombatPrototype
 
         DrawCircle(_playerPosition + forward * 2f, 16f, mantle);
         DrawLine(_playerPosition - side * 14f, _playerPosition + side * 14f, mantle.Darkened(0.22f), 2f);
+
+        Vector2 hairRoot = _playerPosition + forward * 7f;
+        Color hair = Ivory.Lightened(0.05f);
+        DrawLine(hairRoot - forward * 2f + side * 7f, hairRoot - forward * 7f + side * 15f, hair, 4.2f);
+        DrawLine(hairRoot - forward * 4f + side * 4f, hairRoot - forward * 12f + side * 9f, hair.Darkened(0.05f), 4.6f);
+        DrawLine(hairRoot - forward * 5f, hairRoot - forward * 14f - side, hair, 4.8f);
+        DrawLine(hairRoot - forward * 4f - side * 4f, hairRoot - forward * 11f - side * 10f, hair.Darkened(0.08f), 4.4f);
+        DrawLine(hairRoot + forward + side * 5f, hairRoot + forward * 5f + side * 2f, hair, 3.4f);
+        DrawLine(hairRoot + forward - side * 3f, hairRoot + forward * 5f - side, hair.Darkened(0.04f), 3.2f);
         DrawCircle(_playerPosition + forward * 7f, 10.5f, face);
 
         float focus = Mathf.Clamp(_cadence / 100f, 0f, 1f);

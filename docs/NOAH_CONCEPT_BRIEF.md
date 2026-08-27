@@ -1,18 +1,19 @@
-# PROTAGONIST — Concept Art Brief V2
+# Noah — Protagonist Concept Art Brief V3
 
-> Working name: **Nox**. Shortlist under evaluation: **Senn** and **Eiro**. No rename is canonical until one name is deliberately selected and propagated through story, code and UI.
+> **Noah** is the canonical name. This document supersedes the earlier no-hair silhouette while preserving its non-human face and compact proportions.
 
 ## Purpose
 
-Create a protagonist who reads instantly at sprite scale without depending on a human face, detailed anatomy or a costume full of symbols. The design must feel native to Réquiem: small against the world, visually quiet in exploration and precise in combat.
+Create a protagonist who reads instantly at sprite scale without depending on realistic facial anatomy or a costume full of symbols. The design must feel native to Réquiem: small against the world, visually quiet in exploration and precise in combat.
 
-## Five recognition anchors
+## Six recognition anchors
 
-1. large expressive ivory eyes on a dark, non-human face;
-2. short white mantle;
-3. black underlayer;
-4. crimson scarf;
-5. small aged-gold bell at the collar.
+1. compact white hair mass with two front fringes;
+2. large expressive ivory eyes on a dark, non-human face;
+3. short white mantle;
+4. black underlayer;
+5. crimson scarf;
+6. small aged-gold bell at the collar.
 
 The Agulha de Vesper completes the combat silhouette. The Heart fragment exists, but should not compete with these anchors while idle.
 
@@ -24,7 +25,9 @@ The Agulha de Vesper completes the combat silhouette. The Heart fragment exists,
 - mantle creates a short triangular/rounded mass around the shoulders;
 - black underlayer stays narrow and mobile below it;
 - scarf breaks symmetry and shows direction during dash;
-- no hair, visible human skin or realistic human facial structure.
+- white hair uses relaxed backward/downward spikes and two short front fringes;
+- no visible human skin or realistic human facial structure;
+- hair and eyes use original shapes; references inform motion and readability only.
 
 The silhouette should remain recognizable when filled with one solid color.
 
@@ -118,7 +121,7 @@ At sprite scale, do not add:
 - multiple necklaces or charms;
 - shoulder armor;
 - runes across the mantle;
-- colored hair-like shapes;
+- multicolored or highly segmented hair;
 - permanent aura;
 - decorative gloves that erase hand readability;
 - copied proportions, mask shapes or costume language from reference characters.

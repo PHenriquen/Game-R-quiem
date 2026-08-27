@@ -12,7 +12,7 @@ Sem arte final, progressão ou narrativa obrigatória.
 
 ### Movimento
 
-- `WASD` / setas: mover Nox;
+- `WASD` / setas: mover Noah;
 - `Espaço`: Passo (evasão universal);
 - `1–4`: usar a carta do respectivo espaço da mão;
 - `R`: reiniciar arena.
@@ -85,7 +85,7 @@ Sensação: linha espectral fina seguida pelo impacto.
 - Bom: +15 px de deslocamento;
 - Perfeito: cria um Eco no ponto de partida que executa um Corte Breve fraco.
 
-Sensação: Nox some apenas o suficiente para o olho sentir ausência; evitar teleporte chamativo.
+Sensação: Noah some apenas o suficiente para o olho sentir ausência; evitar teleporte chamativo.
 
 ### Sino Partido
 
@@ -177,7 +177,7 @@ Ao atingir 90 pela primeira vez:
 - trava queda de Cadência por 6 s;
 - tempo de compra de cartas -20%;
 - todo terceiro ataque deixa um Eco de 35% do dano;
-- Nox recebe mudança de postura/outline/fissuras;
+- Noah recebe mudança de postura/outline/fissuras;
 - camada musical final entra;
 - efeitos ficam mais precisos, não maiores.
 
@@ -243,7 +243,7 @@ O golpe mais forte deve parecer forte principalmente pelo contraste entre prepar
 - enquadramento 16:9;
 - visão top-down/3/4;
 - arena cabe quase inteira no protótipo;
-- câmera acompanha Nox suavemente em salas futuras;
+- câmera acompanha Noah suavemente em salas futuras;
 - zoom e shake raros;
 - evitar câmera "edit de anime" a cada carta.
 
@@ -253,7 +253,7 @@ No combate:
 
 - vida pequena no canto superior esquerdo;
 - Cadência discreta perto dela;
-- Pulso próximo de Nox;
+- Pulso próximo de Noah;
 - 4 cartas grandes o suficiente para leitura rápida na parte inferior;
 - nome da carta + ícone + tecla;
 - sem minimapa na arena inicial.
@@ -276,7 +276,7 @@ Sem envio de rede.
 
 Antes de adicionar conteúdo, o protótipo precisa cumprir:
 
-1. mover Nox é agradável sem inimigos;
+1. mover Noah é agradável sem inimigos;
 2. jogar quatro cartas seguidas produz decisões, não só spam;
 3. timing melhora a experiência sem punir quem ignora o ritmo;
 4. é possível reconhecer cada carta pela sensação;

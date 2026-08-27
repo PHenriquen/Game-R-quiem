@@ -20,7 +20,7 @@ Abertura, retorno após morte e contraste emocional.
 
 ### Imagem
 
-Nox acorda em uma área pequena e seca. Ao centro existe um sino suspenso que não toca. Uma porta alta leva para fora. Não existe outro humano.
+Noah acorda em uma área pequena e seca. Ao centro existe um sino suspenso que não toca. Uma porta alta leva para fora. Não existe outro humano.
 
 ### Tutorial sem fala
 
@@ -56,7 +56,7 @@ Primeiro combate e primeiro screenshot-alvo.
 
 ### Composição
 
-- Nox entra no terço inferior esquerdo;
+- Noah entra no terço inferior esquerdo;
 - corredor raso de água leva até porta alta;
 - sino quebrado monumental no lado direito;
 - uma fonte dourada pequena orienta a leitura;
@@ -66,13 +66,13 @@ Primeiro combate e primeiro screenshot-alvo.
 
 1 Peregrino Oco.
 
-Ele não percebe Nox imediatamente.
+Ele não percebe Noah imediatamente.
 
 Ao enxergar o fragmento, o Peregrino para por ~0,4 s antes de iniciar o telegraph. Essa pausa é narrativa e gameplay ao mesmo tempo.
 
 ### Primeiro segredo visual
 
-No reflexo da água, durante um Pulso específico, aparece por um instante uma **segunda silhueta** próxima de Nox.
+No reflexo da água, durante um Pulso específico, aparece por um instante uma **segunda silhueta** próxima de Noah.
 
 Não é interativa ainda.
 
@@ -88,7 +88,7 @@ Ensinar que ambiente e combate usam a mesma linguagem.
 
 Quatro sinos pequenos quebrados ficam em sequência numa parede.
 
-Quando Nox usa uma carta perto deles:
+Quando Noah usa uma carta perto deles:
 
 - Corte Breve: resposta seca/aguda;
 - Agulha: resposta longa/fina;
@@ -109,7 +109,7 @@ A ordem não aparece como puzzle UI. Ela foi mostrada antes como decoração/rit
 
 Não dar uma arma melhor.
 
-A alcova contém um **Eco de 5–8 s**: duas pessoas testando aquela mesma sequência antes do Silêncio. Uma delas é Nox. A outra fica fora do enquadramento.
+A alcova contém um **Eco de 5–8 s**: duas pessoas testando aquela mesma sequência antes do Silêncio. Uma delas é Noah. A outra fica fora do enquadramento.
 
 ---
 
@@ -182,7 +182,7 @@ Criar tensão sem combate antes do chefe.
 
 Por alguns segundos, o Pulso visual continua, mas música e sons de impacto desaparecem gradualmente.
 
-Nox ainda responde normalmente.
+Noah ainda responde normalmente.
 
 O jogador escuta apenas água/passos muito abafados e depois quase nada.
 
@@ -194,7 +194,7 @@ Dentro:
 
 - duas cadeiras;
 - uma delas voltada para o Coração desenhado numa parede;
-- a outra voltada para Nox;
+- a outra voltada para Noah;
 - ao interagir, uma voz diz somente: **“Você prometeu ouvir até o fim.”**
 
 Esta frase não deve ser explicada na vertical slice.
@@ -211,7 +211,7 @@ Chefe: Guardião dos Sinos.
 
 O Guardião está imóvel.
 
-Ele olha para o fragmento antes de olhar para Nox.
+Ele olha para o fragmento antes de olhar para Noah.
 
 Não começa atacando imediatamente.
 
@@ -244,7 +244,7 @@ Na metade da vida:
 
 ### Momento de aura
 
-Se Nox alcançar RÉQUIEM durante o chefe, por um breve instante o grande sino ao fundo toca **junto** com o fragmento.
+Se Noah alcançar RÉQUIEM durante o chefe, por um breve instante o grande sino ao fundo toca **junto** com o fragmento.
 
 A câmera não precisa dar zoom extremo. O contraste de som, postura e luz já vende o momento.
 
@@ -253,7 +253,7 @@ A câmera não precisa dar zoom extremo. O contraste de som, postura e luz já v
 Ao vencer, o jogador recebe a memória:
 
 - Coração do Mundo;
-- mão de Nox;
+- mão de Noah;
 - segunda pessoa do outro lado;
 - grito inaudível;
 - movimento ambíguo;

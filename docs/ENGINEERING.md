@@ -94,7 +94,7 @@ Production responsibilities:
 
 The HUD listens to state rather than owning deck rules.
 
-## 6. Nox state machine
+## 6. Noah state machine
 
 Expected high-level states:
 

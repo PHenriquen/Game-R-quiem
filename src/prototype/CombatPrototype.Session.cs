@@ -1,3 +1,4 @@
+using Godot;
 using System;
 
 namespace RequiemEcosDoSilencio.Prototype;
@@ -15,6 +16,8 @@ public partial class CombatPrototype
 
     private SessionState _sessionState = SessionState.Playing;
     private float _sessionElapsed;
+    private bool _bellResponseTriggered;
+    private float _bellResponseRemaining;
 
     private bool IsSessionRunning => _sessionState == SessionState.Playing;
 
@@ -22,13 +25,27 @@ public partial class CombatPrototype
     {
         _sessionState = SessionState.Playing;
         _sessionElapsed = 0f;
+        _bellResponseTriggered = false;
+        _bellResponseRemaining = 0f;
     }
 
     private void UpdateSession(float delta)
     {
-        if (IsSessionRunning)
-            _sessionElapsed += delta;
+        if (!IsSessionRunning)
+            return;
+
+        _sessionElapsed += delta;
+        _bellResponseRemaining = MathF.Max(0f, _bellResponseRemaining - delta);
+
+        Vector2 responsePoint = GetBellResponsePoint();
+        if (_kills > 0 && !_bellResponseTriggered && _playerPosition.DistanceTo(responsePoint) <= 74f)
+        {
+            _bellResponseTriggered = true;
+            _bellResponseRemaining = 2.4f;
+        }
     }
+
+    private Vector2 GetBellResponsePoint() => new(_arena.GetCenter().X, _arena.Position.Y + 76f);
 
     private void CompleteSession(SessionState outcome)
     {

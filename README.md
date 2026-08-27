@@ -4,16 +4,16 @@
 
 Réquiem é um action roguelite 2D em desenvolvimento. A ideia central é misturar combate em tempo real com uma mão pequena de cartas de ação, exploração solitária e uma narrativa que aparece mais pelo mundo do que por diálogos.
 
-O protagonista — ainda chamado de Nox como nome de trabalho — acorda em Vesper sem lembrar por que o mundo perdeu parte de sua música. Conforme avança, encontra lugares presos a memórias incompletas e sinais de que o próprio passado está ligado ao Silêncio.
+**Noah**, um pequeno ser não humano, acorda em Vesper sem lembrar por que o mundo perdeu parte de sua música. Conforme avança, encontra lugares presos a memórias incompletas e sinais de que o próprio passado está ligado ao Silêncio.
 
 ## Duas camadas, um mesmo combate
 
 O projeto passa a separar claramente:
 
-- **Campanha** — experiência autoral e finita; história, Nox, Catedral Afogada, exploração, cartas, inimigos, bosses e narrativa ambiental.
+- **Campanha** — experiência autoral e finita; história, Noah, Catedral Afogada, exploração, cartas, inimigos, bosses e narrativa ambiental.
 - **Echo Trials** — desafios curtos e replayable construídos sobre música + timeline + precisão + combo + score + ranks.
 
-A influência de rhythm games entra no loop de domínio e replay, não em copiar a interface ou trocar o combate por círculos para clicar. Nox continua se movendo, esquivando e usando cartas em tempo real.
+A influência de rhythm games entra no loop de domínio e replay, não em copiar a interface ou trocar o combate por círculos para clicar. Noah continua se movendo, esquivando e usando cartas em tempo real.
 
 ## O que já existe
 
@@ -54,7 +54,7 @@ O Pulso usa três resultados para ações normais:
 
 Agir fora do ritmo nunca bloqueia o ataque. Jogar perto do Pulso melhora execução, score e Cadência. **Miss** só entra quando um Echo Trial explicitamente espera uma resposta em um momento do chart.
 
-Quando a Cadência chega a **RÉQUIEM**, Nox entra por alguns segundos num estado de controle maior, como se lembrasse exatamente de como lutava antes.
+Quando a Cadência chega a **RÉQUIEM**, Noah entra por alguns segundos num estado de controle maior, como se lembrasse exatamente de como lutava antes.
 
 ## Controles do protótipo
 
@@ -99,7 +99,7 @@ Réquiem deve passar principalmente:
 
 A primeira região planejada é a **Catedral Afogada**, parcialmente submersa, onde sinos antigos continuam tentando terminar uma sequência que não possui mais um final.
 
-A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. A nova silhueta não humana combina rosto escuro com olhos ivory expressivos, manto branco, camada preta, **cachecol carmesim** e um pequeno sino dourado no colar.
+A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. A silhueta não humana de Noah combina cabelo branco compacto, rosto escuro com olhos ivory expressivos, manto branco, camada preta, **cachecol carmesim** e um pequeno sino dourado no colar.
 
 ## Rodando localmente
 

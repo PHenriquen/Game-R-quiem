@@ -8,11 +8,11 @@ A segunda pessoa é **Elia**.
 
 Ela não é guardiã do hub, comerciante ou companheira de viagem.
 
-Elia é a única outra pessoa humana central à história de Nox e a presença que o jogo passa quase inteiro evitando mostrar completamente.
+Elia é a única outra pessoa humana central à história de Noah e a presença que o jogo passa quase inteiro evitando mostrar completamente.
 
 ### Relação-base V1
 
-**Nox e Elia são irmãos.**
+**Noah e Elia são irmãos.**
 
 A relação pode ser refinada, mas a versão de produção parte desse vínculo porque:
 
@@ -23,7 +23,7 @@ A relação pode ser refinada, mas a versão de produção parte desse vínculo 
 
 ## 2. Antes do Silêncio
 
-O Coração do Mundo não foi construído por Nox ou Elia. Ele é muito mais antigo que eles.
+O Coração do Mundo não foi construído por Noah ou Elia. Ele é muito mais antigo que eles.
 
 Os dois pertenciam à última geração de **Afinadores** — pessoas capazes de diagnosticar e corrigir os padrões que ligavam o Coração a Vesper.
 
@@ -36,14 +36,14 @@ A função não era tocar música como artistas. Era mais próxima de engenharia
 - acreditava que manter algo funcionando nem sempre significava mantê-lo igual;
 - percebeu primeiro que o Coração estava falhando.
 
-### Nox
+### Noah
 
 - excelente em intervenção prática;
 - rápido, preciso e teimoso;
 - entendia o Coração pela resposta física, não apenas por teoria;
 - tinha dificuldade de aceitar soluções irreversíveis.
 
-Essa diferença aparece no combate: Nox “sente” padrões e transforma memória em ação.
+Essa diferença aparece no combate: Noah “sente” padrões e transforma memória em ação.
 
 ## 3. O problema real do Coração
 
@@ -91,15 +91,15 @@ Anos de contato e sincronização fizeram o Coração usar o padrão de memória
 
 Desligar o sistema significava que Elia não sobreviveria como pessoa contínua.
 
-## 5. O erro de Nox
+## 5. O erro de Noah
 
-Nox descobre isso durante a execução do Último Acorde.
+Noah descobre isso durante a execução do Último Acorde.
 
 Elia pretende terminar mesmo assim.
 
 Ela entende que continuar preservando Vesper significa transformar o mundo inteiro em uma lembrança incapaz de mudar.
 
-Nox não aceita.
+Noah não aceita.
 
 Ele interrompe a sequência antes da última resolução.
 
@@ -118,15 +118,15 @@ O sistema fica preso entre:
 
 Sem conseguir completar nenhuma função, passa a repetir fragmentos.
 
-## 6. Por que Nox sobrevive
+## 6. Por que Noah sobrevive
 
-No instante da interrupção, uma lasca do Coração se fixa em Nox.
+No instante da interrupção, uma lasca do Coração se fixa em Noah.
 
 Ela contém parte do padrão de Elia e parte do próprio protocolo interrompido.
 
 Por isso:
 
-- Nox não é apagado completamente;
+- Noah não é apagado completamente;
 - o fragmento o reconstrói após morrer;
 - Ecos o reconhecem;
 - ele escuta uma melodia recorrente;
@@ -134,19 +134,19 @@ Por isso:
 
 As runs não precisam ser tratadas como “universos paralelos”.
 
-O fragmento reconstrói Nox e partes próximas de sua rota usando informação incompleta. Por isso alguns detalhes se repetem e outros mudam.
+O fragmento reconstrói Noah e partes próximas de sua rota usando informação incompleta. Por isso alguns detalhes se repetem e outros mudam.
 
-## 7. Por que Nox escolheu esquecer
+## 7. Por que Noah escolheu esquecer
 
 Esta é a grande revelação.
 
-Depois do primeiro colapso, Nox ainda se lembrava de tudo.
+Depois do primeiro colapso, Noah ainda se lembrava de tudo.
 
 Ele tentou inúmeras vezes usar o fragmento para reconstruir Elia.
 
-Cada tentativa piorava o Silêncio porque o Coração usava **as próprias lembranças de Nox sobre a irmã** como modelo para continuar criando uma Elia que nunca era realmente completa.
+Cada tentativa piorava o Silêncio porque o Coração usava **as próprias lembranças de Noah sobre a irmã** como modelo para continuar criando uma Elia que nunca era realmente completa.
 
-Nox percebeu que sua incapacidade de soltá-la havia se tornado parte literal da máquina.
+Noah percebeu que sua incapacidade de soltá-la havia se tornado parte literal da máquina.
 
 Então tomou uma decisão:
 
@@ -158,7 +158,7 @@ Para impedir que sua lembrança continuasse funcionando como prisão.
 
 A memória foi distribuída em Ecos e no fragmento.
 
-O Nox que o jogador controla é o Nox que acordou depois dessa decisão.
+O Noah que o jogador controla é o Noah que acordou depois dessa decisão.
 
 Por isso a pergunta “por que você pediu para o mundo esquecer?” funciona melhor que “quem apagou sua memória?”.
 
@@ -166,7 +166,7 @@ Por isso a pergunta “por que você pediu para o mundo esquecer?” funciona me
 
 As cartas são **Memórias de Ação**.
 
-Nox perdeu contexto autobiográfico, mas partes do corpo/fragmento ainda recuperam técnicas em blocos.
+Noah perdeu contexto autobiográfico, mas partes do corpo/fragmento ainda recuperam técnicas em blocos.
 
 A mão representa aquilo que está acessível à memória motora naquele instante.
 
@@ -176,7 +176,7 @@ Uma ação entra em foco.
 
 ### Uso
 
-Nox executa a lembrança.
+Noah executa a lembrança.
 
 ### Descarte
 
@@ -190,13 +190,13 @@ O fragmento reorganiza memórias disponíveis.
 
 Por alguns segundos, as memórias deixam de parecer fragmentos e formam uma pessoa coerente.
 
-Nox não ganha poder “do nada”.
+Noah não ganha poder “do nada”.
 
 Ele lembra como era lutar antes de se quebrar.
 
 ## 9. O papel do jogador
 
-O jogador passa o jogo fazendo exatamente aquilo que Nox tentou evitar:
+O jogador passa o jogo fazendo exatamente aquilo que Noah tentou evitar:
 
 **reconstruindo suas memórias.**
 
@@ -217,7 +217,7 @@ Motivos recorrentes:
 - voz incompleta;
 - metade de uma melodia;
 - anotações com duas caligrafias;
-- lugares onde alguém claramente trabalhava ao lado de Nox;
+- lugares onde alguém claramente trabalhava ao lado de Noah;
 - Dissonantes reagindo ao padrão dela no fragmento;
 - memórias em que a câmera impede ver seu rosto.
 
@@ -235,7 +235,7 @@ Mas a revelação é dolorosa:
 
 **ela não está viva no sentido normal.**
 
-A forma diante de Nox é a reconstrução mais estável que o Coração conseguiu manter do padrão dela.
+A forma diante de Noah é a reconstrução mais estável que o Coração conseguiu manter do padrão dela.
 
 Ela possui memórias, personalidade e consciência suficiente para conversar.
 
@@ -245,11 +245,11 @@ Essa dúvida faz parte do tema.
 
 A própria Elia não pede para ser provada como original.
 
-Ela pede que Nox pare de transformar essa pergunta em uma prisão para Vesper.
+Ela pede que Noah pare de transformar essa pergunta em uma prisão para Vesper.
 
 ## 12. Final-base
 
-Nox chega ao Coração e recupera o contexto do Último Acorde.
+Noah chega ao Coração e recupera o contexto do Último Acorde.
 
 Ele entende:
 
@@ -262,7 +262,7 @@ O jogo oferece uma escolha final construída por ações anteriores, não por um
 
 ### Final — Restauração
 
-Nox usa suas memórias recuperadas para estabilizar o Coração.
+Noah usa suas memórias recuperadas para estabilizar o Coração.
 
 Vesper recupera boa parte da aparência anterior.
 
@@ -274,7 +274,7 @@ Mas pequenas repetições mostram que o mundo continua preso ao passado.
 
 ### Final — Réquiem
 
-Nox permite que Elia complete a última parte do Acorde.
+Noah permite que Elia complete a última parte do Acorde.
 
 O Coração para de preservar o mundo.
 
@@ -282,7 +282,7 @@ Elia desaparece com ele.
 
 Vesper não volta a ser o que era.
 
-Água baixa em alguns lugares, ruínas permanecem, novas plantas aparecem e o Santuário deixa de reconstruir Nox.
+Água baixa em alguns lugares, ruínas permanecem, novas plantas aparecem e o Santuário deixa de reconstruir Noah.
 
 A mudança é irreversível.
 
@@ -294,7 +294,7 @@ Não é “final feliz porque tudo voltou”.
 
 Possibilidade futura, não obrigação da primeira produção.
 
-Nox destrói tanto o protocolo de preservação quanto a sequência de conclusão.
+Noah destrói tanto o protocolo de preservação quanto a sequência de conclusão.
 
 Memórias deixam de ter autoridade sobre o presente, mas o preço é perder também partes dele mesmo.
 
@@ -314,13 +314,13 @@ Ninguém precisa dizer essas frases no jogo.
 
 ## 14. Catedral Afogada como miniatura da história
 
-O Guardião dos Sinos faz em pequena escala o mesmo que Nox fez.
+O Guardião dos Sinos faz em pequena escala o mesmo que Noah fez.
 
 Ele continua protegendo a sequência dos sinos porque não consegue aceitar que sua função terminou.
 
 A água preserva objetos e impede decomposição, mas também impede circulação e mudança.
 
-Quando Nox derrota o Guardião, o jogador pode interpretar apenas como boss.
+Quando Noah derrota o Guardião, o jogador pode interpretar apenas como boss.
 
 Depois do final, entende que estava enfrentando uma versão temática do próprio protagonista.
 
@@ -333,6 +333,6 @@ Se retirarmos nomes, lore e textos, a história ainda deve aparecer através de:
 - preservação excessiva;
 - coisas que não conseguem terminar;
 - música que não resolve;
-- Nox ficando mais completo conforme se aproxima da verdade.
+- Noah ficando mais completo conforme se aproxima da verdade.
 
 Se esses motivos funcionarem, a narrativa está integrada ao jogo em vez de colada por cima.

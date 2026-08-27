@@ -64,7 +64,7 @@ It deliberately does **not** change:
 - movement or dash;
 - enemy attack timing;
 - campaign state;
-- Nox canon or visual direction.
+- Noah canon or visual direction.
 
 ## Playtest questions
 
