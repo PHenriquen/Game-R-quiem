@@ -97,10 +97,11 @@ Exploration favors curiosity. Friendly moments allow softer and playful shapes. 
 ### White hair
 
 - one readable mass rather than separate realistic strands;
-- relaxed spikes fall mostly backward and downward;
+- the crown rises before breaking backward, avoiding a flat or overly relaxed profile;
+- side spikes open the silhouette without becoming a radial star;
 - two short front fringes frame the eyes without covering them;
 - silhouette remains original and must not reproduce the outline of any reference character;
-- movement is restrained in idle and briefly opens the silhouette during dash.
+- idle keeps a slight upward tension; dash briefly opens the rear and side spikes.
 
 ### White mantle
 

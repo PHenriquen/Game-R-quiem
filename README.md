@@ -99,7 +99,7 @@ Réquiem deve passar principalmente:
 
 A primeira região planejada é a **Catedral Afogada**, parcialmente submersa, onde sinos antigos continuam tentando terminar uma sequência que não possui mais um final.
 
-A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. A silhueta não humana de Noah combina cabelo branco compacto, rosto escuro com olhos ivory expressivos, manto branco, camada preta, **cachecol carmesim** e um pequeno sino dourado no colar.
+A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. A silhueta não humana de Noah combina cabelo branco compacto e mais energético, rosto escuro com olhos ivory que reagem ao combate, manto branco, camada preta, **cachecol carmesim** e um pequeno sino dourado no colar.
 
 ## Rodando localmente
 

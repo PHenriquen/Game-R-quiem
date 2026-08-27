@@ -83,22 +83,9 @@ public partial class CombatPrototype
         DrawCircle(_playerPosition + forward * 2f, 16f, mantle);
         DrawLine(_playerPosition - side * 14f, _playerPosition + side * 14f, mantle.Darkened(0.22f), 2f);
 
-        Vector2 hairRoot = _playerPosition + forward * 7f;
-        Color hair = Ivory.Lightened(0.05f);
-        DrawLine(hairRoot - forward * 2f + side * 7f, hairRoot - forward * 7f + side * 15f, hair, 4.2f);
-        DrawLine(hairRoot - forward * 4f + side * 4f, hairRoot - forward * 12f + side * 9f, hair.Darkened(0.05f), 4.6f);
-        DrawLine(hairRoot - forward * 5f, hairRoot - forward * 14f - side, hair, 4.8f);
-        DrawLine(hairRoot - forward * 4f - side * 4f, hairRoot - forward * 11f - side * 10f, hair.Darkened(0.08f), 4.4f);
-        DrawLine(hairRoot + forward + side * 5f, hairRoot + forward * 5f + side * 2f, hair, 3.4f);
-        DrawLine(hairRoot + forward - side * 3f, hairRoot + forward * 5f - side, hair.Darkened(0.04f), 3.2f);
+        DrawNoahHair(forward, side);
         DrawCircle(_playerPosition + forward * 7f, 10.5f, face);
-
-        float focus = Mathf.Clamp(_cadence / 100f, 0f, 1f);
-        Vector2 eyeCenter = _playerPosition + forward * 10f;
-        Vector2 eyeTilt = forward * (1.8f + focus * 1.2f);
-        float eyeSpread = 4.6f - focus * 0.8f;
-        DrawLine(eyeCenter + side * eyeSpread - eyeTilt, eyeCenter + side * 1.2f + eyeTilt * 0.35f, eyes, 2.6f);
-        DrawLine(eyeCenter - side * eyeSpread - eyeTilt, eyeCenter - side * 1.2f + eyeTilt * 0.35f, eyes, 2.6f);
+        DrawNoahEyes(forward, side, eyes, requiem);
 
         Vector2 scarfStart = _playerPosition - forward * 3f + side * 10f;
         Vector2 scarfTurn = _playerPosition - forward * 18f + side * 13f;
@@ -130,6 +117,54 @@ public partial class CombatPrototype
         }
 
         DrawPulseIndicator();
+    }
+
+    private void DrawNoahHair(Vector2 forward, Vector2 side)
+    {
+        Vector2 root = _playerPosition + forward * 7f;
+        Color hair = Ivory.Lightened(0.05f);
+        float flare = _dashRemaining > 0f ? 4f : 0f;
+
+        DrawLine(root - forward + side * 7f, root - forward * 7f + side * (18f + flare), hair, 4.2f);
+        DrawLine(root - forward * 3f + side * 4f, root - forward * 15f + side * (13f + flare), hair.Darkened(0.05f), 4.6f);
+        DrawLine(root - forward * 4f, root - forward * (18f + flare), hair, 4.8f);
+        DrawLine(root - forward * 3f - side * 4f, root - forward * 14f - side * (14f + flare), hair.Darkened(0.08f), 4.4f);
+        DrawLine(root - forward + side * 6f, root + forward * 6f + side * 3f, hair, 3.4f);
+        DrawLine(root - forward - side * 4f, root + forward * 6f - side * 2f, hair.Darkened(0.04f), 3.2f);
+    }
+
+    private void DrawNoahEyes(Vector2 forward, Vector2 side, Color color, bool requiem)
+    {
+        bool recoiling = _playerReaction > 0f;
+        bool perfect = _gradeDisplay > 0f && _lastGrade == TimingGrade.Perfect;
+        bool dashing = _dashRemaining > 0f;
+        float focus = Mathf.Clamp(_cadence / 100f, 0f, 1f);
+        float spread = requiem ? 3.7f : 4.7f - focus * 0.7f;
+        float tilt = requiem ? 2.2f : 1.7f + focus * 1.3f;
+        float leftInner = 1.2f;
+        float rightInner = 1.2f;
+
+        if (recoiling)
+        {
+            spread += 0.9f;
+            tilt = 0.8f;
+            leftInner = 0.2f;
+            rightInner = 1.8f;
+        }
+        else if (perfect)
+        {
+            spread += 0.7f;
+            tilt = 1.4f;
+        }
+        else if (dashing)
+        {
+            spread -= 0.4f;
+            tilt += 0.8f;
+        }
+        Vector2 center = _playerPosition + forward * 10f;
+        Vector2 eyeTilt = forward * tilt;
+        DrawLine(center + side * spread - eyeTilt, center + side * leftInner + eyeTilt * 0.35f, color, 2.6f);
+        DrawLine(center - side * spread - eyeTilt, center - side * rightInner + eyeTilt * 0.35f, color, recoiling ? 2.1f : 2.6f);
     }
 
     private void DrawPulseIndicator()

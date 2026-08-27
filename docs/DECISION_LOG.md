@@ -244,3 +244,17 @@ The selected name closes an unnecessary identity fork. The hair adds a strong to
 ### Reference boundary
 
 Outside characters and personal visual references contribute only broad principles such as readable expression, grouped hair mass and motion. Noah's exact eye shapes, hair outline and proportions must remain original.
+
+## 2026-08-27 — Hair gains tension and eye acting enters gameplay
+
+The first white-hair blockout read too relaxed. The crown now rises before breaking backward, the side spikes open more clearly and dash adds a small silhouette flare. It remains a compact original mass rather than reproducing any reference outline.
+
+Eye acting is no longer documentation-only. The combat prototype now distinguishes:
+
+- progressive focus through Cadência;
+- a brief confident opening after Perfect timing;
+- compressed focus during dash;
+- uneven recoil after damage;
+- calm symmetry during RÉQUIEM.
+
+These reactions use existing gameplay state, add no new controls and preserve combat readability.

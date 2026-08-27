@@ -125,6 +125,7 @@ public partial class CombatPrototype : Node2D
     private float _requiemLock;
     private TimingGrade _lastGrade = TimingGrade.Free;
     private float _gradeDisplay;
+    private float _playerReaction;
     private string _lastAction = string.Empty;
     private EnemyState _enemy = new();
     private int _kills;
@@ -214,6 +215,7 @@ public partial class CombatPrototype : Node2D
         _dashRemaining = 0f;
         _actionLock = 0f;
         _hitStop = 0f;
+        _playerReaction = 0f;
         _kills = 0;
         _actions = 0;
         _goodActions = 0;
@@ -308,6 +310,7 @@ public partial class CombatPrototype : Node2D
         _dashCooldown = MathF.Max(0f, _dashCooldown - dt);
         _actionLock = MathF.Max(0f, _actionLock - dt);
         _gradeDisplay = MathF.Max(0f, _gradeDisplay - dt);
+        _playerReaction = MathF.Max(0f, _playerReaction - dt);
         _enemy.HitFlash = MathF.Max(0f, _enemy.HitFlash - dt);
         _requiemLock = MathF.Max(0f, _requiemLock - dt);
 
@@ -582,6 +585,7 @@ public partial class CombatPrototype : Node2D
             return;
 
         _playerHealth = MathF.Max(0f, _playerHealth - 18f);
+        _playerReaction = 0.24f;
         _cadence = MathF.Max(0f, _cadence - 20f);
         _hitStop = MathF.Max(_hitStop, 0.045f);
         AddRingEffect(_enemy.Position, 92f, Crimson, 0.18f);

@@ -25,7 +25,8 @@ The Agulha de Vesper completes the combat silhouette. The Heart fragment exists,
 - mantle creates a short triangular/rounded mass around the shoulders;
 - black underlayer stays narrow and mobile below it;
 - scarf breaks symmetry and shows direction during dash;
-- white hair uses relaxed backward/downward spikes and two short front fringes;
+- white hair rises into a compact crown before breaking backward, with two short front fringes;
+- the silhouette has visible energy at rest, without becoming a radial star or copying a reference outline;
 - no visible human skin or realistic human facial structure;
 - hair and eyes use original shapes; references inform motion and readability only.
 
@@ -44,6 +45,8 @@ Eye states required for the first animation sheet:
 - startled: wider for a few frames;
 - low health: uneven focus, never a permanent sad expression;
 - RÉQUIEM: calm and nearly symmetrical, with a thin spectral edge.
+
+Prototype mapping: Cadência progressively focuses the eyes; a Perfect briefly opens them with confidence; dash compresses them into motion; taking a hit creates a short uneven recoil; RÉQUIEM restores calm symmetry.
 
 Expressions change shape, spacing and angle. Avoid eyebrows, pupils and a glowing neon face unless a specific scene earns them.
 
