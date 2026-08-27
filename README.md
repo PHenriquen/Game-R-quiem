@@ -4,7 +4,7 @@
 
 Réquiem é um action roguelite 2D em desenvolvimento. A ideia central é misturar combate em tempo real com uma mão pequena de cartas de ação, exploração solitária e uma narrativa que aparece mais pelo mundo do que por diálogos.
 
-Nox acorda em Vesper sem lembrar por que o mundo perdeu parte de sua música. Conforme avança, encontra lugares presos a memórias incompletas e sinais de que o próprio passado está ligado ao Silêncio.
+O protagonista — ainda chamado de Nox como nome de trabalho — acorda em Vesper sem lembrar por que o mundo perdeu parte de sua música. Conforme avança, encontra lugares presos a memórias incompletas e sinais de que o próprio passado está ligado ao Silêncio.
 
 ## Duas camadas, um mesmo combate
 
@@ -99,7 +99,7 @@ Réquiem deve passar principalmente:
 
 A primeira região planejada é a **Catedral Afogada**, parcialmente submersa, onde sinos antigos continuam tentando terminar uma sequência que não possui mais um final.
 
-A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. O azul espectral, ouro envelhecido e o **cachecol carmesim** são âncoras importantes da identidade de Nox.
+A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. A nova silhueta não humana combina rosto escuro com olhos ivory expressivos, manto branco, camada preta, **cachecol carmesim** e um pequeno sino dourado no colar.
 
 ## Rodando localmente
 

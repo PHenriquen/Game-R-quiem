@@ -11,18 +11,20 @@ This file exists so technical experimentation cannot quietly rewrite the identit
 5. **Cards are actions.** The hand changes combat decisions in real time. It is not primarily a stack of passive stat buffs.
 6. **The campaign is not generated from beatmaps.** Authored encounters may use the same rhythm infrastructure, but narrative pacing remains manually directed.
 
-## Nox — visual identity that must survive iteration
+## Protagonist — visual identity that must survive iteration
 
-- small, readable silhouette against large environments;
-- irregular dark hair;
-- blue-black short coat / outer layer;
-- **crimson red scarf** as the strongest warm identifying accent;
-- small aged-gold bell;
-- spectral-blue Heart fragment / core;
+`Nox` remains a working name until the final name is chosen. Naming must not quietly change in code or story before that decision.
+
+- small, unmistakably non-human silhouette against large environments;
+- smooth dark face with large ivory eye-shapes that carry expression;
+- short **white mantle** over a black underlayer;
+- **crimson scarf** as the strongest warm identifying accent;
+- small aged-gold bell at the collar;
+- spectral-blue Heart fragment kept visually quiet outside high Cadência;
 - narrow spectral blade;
 - effects stay controlled until combat earns visual intensity.
 
-The scarf, bell and spectral-blue core are not optional decoration. Together they are recognition anchors.
+The silhouette must work with five anchors: eyes, mantle, scarf, bell and blade. Extra symbols, armor plates and surface decoration are rejected unless they replace an anchor rather than join the pile.
 
 ## Emotional pillars
 

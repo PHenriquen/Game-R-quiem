@@ -55,24 +55,57 @@ public partial class CombatPrototype
     private void DrawPlayer()
     {
         bool requiem = _cadence >= 90f;
-        Color body = requiem ? Ivory.Darkened(0.70f) : new Color(0.07f, 0.12f, 0.18f, 1f);
+        Vector2 forward = _playerFacing.LengthSquared() > 0.01f ? _playerFacing.Normalized() : Vector2.Right;
+        Vector2 side = new(-forward.Y, forward.X);
+        Color mantle = requiem ? Ivory : Ivory.Darkened(0.08f);
+        Color underlayer = new(0.025f, 0.035f, 0.055f, 1f);
+        Color face = new(0.018f, 0.024f, 0.04f, 1f);
+        Color eyes = requiem ? Spectral.Lightened(0.35f) : Ivory;
 
-        DrawCircle(_playerPosition + new Vector2(2f, 9f), 19f, new Color(0f, 0f, 0f, 0.28f));
-        DrawRect(new Rect2(_playerPosition + new Vector2(-12f, -13f), new Vector2(24f, 33f)), body);
-        DrawCircle(_playerPosition + new Vector2(0f, -19f), 11f, new Color(0.035f, 0.035f, 0.05f, 1f));
-        DrawLine(_playerPosition + new Vector2(-6f, -8f), _playerPosition - _playerFacing * 28f + new Vector2(-4f, 4f), Crimson, 4f);
+        DrawCircle(_playerPosition + new Vector2(2f, 10f), 20f, new Color(0f, 0f, 0f, 0.28f));
 
-        float pulse = 3.6f + (MathF.Sin(_elapsed * 6f) + 1f) * 0.8f;
-        DrawCircle(_playerPosition + new Vector2(4f, -4f), pulse, requiem ? Ivory : Spectral);
+        DrawLine(_playerPosition - forward * 2f + side * 7f, _playerPosition - forward * 15f + side * 8f, underlayer, 7f);
+        DrawLine(_playerPosition - forward * 2f - side * 7f, _playerPosition - forward * 15f - side * 8f, underlayer, 7f);
+        DrawCircle(_playerPosition - forward * 3f, 13f, underlayer);
 
-        Vector2 bladeStart = _playerPosition + _playerFacing * 13f;
-        Vector2 bladeEnd = _playerPosition + _playerFacing * 42f;
+        DrawCircle(_playerPosition + forward * 2f, 16f, mantle);
+        DrawLine(_playerPosition - side * 14f, _playerPosition + side * 14f, mantle.Darkened(0.22f), 2f);
+        DrawCircle(_playerPosition + forward * 7f, 10.5f, face);
+
+        float focus = Mathf.Clamp(_cadence / 100f, 0f, 1f);
+        Vector2 eyeCenter = _playerPosition + forward * 10f;
+        Vector2 eyeTilt = forward * (1.8f + focus * 1.2f);
+        float eyeSpread = 4.6f - focus * 0.8f;
+        DrawLine(eyeCenter + side * eyeSpread - eyeTilt, eyeCenter + side * 1.2f + eyeTilt * 0.35f, eyes, 2.6f);
+        DrawLine(eyeCenter - side * eyeSpread - eyeTilt, eyeCenter - side * 1.2f + eyeTilt * 0.35f, eyes, 2.6f);
+
+        Vector2 scarfStart = _playerPosition - forward * 3f + side * 10f;
+        Vector2 scarfTurn = _playerPosition - forward * 18f + side * 13f;
+        Vector2 scarfEnd = _playerPosition - forward * 31f + side * 7f;
+        DrawLine(scarfStart, scarfTurn, Crimson, 5f);
+        DrawLine(scarfTurn, scarfEnd, Crimson.Darkened(0.08f), 4f);
+
+        Vector2 leftHand = _playerPosition + forward * 3f + side * 14f;
+        Vector2 rightHand = _playerPosition + forward * 3f - side * 14f;
+        DrawCircle(leftHand, 3.5f, Ivory.Darkened(0.18f));
+        DrawCircle(rightHand, 3.5f, Ivory.Darkened(0.18f));
+
+        Vector2 bell = _playerPosition - forward * 5f;
+        DrawLine(bell - forward * 4f, bell, Gold.Darkened(0.20f), 1.5f);
+        DrawCircle(bell, 2.8f, Gold);
+        DrawLine(bell - side * 2f, bell + side * 2f, Gold.Darkened(0.42f), 1f);
+
+        float pulse = 2.8f + (MathF.Sin(_elapsed * 6f) + 1f) * 0.55f;
+        DrawCircle(_playerPosition + forward * 1f, pulse, requiem ? Ivory : Spectral.Darkened(0.08f));
+
+        Vector2 bladeStart = rightHand + forward * 2f;
+        Vector2 bladeEnd = rightHand + forward * 38f;
         DrawLine(bladeStart, bladeEnd, requiem ? Ivory : Spectral, 3f);
 
         if (requiem)
         {
-            DrawArc(_playerPosition, 28f, 0f, Mathf.Tau, 40, Spectral, 2f);
-            DrawLine(_playerPosition + new Vector2(-8f, -4f), _playerPosition + new Vector2(-20f, 12f), Gold, 1.5f);
+            DrawArc(_playerPosition, 29f, 0f, Mathf.Tau, 40, Spectral, 2f);
+            DrawArc(_playerPosition + forward * 7f, 13f, -0.45f, Mathf.Pi + 0.45f, 20, Ivory.Darkened(0.18f), 1.4f);
         }
 
         DrawPulseIndicator();

@@ -1,274 +1,152 @@
-# NOX — Concept Art Brief V1
+# PROTAGONIST — Concept Art Brief V2
 
-## Objetivo
+> Working name: **Nox**. Shortlist under evaluation: **Senn** and **Eiro**. No rename is canonical until one name is deliberately selected and propagated through story, code and UI.
 
-Criar um protagonista que seja reconhecível por silhueta em sprite pequeno e continue interessante em ilustração maior **sem depender de excesso de acessórios**.
+## Purpose
 
-Nox precisa parecer alguém de um mundo de fantasia melancólica, mas com desenho funcional o suficiente para lutar rápido.
+Create a protagonist who reads instantly at sprite scale without depending on a human face, detailed anatomy or a costume full of symbols. The design must feel native to Réquiem: small against the world, visually quiet in exploration and precise in combat.
 
-## 1. Leitura em três segundos
+## Five recognition anchors
 
-Ao olhar para Nox, a ordem de leitura ideal é:
+1. large expressive ivory eyes on a dark, non-human face;
+2. short white mantle;
+3. black underlayer;
+4. crimson scarf;
+5. small aged-gold bell at the collar.
 
-1. silhueta leve e assimétrica;
-2. fragmento espectral no peito;
-3. arma estreita;
-4. pequeno detalhe carmesim;
-5. sino dourado descoberto só depois.
+The Agulha de Vesper completes the combat silhouette. The Heart fragment exists, but should not compete with these anchors while idle.
 
-Se o sino vira a primeira coisa vista, está grande demais.
+## Body and silhouette
 
-## 2. Idade e físico
+- compact, light construction with proportions that do not read as an ordinary human in costume;
+- head slightly large enough for eye acting at 48–64 px;
+- limbs simple and flexible, with clear hands and feet rather than black shapes disappearing into the body;
+- mantle creates a short triangular/rounded mass around the shoulders;
+- black underlayer stays narrow and mobile below it;
+- scarf breaks symmetry and shows direction during dash;
+- no hair, visible human skin or realistic human facial structure.
 
-- jovem adulto, aproximadamente começo dos 20;
-- altura mediana;
-- corpo magro/atlético;
-- pernas fortes o suficiente para vender mobilidade;
-- ombros sem volume de armadura;
-- mãos e braços desenhados para precisão, não força bruta.
+The silhouette should remain recognizable when filled with one solid color.
 
-Ele não deve parecer criança nem guerreiro veterano musculoso.
+## Face and eyes
 
-## 3. Rosto
+The face is a smooth dark surface integrated into the character, not a removable superhero mask. The eyes are the main acting system.
 
-### Forma
+Eye states required for the first animation sheet:
 
-- traços simples e levemente angulares;
-- mandíbula definida sem exagero;
-- nariz normal, não “perfeito”;
-- pequenas assimetrias são desejadas.
+- neutral: open, curious and attentive;
+- playful: one eye slightly compressed, asymmetry without becoming a cartoon gag;
+- trusted company: softer angle and less tension;
+- focused: narrowed, level and economical;
+- startled: wider for a few frames;
+- low health: uneven focus, never a permanent sad expression;
+- RÉQUIEM: calm and nearly symmetrical, with a thin spectral edge.
 
-### Expressão-base
+Expressions change shape, spacing and angle. Avoid eyebrows, pupils and a glowing neon face unless a specific scene earns them.
 
-Observador e cansado.
+## Mantle and underlayer
 
-Não “cara de bravo” permanente.
+### White mantle
 
-A ameaça de Nox deve aparecer quando ele começa a lutar bem, não quando está parado.
+- ivory-white rather than pure screen white;
+- short enough to keep legs readable;
+- one clean overlap or notch is enough;
+- broad graphic shapes, almost no printed symbols;
+- subtle wear only at meaningful edges.
 
-### Olhos
+### Black underlayer
 
-Cor normal em baixa Cadência.
+- matte and visually simple;
+- visible at torso, legs and inside the mantle;
+- hands need an ivory cuff, rim light or clear separation so gestures remain readable;
+- no belts, armor panels or mechanical seams added only to fill empty space.
 
-Durante S/RÉQUIEM, reflexo espectral muito discreto pode surgir.
+## Scarf
 
-Evitar íris neon permanente.
+The crimson scarf is medium-short: long enough to trail during movement, short enough not to dominate the silhouette.
 
-## 4. Cabelo
+It communicates motion and social energy. In relaxed moments it sits loosely; against a threat it follows a cleaner, sharper line. It should not animate as if wind exists indoors without reason.
 
-- preto ou castanho quase preto;
-- irregular;
-- massas grandes e fáceis de animar;
-- franja assimétrica;
-- laterais não muito raspadas;
-- nuca curta/média.
+## Bell
 
-Referência de sensação: cabelo que foi cortado/manutenção prática, não penteado impossível.
+The aged-gold bell hangs at the collar and is small enough to be discovered after the eyes and mantle.
 
-No sprite, três ou quatro massas são mais importantes que fios.
+Narrative/gameplay rule:
 
-## 5. Roupa — silhueta
+- ordinary movement does not make it ring constantly;
+- a single clear note can signal that a place, memory or encounter has completed a missing pulse;
+- the protagonist may touch or protect it in quiet story beats;
+- the bell is an interface between character and world, not a generic collectible detector.
 
-### Parte superior
+Working artifact term: **Sino de Vigília**. This term can change without renaming the character.
 
-Casaco curto assimétrico que termina aproximadamente entre cintura e parte superior da coxa.
+## Heart fragment
 
-Uma lateral pode possuir sobreposição um pouco maior que a outra.
+The spectral fragment remains partly hidden under the mantle at low Cadência.
 
-A gola cria linhas apontando para o fragmento sem literalmente desenhar setas.
+- low Cadência: only a small cold-blue point;
+- high Cadência: two or three thin lines become visible;
+- RÉQUIEM: ivory joins the blue briefly and the design becomes more coherent, not larger or louder.
 
-### Parte inferior
+No permanent chest emblem is added around it.
 
-- calça escura funcional;
-- volume moderado;
-- botas leves;
-- nenhuma capa longa arrastando.
+## Agulha de Vesper
 
-### Assimetria
+- extremely narrow;
+- minimal guard;
+- reads as precision rather than weight;
+- dark physical base with a controlled spectral edge;
+- idle pose stays low and practical;
+- high Cadência removes wasted motion instead of adding flourishes.
 
-Uma luva/antebraço pode ter tratamento diferente do outro, ligado ao trabalho antigo de Afinador.
+## Personality through animation
 
-Não transformar isso em braço robótico completo.
+The character is not emotionally flat.
 
-## 6. Materiais
+- with unfamiliar people: open posture, quick eye reactions and playful timing;
+- with trusted people: smaller gestures and softer eye angles;
+- with enemies: the playfulness contracts into stillness and precision;
+- alone: curiosity appears through pauses, head angle and how the bell is handled.
 
-- tecido fosco azul-negro;
-- couro muito escuro apenas onde funcional;
-- metal envelhecido no sino/fivelas mínimas;
-- fragmento com aparência de material impossível: entre vidro, pedra e luz.
+These are animation rules, not dialogue quotas.
 
-Pouco metal brilhante.
+## Detail budget
 
-## 7. Carmesim
+At sprite scale, do not add:
 
-Elemento V1: **faixa curta de tecido presa abaixo da gola/cintura**, com comprimento suficiente para indicar direção durante dash, mas curta demais para virar cachecol de anime.
+- clothing symbols beyond a possible single construction seam;
+- multiple necklaces or charms;
+- shoulder armor;
+- runes across the mantle;
+- colored hair-like shapes;
+- permanent aura;
+- decorative gloves that erase hand readability;
+- copied proportions, mask shapes or costume language from reference characters.
 
-Uso narrativo possível:
+If a new detail cannot be explained in silhouette, gameplay animation or story, remove it.
 
-A faixa pertenceu originalmente a Elia ou era parte da indumentária dos Afinadores. Não confirmar no começo.
+## Concept sheet
 
-No gameplay, carmesim precisa ocupar menos área que azul espectral.
+Required views:
 
-## 8. Sino
+1. front, back and 3/4 neutral;
+2. solid-black silhouette test;
+3. eye expression row;
+4. mantle open/closed construction;
+5. scarf movement keys;
+6. bell close-up and collar attachment;
+7. idle D/C, focused S and RÉQUIEM pose;
+8. Corte Breve, dash and Sino Partido key poses;
+9. 48 px and 64 px sprite readability tests.
 
-Pequeno sino de bronze/dourado envelhecido.
+## Approval test
 
-Forma:
+The design is ready for production when:
 
-- simples;
-- levemente assimétrica;
-- fissura fina específica que pode virar motivo recorrente.
-
-Local sugerido: cintura alta ou abaixo do fragmento, onde pode ser visto em ilustração sem prejudicar silhueta.
-
-Ele não soa em cada passo.
-
-## 9. Fragmento do Coração
-
-### Forma
-
-Lasca vertical/diagonal irregular de aproximadamente 5–8 cm na escala real do personagem.
-
-Não é colar.
-
-Parece parcialmente inserida ou presa ao corpo/roupa por fissuras finas.
-
-### Baixa Cadência
-
-- azul frio;
-- baixa emissão;
-- fissuras quase invisíveis.
-
-### Alta Cadência
-
-- luz percorre duas ou três linhas do peito;
-- pequenas respostas à batida.
-
-### RÉQUIEM
-
-- fissuras formam desenho mais coerente;
-- ivory aparece junto do azul;
-- por poucos frames, existe a impressão de que havia uma forma completa antes de ser quebrada.
-
-## 10. Agulha de Vesper
-
-### Silhueta
-
-- lâmina extremamente fina;
-- comprimento aproximado de espada longa leve;
-- guarda mínima;
-- cabo escuro;
-- fio espectral.
-
-### Empunhadura
-
-Nox segura como ferramenta que conhece muito bem.
-
-Idle: lâmina baixa, sem pose heroica constante.
-
-Alta Cadência: menos preparação e menos movimento desnecessário.
-
-### Proibição
-
-Não desenhar como katana reconhecível, rapieira histórica literal ou espada de energia sci-fi.
-
-Ela precisa ficar entre objeto físico e manifestação do fragmento.
-
-## 11. Poses obrigatórias do concept sheet
-
-1. frontal neutra;
-2. costas;
-3. 3/4 principal;
-4. idle de combate D/C;
-5. pose S;
-6. RÉQUIEM;
-7. Corte Breve;
-8. preparação de Sino Partido.
-
-## 12. Detalhes obrigatórios
-
-Close separado de:
-
-- fragmento;
-- sino;
-- Agulha de Vesper;
-- elemento carmesim;
-- símbolo/marca dos Afinadores, se usado.
-
-## 13. Variações que vale testar
-
-### A — mais humano
-
-Quase nenhuma peça sobrenatural além do fragmento.
-
-### B — Afinador
-
-Pequenos detalhes funcionais do antigo trabalho: tira de medição, marca, suporte de ferramenta.
-
-### C — marcado pelo Silêncio
-
-Uma manga/parte da roupa sofreu perda de continuidade e possui borda que parece “faltando”, mas sem glitch digital óbvio.
-
-A versão final provavelmente deve ficar entre A e B, com apenas um detalhe de C.
-
-## 14. O que evitar
-
-- sobretudo enorme;
-- capa até o chão;
-- cachecol gigante;
-- ombreiras;
-- armadura pesada;
-- 10 cintos;
-- runas em todas as superfícies;
-- cabelo azul/vermelho;
-- heterocromia só para parecer especial;
-- olho brilhando o tempo inteiro;
-- máscara permanente;
-- símbolo musical literal em toda roupa;
-- cruz/ornamento religioso copiado;
-- estética cyberpunk;
-- aparência de protagonista genérico de gacha.
-
-## 15. Sprite
-
-Antes de render detalhado, testar Nox como silhueta sólida em aproximadamente 48–64 px de altura.
-
-Perguntas:
-
-- reconheço direção do corpo?;
-- o detalhe carmesim ainda aparece?;
-- fragmento não parece um pixel aleatório?;
-- arma não some no cenário?;
-- idle e RÉQUIEM têm posturas claramente diferentes?;
-
-## 16. Animação
-
-O arco de Nox é visível no corpo.
-
-### Baixa Cadência
-
-- microajustes de postura;
-- golpes têm recuperação perceptível;
-- tecido responde mais.
-
-### Alta Cadência
-
-- menos antecipação desperdiçada;
-- ações terminam prontas para a próxima;
-- cabeça/olhar acompanham ameaça melhor.
-
-### RÉQUIEM
-
-Não acelerar todas as animações indiscriminadamente.
-
-A impressão de poder vem de **economia**: Nox faz menos para conseguir mais.
-
-## 17. Teste final
-
-O concept está aprovado quando:
-
-- preto e branco ainda reconhece Nox;
-- sprite pequeno e ilustração parecem a mesma pessoa;
-- RÉQUIEM parece evolução do mesmo design;
-- nenhum elemento isolado parece roubado de uma referência;
-- o personagem parece pertencer ao mundo antes de parecer “cool”.
+- the character is identifiable without color;
+- eyes remain readable without looking copied from a known mascot;
+- white mantle and black underlayer do not merge into background extremes;
+- hands remain visible in combat poses;
+- the bell is meaningful but not oversized;
+- removing every decorative mark does not weaken the character;
+- the sprite and large illustration clearly depict the same being.

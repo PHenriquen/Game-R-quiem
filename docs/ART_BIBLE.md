@@ -64,102 +64,59 @@ Escolher:
 - uma secundária;
 - uma cor rara de atenção.
 
-## 5. Nox — objetivo
+## 5. Protagonista — objetivo
 
-Nox deve ser reconhecível em três níveis:
+`Nox` is a working name while **Senn** and **Eiro** remain candidates. The visual identity does not wait for the naming decision.
 
-### Silhueta
+The protagonist is a small non-human being built from five anchors:
 
-Corpo leve, parte superior curta e assimétrica, elemento de tecido que quebra a forma e arma longa/fina.
+- large ivory eye-shapes on a dark face;
+- short white mantle;
+- black underlayer;
+- crimson scarf;
+- small aged-gold bell at the collar.
 
-### Cor
+The world stays more detailed than the character. If the design needs surface symbols to remain interesting, simplify and strengthen the silhouette.
 
-Azul-negro + um detalhe carmesim + ponto espectral no peito.
+## 6. Protagonista — construção visual
 
-### Símbolo
+### Form
 
-Fragmento + pequeno sino dourado.
+- compact body with proportions that do not read as an ordinary human in costume;
+- slightly enlarged head so the eyes can act at sprite scale;
+- simple limbs with readable hands and feet;
+- movement alternates playful elasticity and focused economy.
 
-Se o sprite precisa de quinze acessórios para ser interessante, o design falhou.
+### Face and eyes
 
-## 6. Nox — construção visual
+The dark face is part of the being, not a removable mask. Ivory eye-shapes replace realistic facial anatomy and carry the performance through angle, width, spacing and asymmetry.
 
-### Corpo
+Exploration favors curiosity. Friendly moments allow softer and playful shapes. Combat focus narrows the eyes. RÉQUIEM makes them calm and nearly symmetrical with a thin spectral edge.
 
-- jovem adulto;
-- magro/atlético, não frágil;
-- postura inicial discretamente defensiva;
-- centro de gravidade baixo durante combate;
-- movimento econômico.
+### White mantle
 
-### Rosto
+- ivory-white, short and graphic;
+- one overlap/notch at most;
+- broad shapes rather than embroidery;
+- leaves the legs free and the scarf visible.
 
-No gameplay, detalhe mínimo.
+### Black underlayer
 
-Em ilustrações/retratos:
+- matte and narrow;
+- no armor plates, belts or decorative seams;
+- hands use a cuff, rim or value break so they never disappear into the torso.
 
-- expressão observadora;
-- aparência cansada sem parecer doente;
-- olhar mais atento que agressivo;
-- evitar beleza perfeita/genérica de personagem de IA.
+### Crimson scarf
 
-### Cabelo
+The scarf is the movement accent: medium-short, readable during dash and quieter while idle. It carries personality without becoming the largest part of the silhouette.
 
-- escuro;
-- irregular, porém com massas grandes e desenháveis;
-- franja ajuda a quebrar a simetria;
-- sem mechas coloridas permanentes.
+### Bell
 
-A luz espectral pode tingir bordas durante alta Cadência.
+The aged-gold collar bell does not ring with every step. One isolated note may mark a completed pulse in a memory, room or encounter. It is a relationship between character and world, not decoration.
 
-### Roupa
+### Heart fragment
 
-Base: casaco curto ou peça superior assimétrica azul-negra.
-
-Características:
-
-- tecido funcional;
-- comprimento que deixe pernas livres;
-- gola ou sobreposição que crie triângulo visual no peito;
-- pouca ornamentação;
-- desgaste visível apenas em áreas importantes.
-
-### Carmesim
-
-Não usar um cachecol gigante como assinatura obrigatória.
-
-Direção V2: **faixa curta, tira de tecido, forro ou pequeno lenço** que apareça no movimento sem dominar Nox.
-
-A cor representa vínculo/ruptura e deve ser rara o suficiente para ganhar significado narrativo.
-
-### Sino
-
-Pequeno, dourado envelhecido, preso próximo ao peito/cintura.
-
-Ele não balança fazendo barulho o tempo inteiro.
-
-O primeiro momento em que ele toca sozinho pode ser narrativamente importante.
-
-### Fragmento
-
-Não é uma joia redonda.
-
-Forma: lasca irregular inserida/ancorada próxima ao coração, com linhas finas como rachaduras.
-
-Baixa Cadência:
-
-- brilho fraco;
-- quase nenhum efeito.
-
-Alta Cadência:
-
-- fissuras pequenas aparecem ao redor.
-
-RÉQUIEM:
-
-- fissuras se organizam por alguns segundos como se o corpo lembrasse uma forma anterior;
-- ivory aparece junto do azul;
-- não virar aura flamejante.
+The fragment stays visually quiet under the mantle until Cadência rises. Blue lines appear with mastery; ivory joins them briefly in RÉQUIEM. It never becomes a permanent oversized emblem.
 
 ## 7. Agulha de Vesper
 

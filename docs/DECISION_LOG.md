@@ -189,3 +189,33 @@ Quando uma ideia nova for aprovada:
 2. atualizar o documento especialista quando necessário;
 3. evitar manter duas versões concorrentes como se fossem igualmente válidas;
 4. se for experimento, marcar explicitamente como experimento e não decisão.
+
+## 2026-08-27 — Protagonist moves from human design to an original non-human silhouette
+
+### Changed
+
+- the earlier young-human face, hair and short-coat direction is retired;
+- the protagonist now uses a dark non-human face with expressive ivory eye-shapes;
+- the costume hierarchy becomes white mantle, black underlayer, crimson scarf and a small collar bell;
+- visual detail is reduced to five recognition anchors;
+- `Nox` becomes a working name while Senn and Eiro remain candidates.
+
+### Why the prior rule failed
+
+The human concept depended on hair, face and clothing detail to create identity. At the intended sprite scale it risked reading as a generic fantasy protagonist and did not support the stronger mascot-like simplicity requested for the game.
+
+### Preserved
+
+- small silhouette against monumental environments;
+- quiet protagonist whose inner life appears through movement and objects;
+- crimson, aged gold and spectral blue as meaningful accents;
+- bell, Heart fragment and Agulha de Vesper;
+- controlled effects and readable combat.
+
+### Player experience gained
+
+The protagonist can now communicate curiosity, playfulness, trust and combat focus through eye animation while remaining recognizable at small scale. The bell also gains a concrete world-facing role: it marks a completed missing pulse instead of making constant decorative noise.
+
+### Naming gate
+
+No code-wide rename occurs until the final name is selected. Story meaning, sound, spelling and UI readability must be checked together.
