@@ -61,6 +61,18 @@ public partial class CombatRhythmBridge : Node2D
         _director?.SetProcess(!paused);
     }
 
+    public void RestartForArena()
+    {
+        if (_director is null)
+        {
+            _restartPending = true;
+            return;
+        }
+
+        _restartPending = false;
+        RestartTrial();
+    }
+
     public override void _Ready()
     {
         PrototypeInput.EnsureDefaultBindings();
@@ -138,9 +150,6 @@ public partial class CombatRhythmBridge : Node2D
             _capturePending = true;
             break;
         }
-
-        if (@event.IsActionPressed(PrototypeInput.Restart, false))
-            _restartPending = true;
 
         if (@event is InputEventMouseButton mouse && mouse.Pressed && mouse.ButtonIndex == MouseButton.Left)
         {

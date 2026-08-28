@@ -16,6 +16,7 @@ internal static class PrototypeInput
     public const string CardFour = "prototype_card_4";
     public const string Restart = "prototype_restart";
     public const string Pause = "prototype_pause";
+    public const string Confirm = "prototype_confirm";
 
     public static readonly string[] CardActions = { CardOne, CardTwo, CardThree, CardFour };
 
@@ -33,6 +34,7 @@ internal static class PrototypeInput
         EnsureAction(CardFour, Key.Key4, JoyButton.DpadDown);
         EnsureAction(Restart, Key.R, JoyButton.Back);
         EnsureAction(Pause, Key.Escape, JoyButton.Start);
+        EnsureAction(Confirm, Key.Enter, JoyButton.A);
     }
 
     private static void EnsureAction(string action, Key primary, Key secondary, JoyAxis axis, float axisValue)

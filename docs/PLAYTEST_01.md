@@ -21,6 +21,8 @@ Controles atuais:
 
 A pausa precisa congelar cronômetro, Pulso, inimigo, cartas e efeitos transitórios. Reiniciar a partir da pausa deve começar uma tentativa limpa e já retomada.
 
+Na primeira abertura, o briefing deve manter arena, Peregrino, Pulso e cronômetro imóveis até `Enter`, `A` ou clique. Depois do primeiro início, `R` / `Back` reinicia diretamente a tentativa para reduzir atrito de repetição.
+
 ## Passo 0 — Compilação
 
 Antes de avaliar gameplay:

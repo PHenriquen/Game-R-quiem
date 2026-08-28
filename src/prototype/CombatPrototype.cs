@@ -153,13 +153,13 @@ public partial class CombatPrototype : Node2D
     public override void _Ready()
     {
         PrototypeInput.EnsureDefaultBindings();
-        ResetArena();
+        ResetArena(true);
         GD.Print("Réquiem combat prototype ready: teclado, mouse ou gamepad.");
     }
 
     public override void _Process(double delta)
     {
-        if (_prototypePaused)
+        if (_prototypePaused || IsSessionBriefing)
         {
             QueueRedraw();
             return;
@@ -196,6 +196,16 @@ public partial class CombatPrototype : Node2D
 
     public override void _Input(InputEvent @event)
     {
+        bool mousePressed = @event is InputEventMouseButton mouseStart
+            && mouseStart.Pressed
+            && mouseStart.ButtonIndex == MouseButton.Left;
+        if (IsSessionBriefing && (@event.IsActionPressed(PrototypeInput.Confirm, false) || mousePressed))
+        {
+            BeginBriefedSession();
+            GetViewport().SetInputAsHandled();
+            return;
+        }
+
         if (@event.IsActionPressed(PrototypeInput.Pause, false))
         {
             TogglePrototypePause();
@@ -205,7 +215,7 @@ public partial class CombatPrototype : Node2D
 
         if (@event.IsActionPressed(PrototypeInput.Restart, false))
         {
-            ResetArena();
+            ResetArena(false);
             return;
         }
 
@@ -241,7 +251,7 @@ public partial class CombatPrototype : Node2D
         }
     }
 
-    private void ResetArena()
+    private void ResetArena(bool showBriefing)
     {
         Vector2 size = GetViewportRect().Size;
         _arena = new Rect2(72f, 70f, MathF.Max(900f, size.X - 144f), MathF.Max(430f, size.Y - 255f));
@@ -256,16 +266,18 @@ public partial class CombatPrototype : Node2D
         _actionLock = 0f;
         _hitStop = 0f;
         _playerReaction = 0f;
+        _elapsed = 0f;
         _clamorForm = ClamorForm.Rest;
         _clamorShiftDisplay = 0f;
         _prototypePaused = false;
-        _combatRhythmBridge?.SetPrototypePaused(false);
         _kills = 0;
         _actions = 0;
         _goodActions = 0;
         _perfectActions = 0;
         _effects.Clear();
-        StartSession();
+        StartSession(showBriefing);
+        _combatRhythmBridge?.RestartForArena();
+        _combatRhythmBridge?.SetPrototypePaused(showBriefing);
 
         SpawnEnemy();
         RebuildDeck();

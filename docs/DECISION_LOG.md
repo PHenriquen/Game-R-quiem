@@ -321,3 +321,9 @@ The local Cast Board tests color, filled silhouette and unchanged 64 px reductio
 The combat toy no longer owns raw physical-key checks. A small input boundary registers keyboard and gamepad defaults while allowing later project-level remapping to replace them. Keyboard, mouse and controller paths now feed the same actions and rhythm capture.
 
 Pause is local to the prototype rather than the whole SceneTree. It freezes the trial timer, current fallback Pulse clock, enemy, cards and transient effects without stopping unrelated nodes globally. Restart remains available while paused and begins a clean, resumed attempt. When authored music enters the scene, its player must join this boundary explicitly instead of relying on SceneTree pause.
+
+## 2026-08-28 — The first run begins with a briefing; retries do not
+
+The prototype no longer attacks a first-time player while controls are being read. Its initial state presents the concrete objective and both keyboard/controller bindings while arena, enemy, timer and Pulse remain still. Confirming starts all clocks from zero together.
+
+Retries skip this screen and return directly to play. Reset now also clears the combat toy's local Pulse phase, fixing the former mismatch in which the authored shadow timeline restarted but local timing evaluation kept its previous phase.

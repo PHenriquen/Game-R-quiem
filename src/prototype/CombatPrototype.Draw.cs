@@ -26,6 +26,7 @@ public partial class CombatPrototype
         DrawHud();
         DrawSessionOverlay();
         DrawPauseOverlay();
+        DrawBriefingOverlay();
     }
 
     private void DrawBackground()
@@ -372,7 +373,7 @@ public partial class CombatPrototype
 
     private void DrawSessionOverlay()
     {
-        if (IsSessionRunning)
+        if (IsSessionRunning || IsSessionBriefing)
             return;
 
         Vector2 size = GetViewportRect().Size;
@@ -401,6 +402,34 @@ public partial class CombatPrototype
         string discovery = _bellResponseTriggered ? "ECO DO SINO  ENCONTRADO" : "ECO DO SINO  OCULTO";
         DrawString(_font, panel.Position + new Vector2(30f, 198f), discovery, HorizontalAlignment.Left, panel.Size.X - 60f, 14, _bellResponseTriggered ? Gold : Ivory.Darkened(0.48f));
         DrawString(_font, panel.Position + new Vector2(30f, 238f), "R  REINICIAR A PROVA", HorizontalAlignment.Left, panel.Size.X - 60f, 16, Gold);
+    }
+
+    private void DrawBriefingOverlay()
+    {
+        if (!IsSessionBriefing)
+            return;
+
+        Vector2 size = GetViewportRect().Size;
+        DrawRect(new Rect2(Vector2.Zero, size), new Color(0.01f, 0.015f, 0.025f, 0.86f));
+
+        Rect2 panel = new(size * 0.5f - new Vector2(310f, 174f), new Vector2(620f, 348f));
+        DrawRect(panel, new Color(0.025f, 0.03f, 0.05f, 0.99f));
+        DrawRect(panel, Gold.Darkened(0.18f), false, 2f);
+        DrawRect(new Rect2(panel.Position, new Vector2(6f, panel.Size.Y)), Gold);
+
+        DrawString(_font, panel.Position + new Vector2(34f, 48f), "PROVA DO PRIMEIRO ECO", HorizontalAlignment.Left, panel.Size.X - 68f, 25, Ivory);
+        DrawString(_font, panel.Position + new Vector2(34f, 80f), "Supere três Peregrinos. O Pulso ajuda, mas nunca obriga.", HorizontalAlignment.Left, panel.Size.X - 68f, 14, Ivory.Darkened(0.30f));
+
+        DrawString(_font, panel.Position + new Vector2(34f, 128f), "MOVER", HorizontalAlignment.Left, 120f, 11, Spectral);
+        DrawString(_font, panel.Position + new Vector2(170f, 128f), "WASD / SETAS / ANALÓGICO", HorizontalAlignment.Left, 360f, 14, Ivory.Darkened(0.12f));
+        DrawString(_font, panel.Position + new Vector2(34f, 166f), "ESQUIVAR", HorizontalAlignment.Left, 120f, 11, Spectral);
+        DrawString(_font, panel.Position + new Vector2(170f, 166f), "ESPAÇO / A", HorizontalAlignment.Left, 360f, 14, Ivory.Darkened(0.12f));
+        DrawString(_font, panel.Position + new Vector2(34f, 204f), "CLAMOR", HorizontalAlignment.Left, 120f, 11, Spectral);
+        DrawString(_font, panel.Position + new Vector2(170f, 204f), "Q / LB", HorizontalAlignment.Left, 360f, 14, Ivory.Darkened(0.12f));
+        DrawString(_font, panel.Position + new Vector2(34f, 242f), "CARTAS", HorizontalAlignment.Left, 120f, 11, Spectral);
+        DrawString(_font, panel.Position + new Vector2(170f, 242f), "1–4 / DIRECIONAL / CLIQUE", HorizontalAlignment.Left, 360f, 14, Ivory.Darkened(0.12f));
+
+        DrawString(_font, panel.Position + new Vector2(34f, 306f), "ENTER / A / CLIQUE   INICIAR", HorizontalAlignment.Left, panel.Size.X - 68f, 17, Gold);
     }
 
     private void DrawPauseOverlay()

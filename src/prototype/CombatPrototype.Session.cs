@@ -7,6 +7,7 @@ public partial class CombatPrototype
 {
     private enum SessionState
     {
+        Briefing,
         Playing,
         Victory,
         Defeat
@@ -21,14 +22,25 @@ public partial class CombatPrototype
     private float _bellResponseRemaining;
 
     private bool IsSessionRunning => _sessionState == SessionState.Playing;
+    private bool IsSessionBriefing => _sessionState == SessionState.Briefing;
     private bool IsBellMicroEchoActive => _bellResponseRemaining > 0f;
 
-    private void StartSession()
+    private void StartSession(bool showBriefing)
     {
-        _sessionState = SessionState.Playing;
+        _sessionState = showBriefing ? SessionState.Briefing : SessionState.Playing;
         _sessionElapsed = 0f;
         _bellResponseTriggered = false;
         _bellResponseRemaining = 0f;
+    }
+
+    private void BeginBriefedSession()
+    {
+        if (!IsSessionBriefing)
+            return;
+
+        _sessionState = SessionState.Playing;
+        _combatRhythmBridge?.SetPrototypePaused(false);
+        QueueRedraw();
     }
 
     private void UpdateSession(float delta)

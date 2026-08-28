@@ -19,6 +19,7 @@ A influência de rhythm games entra no loop de domínio e replay, não em copiar
 
 A base atual tem um **combat toy jogável** em Godot/C# para testar o núcleo antes de investir em arte final:
 
+- briefing inicial que apresenta objetivo e controles antes de liberar o inimigo e o Pulso;
 - movimento livre e esquiva;
 - **Clamor**, arma alternável entre Bastão/Repouso, Lâmina dupla e Dois bastões;
 - mão de 4 cartas usada em tempo real;
@@ -70,6 +71,8 @@ Quando a Cadência chega a **RÉQUIEM**, Noah entra por alguns segundos num esta
 | clique esquerdo | usar a carta clicada |
 | `Esc` / `Start` | pausar ou retomar |
 | `R` / `Back` | reiniciar a arena |
+
+Na primeira abertura, `Enter`, `A` ou um clique inicia a Prova após o briefing. Os reinícios seguintes voltam diretamente ao combate.
 
 ## Código
 
