@@ -41,6 +41,7 @@ A foundation de Echo Trials adiciona:
 - primeiro chart de 32 segundos (`Primeiro Eco de Vesper`);
 - cena de debug independente para visualizar beat/phase/eventos sem depender de áudio;
 - editor visual local em `tools/echo_editor/index.html` para importar, editar e exportar beatmaps;
+- Cast Board local em `tools/cast_board/index.html` para comparar cor, silhueta e leitura em 64 px antes de aprovar personagens;
 - `beatmap_seed.py` para gerar uma grade inicial;
 - `beatmap_lint.py` rodando no CI.
 
@@ -137,6 +138,7 @@ python tools/beatmap_seed.py --bpm 120 --duration 60 --out assets/beatmaps/test.
 - [`docs/COMBAT_SPEC.md`](docs/COMBAT_SPEC.md) — regras do toy;
 - [`docs/STORY.md`](docs/STORY.md) — narrativa;
 - [`docs/ART_BIBLE.md`](docs/ART_BIBLE.md) — direção visual;
+- [`docs/CAST_VISUAL_SYSTEM.md`](docs/CAST_VISUAL_SYSTEM.md) — gramática compartilhada e gates do elenco;
 - [`docs/AUDIO_DIRECTION.md`](docs/AUDIO_DIRECTION.md) — Pulso e música adaptativa.
 
 ## Status

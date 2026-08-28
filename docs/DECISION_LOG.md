@@ -307,3 +307,11 @@ The card named **Agulha** remains a combat action; it is not the weapon's identi
 This first integration deliberately changes no damage, range or cooldown. Mechanical differences need build validation and playtest evidence before entering combat balance.
 
 The shift itself receives a short procedural response around Noah's hands: one spectral arc, a restrained gold junction and a connecting line. It is feedback for state change rather than an attack effect, and the HUD position follows viewport width instead of relying on one fixed desktop coordinate.
+
+## 2026-08-28 — Visual cast exploration is separated from campaign presence
+
+Character concepts inspired by people close to the creator may be developed as part of Réquiem's visual world without automatically becoming NPCs in the campaign. The solitude rule remains active until story structure is deliberately revised.
+
+Noah and Anna become the first visual benchmarks. Noah keeps his dark face and ivory eyes; masked supporting-cast studies use light masks with black eye fields, allowing a restrained personal-color reflection. Shared compact proportions, species readability and functional accessories create family resemblance without copying Noah's face or costume.
+
+The local Cast Board tests color, filled silhouette and unchanged 64 px reduction. Other characters enter the board only after their species and two or three signature anchors are actually approved.

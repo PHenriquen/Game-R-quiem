@@ -67,6 +67,8 @@ For every final asset family keep:
 - gameplay readability requirement;
 - provenance/license note.
 
+Character studies pass through `tools/cast_board/` before final sprite production. The board checks full color, filled silhouette and an unedited 64 px reduction. It is a comparison tool, not an automatic approval system.
+
 ## What the assistant can accelerate
 
 - C# systems and refactors;
