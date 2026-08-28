@@ -55,11 +55,14 @@ Essa inversão aproxima o elenco de Noah por contraste e linguagem gráfica, sem
 ### Anna — estudo visual aprovado
 
 - família: felina, comunicada pela máscara e pelo gesto, não por anatomia realista;
-- silhueta: máscara de gato clara dentro de uma massa ondulada castanho-clara;
+- silhueta: máscara de gato clara e angular dentro de uma massa ondulada castanho-clara;
 - rosto: campos pretos com um reflexo verde controlado;
 - acentos: verde profundo e um detalhe carmesim central;
 - motivo secundário: caudas sutis, agrupadas como uma única massa quando a escala diminui;
 - personalidade visual: acolhedora e segura, sem perder presença própria.
+- limite: nenhum colar, pingente ou símbolo adicional; a máscara, o cabelo e as caudas já sustentam a leitura.
+
+Os cortes ascendentes e as bochechas marcadas dão à máscara presença teatral. Essa é uma regra abstrata de expressão e contraste: o contorno e o símbolo central permanecem originais de Réquiem.
 
 Anna é um benchmark de design, não uma confirmação automática de papel, parentesco ou tempo de tela na campanha.
 

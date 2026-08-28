@@ -331,3 +331,9 @@ Retries skip this screen and return directly to play. Reset now also clears the 
 ## 2026-08-28 — Playable-loop contracts receive an executable guard
 
 Input, pause, briefing and synchronized reset depend on ordering across partial classes and the rhythm bridge. A small Python linter now verifies these boundaries before the C# restore/build step. It intentionally checks only high-risk invariants and remains explicit that source validation is not a Godot playtest.
+
+## 2026-08-28 — Anna's mask carries the expression without a pendant
+
+Anna's Cast Board blockout now uses an original angular feline mask with rising black eye fields, sharper cheeks and a restrained crimson center. The theatrical contrast comes from broad visual principles rather than reproducing any referenced character's exact mask or symbol.
+
+The former collar line is removed. Hair mass, mask and grouped tails already provide three readable anchors, so an extra pendant would dilute the hierarchy instead of adding personality.
