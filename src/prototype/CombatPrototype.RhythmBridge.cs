@@ -54,8 +54,17 @@ public partial class CombatRhythmBridge : Node2D
         _owner = owner;
     }
 
+    public void SetPrototypePaused(bool paused)
+    {
+        SetProcess(!paused);
+        _clock?.SetProcess(!paused);
+        _director?.SetProcess(!paused);
+    }
+
     public override void _Ready()
     {
+        PrototypeInput.EnsureDefaultBindings();
+
         if (_owner is null)
         {
             GD.PushError("CombatRhythmBridge entered the tree without a CombatPrototype owner.");
@@ -120,19 +129,20 @@ public partial class CombatRhythmBridge : Node2D
         if (_clock is null)
             return;
 
-        if (@event is InputEventKey key && key.Pressed && !key.Echo)
+        for (int i = 0; i < PrototypeInput.CardActions.Length; i++)
         {
-            Key physical = key.PhysicalKeycode;
-            if (physical is (Key)49 or (Key)50 or (Key)51 or (Key)52)
-            {
-                _pendingActionTime = _clock.JudgementTimeSeconds;
-                _capturePending = true;
-            }
+            if (!@event.IsActionPressed(PrototypeInput.CardActions[i], false))
+                continue;
 
-            if (physical == (Key)82) // R
-                _restartPending = true;
+            _pendingActionTime = _clock.JudgementTimeSeconds;
+            _capturePending = true;
+            break;
         }
-        else if (@event is InputEventMouseButton mouse && mouse.Pressed && mouse.ButtonIndex == MouseButton.Left)
+
+        if (@event.IsActionPressed(PrototypeInput.Restart, false))
+            _restartPending = true;
+
+        if (@event is InputEventMouseButton mouse && mouse.Pressed && mouse.ButtonIndex == MouseButton.Left)
         {
             _pendingActionTime = _clock.JudgementTimeSeconds;
             _capturePending = true;

@@ -25,6 +25,7 @@ public partial class CombatPrototype
         DrawEffects();
         DrawHud();
         DrawSessionOverlay();
+        DrawPauseOverlay();
     }
 
     private void DrawBackground()
@@ -319,7 +320,7 @@ public partial class CombatPrototype
         Vector2 size = GetViewportRect().Size;
 
         DrawString(_font, new Vector2(28f, 30f), "RÉQUIEM // NAVE SILENCIOSA — PROTÓTIPO V2", HorizontalAlignment.Left, -1f, 18, Ivory.Darkened(0.12f));
-        DrawString(_font, new Vector2(28f, 54f), "WASD mover  ·  ESPAÇO esquiva  ·  Q Clamor  ·  1–4 cartas  ·  clique nas cartas  ·  R reiniciar", HorizontalAlignment.Left, -1f, 14, Ivory.Darkened(0.42f));
+        DrawString(_font, new Vector2(28f, 54f), "WASD/analógico mover  ·  ESPAÇO/A esquiva  ·  Q/LB Clamor  ·  1–4/D-pad cartas  ·  ESC/START pausa", HorizontalAlignment.Left, -1f, 14, Ivory.Darkened(0.42f));
 
         Rect2 healthBack = new(28f, 76f, 210f, 12f);
         DrawRect(healthBack, Night.Lightened(0.11f));
@@ -400,6 +401,25 @@ public partial class CombatPrototype
         string discovery = _bellResponseTriggered ? "ECO DO SINO  ENCONTRADO" : "ECO DO SINO  OCULTO";
         DrawString(_font, panel.Position + new Vector2(30f, 198f), discovery, HorizontalAlignment.Left, panel.Size.X - 60f, 14, _bellResponseTriggered ? Gold : Ivory.Darkened(0.48f));
         DrawString(_font, panel.Position + new Vector2(30f, 238f), "R  REINICIAR A PROVA", HorizontalAlignment.Left, panel.Size.X - 60f, 16, Gold);
+    }
+
+    private void DrawPauseOverlay()
+    {
+        if (!_prototypePaused)
+            return;
+
+        Vector2 size = GetViewportRect().Size;
+        DrawRect(new Rect2(Vector2.Zero, size), new Color(0.01f, 0.015f, 0.025f, 0.82f));
+
+        Rect2 panel = new(size * 0.5f - new Vector2(245f, 102f), new Vector2(490f, 204f));
+        DrawRect(panel, new Color(0.025f, 0.03f, 0.05f, 0.98f));
+        DrawRect(panel, Spectral.Darkened(0.18f), false, 2f);
+        DrawRect(new Rect2(panel.Position, new Vector2(6f, panel.Size.Y)), Spectral);
+
+        DrawString(_font, panel.Position + new Vector2(30f, 48f), "PROVA SUSPENSA", HorizontalAlignment.Left, panel.Size.X - 60f, 24, Ivory);
+        DrawString(_font, panel.Position + new Vector2(30f, 82f), "O Pulso, o Peregrino e o cronômetro aguardam.", HorizontalAlignment.Left, panel.Size.X - 60f, 14, Ivory.Darkened(0.32f));
+        DrawString(_font, panel.Position + new Vector2(30f, 126f), "ESC / START   RETOMAR", HorizontalAlignment.Left, panel.Size.X - 60f, 16, Spectral);
+        DrawString(_font, panel.Position + new Vector2(30f, 164f), "R / BACK      REINICIAR A PROVA", HorizontalAlignment.Left, panel.Size.X - 60f, 14, Gold);
     }
 
     private void DrawCardSlot(int index)

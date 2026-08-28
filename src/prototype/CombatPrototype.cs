@@ -142,6 +142,7 @@ public partial class CombatPrototype : Node2D
     private int _goodActions;
     private int _perfectActions;
     private Rect2 _arena;
+    private bool _prototypePaused;
 
     private const float PlayerSpeed = 245f;
     private const float BeatPeriod = 0.60f; // 100 BPM
@@ -151,12 +152,19 @@ public partial class CombatPrototype : Node2D
 
     public override void _Ready()
     {
+        PrototypeInput.EnsureDefaultBindings();
         ResetArena();
-        GD.Print("Réquiem combat prototype ready: WASD, Espaço, Q, 1-4, R.");
+        GD.Print("Réquiem combat prototype ready: teclado, mouse ou gamepad.");
     }
 
     public override void _Process(double delta)
     {
+        if (_prototypePaused)
+        {
+            QueueRedraw();
+            return;
+        }
+
         float dt = (float)delta;
         _elapsed += dt;
 
@@ -188,18 +196,36 @@ public partial class CombatPrototype : Node2D
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventKey key && key.Pressed && !key.Echo)
+        if (@event.IsActionPressed(PrototypeInput.Pause, false))
         {
-            Key physical = key.PhysicalKeycode;
-
-            if (physical == (Key)49) TryPlayCard(0); // 1
-            if (physical == (Key)50) TryPlayCard(1); // 2
-            if (physical == (Key)51) TryPlayCard(2); // 3
-            if (physical == (Key)52) TryPlayCard(3); // 4
-            if (physical == (Key)32) TryDash();      // Space
-            if (physical == (Key)81) CycleClamor();  // Q
-            if (physical == (Key)82) ResetArena();   // R
+            TogglePrototypePause();
+            GetViewport().SetInputAsHandled();
+            return;
         }
+
+        if (@event.IsActionPressed(PrototypeInput.Restart, false))
+        {
+            ResetArena();
+            return;
+        }
+
+        if (_prototypePaused)
+            return;
+
+        for (int i = 0; i < PrototypeInput.CardActions.Length; i++)
+        {
+            if (!@event.IsActionPressed(PrototypeInput.CardActions[i], false))
+                continue;
+
+            TryPlayCard(i);
+            return;
+        }
+
+        if (@event.IsActionPressed(PrototypeInput.Dash, false))
+            TryDash();
+
+        if (@event.IsActionPressed(PrototypeInput.ShiftClamor, false))
+            CycleClamor();
 
         if (@event is not InputEventMouseButton mouse || !mouse.Pressed || mouse.ButtonIndex != MouseButton.Left)
             return;
@@ -232,6 +258,8 @@ public partial class CombatPrototype : Node2D
         _playerReaction = 0f;
         _clamorForm = ClamorForm.Rest;
         _clamorShiftDisplay = 0f;
+        _prototypePaused = false;
+        _combatRhythmBridge?.SetPrototypePaused(false);
         _kills = 0;
         _actions = 0;
         _goodActions = 0;
@@ -248,6 +276,16 @@ public partial class CombatPrototype : Node2D
             _drawTimers[i] = 0f;
         }
 
+        QueueRedraw();
+    }
+
+    private void TogglePrototypePause()
+    {
+        if (!IsSessionRunning)
+            return;
+
+        _prototypePaused = !_prototypePaused;
+        _combatRhythmBridge?.SetPrototypePaused(_prototypePaused);
         QueueRedraw();
     }
 
@@ -341,11 +379,11 @@ public partial class CombatPrototype : Node2D
 
     private void UpdatePlayer(float dt)
     {
-        Vector2 input = Vector2.Zero;
-        if (Input.IsPhysicalKeyPressed((Key)87)) input.Y -= 1f; // W
-        if (Input.IsPhysicalKeyPressed((Key)83)) input.Y += 1f; // S
-        if (Input.IsPhysicalKeyPressed((Key)65)) input.X -= 1f; // A
-        if (Input.IsPhysicalKeyPressed((Key)68)) input.X += 1f; // D
+        Vector2 input = Input.GetVector(
+            PrototypeInput.MoveLeft,
+            PrototypeInput.MoveRight,
+            PrototypeInput.MoveUp,
+            PrototypeInput.MoveDown);
 
         if (input.LengthSquared() > 0.01f)
         {

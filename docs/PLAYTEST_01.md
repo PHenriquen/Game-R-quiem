@@ -11,11 +11,15 @@
 
 Controles atuais:
 
-- `WASD` — mover;
-- `Espaço` — esquiva universal;
-- `1–4` — usar carta;
+- `WASD` / setas / analógico esquerdo — mover;
+- `Espaço` / botão sul (`A`) — esquiva universal;
+- `Q` / `LB` — alternar a forma de Clamor;
+- `1–4` / direcional digital — usar carta;
 - clique — usar carta;
-- `R` — reiniciar arena.
+- `Esc` / `Start` — pausar e retomar;
+- `R` / `Back` — reiniciar arena.
+
+A pausa precisa congelar cronômetro, Pulso, inimigo, cartas e efeitos transitórios. Reiniciar a partir da pausa deve começar uma tentativa limpa e já retomada.
 
 ## Passo 0 — Compilação
 

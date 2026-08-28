@@ -63,12 +63,13 @@ Quando a Cadência chega a **RÉQUIEM**, Noah entra por alguns segundos num esta
 
 | Tecla | Ação |
 |---|---|
-| `WASD` | mover |
-| `Space` | esquivar |
-| `Q` | alternar a forma de Clamor |
-| `1–4` | usar uma carta |
+| `WASD` / setas / analógico esquerdo | mover |
+| `Space` / `A` | esquivar |
+| `Q` / `LB` | alternar a forma de Clamor |
+| `1–4` / direcional digital | usar uma carta |
 | clique esquerdo | usar a carta clicada |
-| `R` | reiniciar a arena |
+| `Esc` / `Start` | pausar ou retomar |
+| `R` / `Back` | reiniciar a arena |
 
 ## Código
 
@@ -76,6 +77,7 @@ Toy atual:
 
 - [`src/prototype/CombatPrototype.cs`](src/prototype/CombatPrototype.cs)
 - [`src/prototype/CombatPrototype.Draw.cs`](src/prototype/CombatPrototype.Draw.cs)
+- [`src/prototype/PrototypeInput.cs`](src/prototype/PrototypeInput.cs)
 - [`src/prototype/CombatPrototype.tscn`](src/prototype/CombatPrototype.tscn)
 - [`src/audio/PulseClock.cs`](src/audio/PulseClock.cs)
 

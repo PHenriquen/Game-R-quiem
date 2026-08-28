@@ -315,3 +315,9 @@ Character concepts inspired by people close to the creator may be developed as p
 Noah and Anna become the first visual benchmarks. Noah keeps his dark face and ivory eyes; masked supporting-cast studies use light masks with black eye fields, allowing a restrained personal-color reflection. Shared compact proportions, species readability and functional accessories create family resemblance without copying Noah's face or costume.
 
 The local Cast Board tests color, filled silhouette and unchanged 64 px reduction. Other characters enter the board only after their species and two or three signature anchors are actually approved.
+
+## 2026-08-28 — Prototype input is action-based and pause freezes the run
+
+The combat toy no longer owns raw physical-key checks. A small input boundary registers keyboard and gamepad defaults while allowing later project-level remapping to replace them. Keyboard, mouse and controller paths now feed the same actions and rhythm capture.
+
+Pause is local to the prototype rather than the whole SceneTree. It freezes the trial timer, current fallback Pulse clock, enemy, cards and transient effects without stopping unrelated nodes globally. Restart remains available while paused and begins a clean, resumed attempt. When authored music enters the scene, its player must join this boundary explicitly instead of relying on SceneTree pause.
