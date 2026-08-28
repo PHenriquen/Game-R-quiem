@@ -26,7 +26,7 @@ A base atual tem um **combat toy jogável** em Godot/C# para testar o núcleo an
 - Pulso e Cadência de D até RÉQUIEM;
 - inimigo simples com ataque telegrafado;
 - Prova do Primeiro Eco com objetivo de três confrontos, vitória, derrota, resumo e reinício;
-- primeiro segredo opcional: depois do primeiro confronto, o sino de Noah indica uma resposta escondida junto à porta e registra a descoberta no resultado;
+- primeiro segredo opcional: depois do primeiro confronto, o sino de Noah indica uma resposta junto à porta, revela um micro-Eco visual e registra a descoberta no resultado;
 - arena e efeitos provisórios desenhados por código;
 - relógio musical com compensação de latência.
 

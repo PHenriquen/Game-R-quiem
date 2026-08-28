@@ -270,3 +270,14 @@ The environmental response near the cathedral door now has a complete prototype 
 - winning without investigating preserves the discovery as replay motivation instead of falsely claiming it happened.
 
 This remains a visual blockout. It does not claim final audio, art or permanent campaign save behavior.
+
+## 2026-08-28 — Bell discovery gains a five-second micro-Echo
+
+The response now unfolds as a short environmental memory instead of stopping at a notification:
+
+1. an aged-gold wave answers Noah's collar bell;
+2. two incomplete presences appear only as reflections in the water;
+3. three pulses resolve while a fourth remains absent;
+4. the phrase **UM PULSO FALTA** closes the sequence.
+
+The second presence is intentionally unreadable: no face, name, costume or relationship is fixed by this blockout. The sequence strengthens the existing mystery without replacing the longer authored Eco planned for the Catedral Afogada.

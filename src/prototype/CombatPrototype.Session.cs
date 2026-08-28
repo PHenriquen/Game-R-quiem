@@ -13,6 +13,7 @@ public partial class CombatPrototype
     }
 
     private const int TargetKills = 3;
+    private const float BellEchoDuration = 5.2f;
 
     private SessionState _sessionState = SessionState.Playing;
     private float _sessionElapsed;
@@ -41,7 +42,7 @@ public partial class CombatPrototype
         if (_kills > 0 && !_bellResponseTriggered && _playerPosition.DistanceTo(responsePoint) <= 74f)
         {
             _bellResponseTriggered = true;
-            _bellResponseRemaining = 2.4f;
+            _bellResponseRemaining = BellEchoDuration;
         }
     }
 

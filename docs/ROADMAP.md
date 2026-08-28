@@ -66,7 +66,7 @@ O roadmap prova a sensação do jogo antes de aumentar conteúdo.
 - [ ] Peregrino Oco final do slice
 - [ ] Cantor Partido
 - [x] primeiro segredo mecânico provisório com pista e resultado
-- [ ] primeiro micro-Eco
+- [x] primeiro micro-Eco visual provisório
 
 **Saída:** uma sala já transmite exploração, combate e mistério de Réquiem.
 

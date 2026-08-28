@@ -61,15 +61,50 @@ public partial class CombatPrototype
         }
 
         if (_bellResponseRemaining > 0f)
+            DrawBellMicroEcho();
+    }
+
+    private void DrawBellMicroEcho()
+    {
+        float progress = 1f - _bellResponseRemaining / BellEchoDuration;
+        Vector2 point = GetBellResponsePoint();
+
+        if (progress < 0.34f)
         {
-            float progress = 1f - _bellResponseRemaining / 2.4f;
-            Vector2 responsePoint = GetBellResponsePoint();
-            float radius = 18f + progress * 42f;
-            float alpha = 0.82f * (1f - progress);
+            float phase = progress / 0.34f;
+            float radius = 18f + phase * 42f;
+            float alpha = 0.86f * (1f - phase);
             Color response = new(Gold.R, Gold.G, Gold.B, alpha);
-            DrawArc(responsePoint, radius, -Mathf.Pi * 0.86f, -Mathf.Pi * 0.14f, 32, response, 2.4f);
-            DrawArc(responsePoint, radius + 11f, -Mathf.Pi * 0.78f, -Mathf.Pi * 0.22f, 28, response.Darkened(0.16f), 1.4f);
-            DrawString(_font, responsePoint + new Vector2(-74f, 34f), "O SINO RESPONDE", HorizontalAlignment.Center, 148f, 12, Gold);
+            DrawArc(point, radius, -Mathf.Pi * 0.86f, -Mathf.Pi * 0.14f, 32, response, 2.4f);
+            DrawArc(point, radius + 11f, -Mathf.Pi * 0.78f, -Mathf.Pi * 0.22f, 28, response.Darkened(0.16f), 1.4f);
+            DrawString(_font, point + new Vector2(-74f, 34f), "O SINO RESPONDE", HorizontalAlignment.Center, 148f, 12, Gold);
+        }
+
+        if (progress >= 0.20f && progress < 0.78f)
+        {
+            float phase = (progress - 0.20f) / 0.58f;
+            float alpha = MathF.Sin(phase * MathF.PI) * 0.64f;
+            Color memory = new(Spectral.R, Spectral.G, Spectral.B, alpha);
+            Vector2 waterLine = point + new Vector2(0f, 24f);
+
+            DrawLine(waterLine + new Vector2(-19f, 0f), waterLine + new Vector2(-15f, 34f), memory, 5f);
+            DrawCircle(waterLine + new Vector2(-19f, -7f), 6f, memory);
+            DrawLine(waterLine + new Vector2(19f, 4f), waterLine + new Vector2(22f, 28f), memory.Darkened(0.26f), 4f);
+            DrawArc(waterLine + new Vector2(19f, -3f), 5f, 0.2f, Mathf.Pi * 1.7f, 14, memory.Darkened(0.26f), 2f);
+            DrawLine(waterLine + new Vector2(-36f, 42f), waterLine + new Vector2(39f, 42f), memory.Darkened(0.38f), 1.2f);
+        }
+
+        if (progress >= 0.62f)
+        {
+            float phase = (progress - 0.62f) / 0.38f;
+            float alpha = MathF.Sin(Mathf.Clamp(phase, 0f, 1f) * MathF.PI) * 0.86f;
+            Color memoryGold = new(Gold.R, Gold.G, Gold.B, alpha);
+            Vector2 sequence = point + new Vector2(-30f, 58f);
+            DrawCircle(sequence, 3f, memoryGold);
+            DrawCircle(sequence + new Vector2(20f, 0f), 3f, memoryGold);
+            DrawCircle(sequence + new Vector2(40f, 0f), 3f, memoryGold);
+            DrawArc(sequence + new Vector2(60f, 0f), 4f, 0f, Mathf.Tau, 16, memoryGold.Darkened(0.62f), 1.2f);
+            DrawString(_font, point + new Vector2(-68f, 84f), "UM PULSO FALTA", HorizontalAlignment.Center, 136f, 11, memoryGold);
         }
     }
 
