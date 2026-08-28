@@ -49,7 +49,16 @@ public partial class CombatPrototype
 
         Rect2 door = new(_arena.GetCenter().X - 44f, _arena.Position.Y + 8f, 88f, 58f);
         DrawRect(door, Night.Lightened(0.02f));
-        DrawArc(new Vector2(door.GetCenter().X, door.Position.Y + 26f), 20f, Mathf.Pi, Mathf.Tau, 20, Ivory.Darkened(0.58f), 2f);
+        Color doorAccent = _bellResponseTriggered ? Gold : Ivory.Darkened(0.58f);
+        DrawRect(door, doorAccent.Darkened(0.28f), false, _bellResponseTriggered ? 2.4f : 1.4f);
+        DrawArc(new Vector2(door.GetCenter().X, door.Position.Y + 26f), 20f, Mathf.Pi, Mathf.Tau, 20, doorAccent, 2f);
+
+        if (_bellResponseTriggered)
+        {
+            Vector2 memoryMark = new(door.GetCenter().X, door.End.Y - 10f);
+            DrawCircle(memoryMark, 3.5f, Gold);
+            DrawArc(memoryMark, 8f, 0f, Mathf.Tau, 20, Gold.Darkened(0.24f), 1.2f);
+        }
 
         if (_bellResponseRemaining > 0f)
         {
@@ -241,6 +250,15 @@ public partial class CombatPrototype
         string accuracy = _actions == 0 ? "—" : $"{MathF.Round((_goodActions + _perfectActions) * 100f / _actions)}%";
         DrawString(_font, new Vector2(size.X - 325f, 32f), $"PROVA {_kills}/{TargetKills}   //   NO PULSO {accuracy}", HorizontalAlignment.Left, 300f, 14, Ivory.Darkened(0.28f));
 
+        if (_bellResponseTriggered)
+        {
+            DrawString(_font, new Vector2(size.X - 356f, 116f), "ECO DO SINO  //  ENCONTRADO", HorizontalAlignment.Right, 328f, 13, Gold);
+        }
+        else if (_kills > 0)
+        {
+            DrawString(_font, new Vector2(size.X - 356f, 116f), "PISTA  //  O SINO VIBRA PERTO DA PORTA", HorizontalAlignment.Right, 328f, 13, Gold.Darkened(0.12f));
+        }
+
         if (_gradeDisplay > 0f)
         {
             string grade = _lastGrade switch
@@ -265,7 +283,7 @@ public partial class CombatPrototype
         Vector2 size = GetViewportRect().Size;
         DrawRect(new Rect2(Vector2.Zero, size), new Color(0.01f, 0.015f, 0.025f, 0.76f));
 
-        Rect2 panel = new(size * 0.5f - new Vector2(275f, 118f), new Vector2(550f, 236f));
+        Rect2 panel = new(size * 0.5f - new Vector2(275f, 132f), new Vector2(550f, 264f));
         Color accent = _sessionState == SessionState.Victory ? Spectral : Crimson;
         DrawRect(panel, new Color(0.025f, 0.03f, 0.05f, 0.98f));
         DrawRect(panel, accent.Darkened(0.15f), false, 2f);
@@ -275,7 +293,9 @@ public partial class CombatPrototype
             ? "O PRIMEIRO ECO RESPONDEU"
             : "A NAVE VOLTOU AO SILÊNCIO";
         string subtitle = _sessionState == SessionState.Victory
-            ? "Três Peregrinos cederam. A porta da Catedral reconhece o fragmento."
+            ? (_bellResponseTriggered
+                ? "Três Peregrinos cederam. A porta da Catedral reconhece o fragmento."
+                : "Três Peregrinos cederam, mas um eco continua oculto junto à porta.")
             : "O fragmento ainda pulsa. Recomece e leia os sinais do Peregrino.";
 
         float pulseAccuracy = _actions == 0 ? 0f : (_goodActions + _perfectActions) * 100f / _actions;
@@ -283,7 +303,9 @@ public partial class CombatPrototype
         DrawString(_font, panel.Position + new Vector2(30f, 82f), subtitle, HorizontalAlignment.Left, panel.Size.X - 60f, 14, Ivory.Darkened(0.32f));
         DrawString(_font, panel.Position + new Vector2(30f, 124f), $"TEMPO {FormatSessionTime()}   ·   PULSO {pulseAccuracy:0}%   ·   PERFEITOS {_perfectActions}", HorizontalAlignment.Left, panel.Size.X - 60f, 15, accent);
         DrawString(_font, panel.Position + new Vector2(30f, 164f), $"CADÊNCIA FINAL {GetCadenceRank()}   ·   AÇÕES {_actions}", HorizontalAlignment.Left, panel.Size.X - 60f, 14, Ivory.Darkened(0.18f));
-        DrawString(_font, panel.Position + new Vector2(30f, 207f), "R  REINICIAR A PROVA", HorizontalAlignment.Left, panel.Size.X - 60f, 16, Gold);
+        string discovery = _bellResponseTriggered ? "ECO DO SINO  ENCONTRADO" : "ECO DO SINO  OCULTO";
+        DrawString(_font, panel.Position + new Vector2(30f, 198f), discovery, HorizontalAlignment.Left, panel.Size.X - 60f, 14, _bellResponseTriggered ? Gold : Ivory.Darkened(0.48f));
+        DrawString(_font, panel.Position + new Vector2(30f, 238f), "R  REINICIAR A PROVA", HorizontalAlignment.Left, panel.Size.X - 60f, 16, Gold);
     }
 
     private void DrawCardSlot(int index)

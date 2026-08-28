@@ -258,3 +258,15 @@ Eye acting is no longer documentation-only. The combat prototype now distinguish
 - calm symmetry during RÉQUIEM.
 
 These reactions use existing gameplay state, add no new controls and preserve combat readability.
+
+## 2026-08-28 — The first bell response becomes an optional discovery
+
+The environmental response near the cathedral door now has a complete prototype loop:
+
+- after the first Peregrino, the HUD gives a short diegetic hint through Noah's collar bell;
+- approaching the door triggers the response once;
+- the door keeps a quiet aged-gold memory mark for the rest of the attempt;
+- the result panel distinguishes **found** from **hidden**;
+- winning without investigating preserves the discovery as replay motivation instead of falsely claiming it happened.
+
+This remains a visual blockout. It does not claim final audio, art or permanent campaign save behavior.

@@ -61,11 +61,11 @@ O roadmap prova a sensação do jogo antes de aumentar conteúdo.
 - [ ] blockout autoral da sala
 - [ ] tiles temporários ou CC0 documentados
 - [ ] água / reflexos provisórios
-- [ ] sino interativo
-- [ ] porta/foco visual
+- [x] sino responsivo provisório integrado à porta
+- [x] porta/foco visual no blockout procedural
 - [ ] Peregrino Oco final do slice
 - [ ] Cantor Partido
-- [ ] primeiro segredo mecânico
+- [x] primeiro segredo mecânico provisório com pista e resultado
 - [ ] primeiro micro-Eco
 
 **Saída:** uma sala já transmite exploração, combate e mistério de Réquiem.
