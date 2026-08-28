@@ -150,9 +150,7 @@ public partial class CombatPrototype
         float pulse = 2.8f + (MathF.Sin(_elapsed * 6f) + 1f) * 0.55f;
         DrawCircle(_playerPosition + forward * 1f, pulse, requiem ? Ivory : Spectral.Darkened(0.08f));
 
-        Vector2 bladeStart = rightHand + forward * 2f;
-        Vector2 bladeEnd = rightHand + forward * 38f;
-        DrawLine(bladeStart, bladeEnd, requiem ? Ivory : Spectral, 3f);
+        DrawClamor(forward, side, leftHand, rightHand, requiem);
 
         if (requiem)
         {
@@ -161,6 +159,41 @@ public partial class CombatPrototype
         }
 
         DrawPulseIndicator();
+    }
+
+    private void DrawClamor(Vector2 forward, Vector2 side, Vector2 leftHand, Vector2 rightHand, bool requiem)
+    {
+        Color core = Night.Lightened(0.20f);
+        Color edge = requiem ? Ivory : Spectral;
+
+        switch (_clamorForm)
+        {
+            case ClamorForm.Rest:
+            {
+                Vector2 center = rightHand + forward * 2f;
+                DrawLine(center - forward * 25f, center + forward * 42f, core, 5f);
+                DrawLine(center - forward * 24f, center + forward * 41f, edge.Darkened(0.18f), 1.6f);
+                DrawCircle(center + forward * 43f, 2.4f, Gold);
+                break;
+            }
+            case ClamorForm.DoubleBlade:
+            {
+                Vector2 center = rightHand + forward * 3f;
+                DrawLine(center - forward * 11f, center + forward * 11f, core, 5.5f);
+                DrawLine(center + forward * 10f, center + forward * 39f, edge, 3f);
+                DrawLine(center - forward * 10f, center - forward * 34f, edge.Darkened(0.12f), 3f);
+                DrawCircle(center, 2.2f, Gold.Darkened(0.10f));
+                break;
+            }
+            default:
+            {
+                DrawLine(leftHand - forward * 8f, leftHand + forward * 21f + side * 2f, core, 5f);
+                DrawLine(rightHand - forward * 8f, rightHand + forward * 21f - side * 2f, core, 5f);
+                DrawLine(leftHand - forward * 7f, leftHand + forward * 20f + side * 2f, edge, 1.5f);
+                DrawLine(rightHand - forward * 7f, rightHand + forward * 20f - side * 2f, edge.Darkened(0.10f), 1.5f);
+                break;
+            }
+        }
     }
 
     private void DrawNoahHair(Vector2 forward, Vector2 side)
@@ -269,7 +302,7 @@ public partial class CombatPrototype
         Vector2 size = GetViewportRect().Size;
 
         DrawString(_font, new Vector2(28f, 30f), "RÉQUIEM // NAVE SILENCIOSA — PROTÓTIPO V2", HorizontalAlignment.Left, -1f, 18, Ivory.Darkened(0.12f));
-        DrawString(_font, new Vector2(28f, 54f), "WASD mover  ·  ESPAÇO esquiva  ·  1–4 cartas  ·  clique nas cartas  ·  R reiniciar", HorizontalAlignment.Left, -1f, 14, Ivory.Darkened(0.42f));
+        DrawString(_font, new Vector2(28f, 54f), "WASD mover  ·  ESPAÇO esquiva  ·  Q Clamor  ·  1–4 cartas  ·  clique nas cartas  ·  R reiniciar", HorizontalAlignment.Left, -1f, 14, Ivory.Darkened(0.42f));
 
         Rect2 healthBack = new(28f, 76f, 210f, 12f);
         DrawRect(healthBack, Night.Lightened(0.11f));
@@ -284,6 +317,10 @@ public partial class CombatPrototype
 
         string accuracy = _actions == 0 ? "—" : $"{MathF.Round((_goodActions + _perfectActions) * 100f / _actions)}%";
         DrawString(_font, new Vector2(size.X - 325f, 32f), $"PROVA {_kills}/{TargetKills}   //   NO PULSO {accuracy}", HorizontalAlignment.Left, 300f, 14, Ivory.Darkened(0.28f));
+
+        Color clamorColor = _clamorShiftDisplay > 0f ? Gold : Spectral.Darkened(0.08f);
+        DrawString(_font, new Vector2(590f, 88f), $"CLAMOR  //  {GetClamorFormName()}", HorizontalAlignment.Left, 310f, 13, clamorColor);
+        DrawString(_font, new Vector2(590f, 108f), GetClamorFormRole(), HorizontalAlignment.Left, 250f, 12, Ivory.Darkened(0.46f));
 
         if (IsBellMicroEchoActive)
         {

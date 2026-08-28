@@ -14,10 +14,13 @@ Sem arte final, progressão ou narrativa obrigatória.
 
 - `WASD` / setas: mover Noah;
 - `Espaço`: Passo (evasão universal);
+- `Q`: alternar Clamor entre Bastão/Repouso, Lâmina dupla e Dois bastões;
 - `1–4`: usar a carta do respectivo espaço da mão;
 - `R`: reiniciar arena.
 
 A evasão fica fora do baralho para impedir situações em que uma mão ruim torne dano inevitável.
+
+Clamor também fica fora do baralho: a forma é uma escolha persistente de postura, enquanto as cartas continuam sendo ações imediatas. Nesta primeira integração, a troca é visual e informativa; nenhum valor abaixo muda por forma antes do playtest.
 
 ## 2. Mão e baralho
 

@@ -22,10 +22,10 @@ This file exists so technical experimentation cannot quietly rewrite the identit
 - **crimson scarf** as the strongest warm identifying accent;
 - small aged-gold bell at the collar;
 - spectral-blue Heart fragment kept visually quiet outside high Cadência;
-- narrow spectral blade;
+- **Clamor**, with three related forms: Bastão/Repouso, Lâmina dupla and Dois bastões;
 - effects stay controlled until combat earns visual intensity.
 
-The silhouette must work with six anchors: hair mass, eyes, mantle, scarf, bell and blade. Extra symbols, armor plates and surface decoration are rejected unless they replace an anchor rather than join the pile.
+The silhouette must work with six anchors: hair mass, eyes, mantle, scarf, bell and Clamor. Extra symbols, armor plates and surface decoration are rejected unless they replace an anchor rather than join the pile.
 
 ## Emotional pillars
 

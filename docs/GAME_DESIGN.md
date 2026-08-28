@@ -42,7 +42,7 @@ O personagem deve parecer pequeno diante da arquitetura, mas nunca pequeno demai
 - detalhe carmesim controlado;
 - pequeno sino dourado;
 - fragmento azul-espectral próximo ao coração;
-- arma fina: **Agulha de Vesper**.
+- arma modular: **Clamor**, legível em três formas.
 
 Silhueta antes de detalhe. Evitar excesso de acessórios.
 
@@ -79,6 +79,7 @@ A inspiração estrutural é a combinação de ação livre com seleção rápid
 
 - mover: WASD / analógico;
 - evasão: botão direto;
+- Clamor: alternar forma por botão direto;
 - cartas: quatro slots/botões;
 - pausa e reorganização apenas fora da pressão imediata.
 
@@ -110,6 +111,16 @@ A pergunta durante a luta deve ser:
 - 2× Sino Partido.
 
 Antes de criar dezenas de cartas, essas quatro ações precisam ser diferentes pelo toque, timing e utilidade.
+
+### Clamor
+
+Clamor é a arma de Noah e traduz o princípio de ressonância: uma estrutura simples muda a relação entre suas partes para produzir funções diferentes.
+
+- **Bastão / Repouso:** forma longa de apoio, alcance e travessia;
+- **Lâmina dupla:** pressão em arco e controle próximo;
+- **Dois bastões:** mobilidade, sequência e futura interação com escalada.
+
+No protótipo atual, `Q` percorre as três formas e altera sua leitura visual. Modificadores de combate e travessia permanecem fora do balanceamento até o primeiro playtest no Godot.
 
 ## 7. Quatro ações-base
 

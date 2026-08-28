@@ -293,3 +293,15 @@ The memory must not punish the player for noticing it. While the five-second seq
 - the HUD communicates that movement remains available.
 
 The enemy resumes with a full attack cooldown, preventing an immediate hit on the first frame after the memory. This focus window is scoped to the prototype and still requires playtest before becoming a campaign-wide rule.
+
+## 2026-08-28 — Clamor supersedes the fixed Agulha de Vesper weapon
+
+The fixed narrow blade no longer covers the traversal and expressive range established for Noah. **Clamor** becomes the canonical weapon, built from one coherent visual system in three configurations:
+
+- **Bastão / Repouso** for support, reach and traversal;
+- **Lâmina dupla** for arcs and close pressure;
+- **Dois bastões** for mobility, sequences and future climbing interactions.
+
+The card named **Agulha** remains a combat action; it is not the weapon's identity. The prototype now lets the player cycle Clamor with `Q`, resets each attempt in Repouso and draws every form with a shared dark core, spectral line and restrained gold junction.
+
+This first integration deliberately changes no damage, range or cooldown. Mechanical differences need build validation and playtest evidence before entering combat balance.

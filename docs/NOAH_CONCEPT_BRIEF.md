@@ -15,7 +15,7 @@ Create a protagonist who reads instantly at sprite scale without depending on re
 5. crimson scarf;
 6. small aged-gold bell at the collar.
 
-The Agulha de Vesper completes the combat silhouette. The Heart fragment exists, but should not compete with these anchors while idle.
+Clamor completes the combat silhouette through one of three related forms. The Heart fragment exists, but should not compete with these anchors while idle.
 
 ## Body and silhouette
 
@@ -96,14 +96,16 @@ The spectral fragment remains partly hidden under the mantle at low Cadência.
 
 No permanent chest emblem is added around it.
 
-## Agulha de Vesper
+## Clamor
 
-- extremely narrow;
-- minimal guard;
-- reads as precision rather than weight;
-- dark physical base with a controlled spectral edge;
-- idle pose stays low and practical;
+- dark structural core, controlled spectral lines and a small aged-gold joining point;
+- **Bastão / Repouso** reads as support, reach and traversal;
+- **Lâmina dupla** reads as continuous arcs and close pressure;
+- **Dois bastões** reads as mobility, sequences and future climbing interactions;
+- all three forms share proportions and material language;
 - high Cadência removes wasted motion instead of adding flourishes.
+
+Clamor must read as one reconfigurable instrument, not three unrelated weapons.
 
 ## Personality through animation
 

@@ -21,6 +21,13 @@ public partial class CombatPrototype : Node2D
         BrokenBell
     }
 
+    private enum ClamorForm
+    {
+        Rest,
+        DoubleBlade,
+        TwinBatons
+    }
+
     private sealed class CardDefinition
     {
         public CardKind Kind { get; init; }
@@ -126,6 +133,8 @@ public partial class CombatPrototype : Node2D
     private TimingGrade _lastGrade = TimingGrade.Free;
     private float _gradeDisplay;
     private float _playerReaction;
+    private ClamorForm _clamorForm = ClamorForm.Rest;
+    private float _clamorShiftDisplay;
     private string _lastAction = string.Empty;
     private EnemyState _enemy = new();
     private int _kills;
@@ -142,7 +151,7 @@ public partial class CombatPrototype : Node2D
     public override void _Ready()
     {
         ResetArena();
-        GD.Print("Réquiem combat prototype ready: WASD, Espaço, 1-4, R.");
+        GD.Print("Réquiem combat prototype ready: WASD, Espaço, Q, 1-4, R.");
     }
 
     public override void _Process(double delta)
@@ -187,6 +196,7 @@ public partial class CombatPrototype : Node2D
             if (physical == (Key)51) TryPlayCard(2); // 3
             if (physical == (Key)52) TryPlayCard(3); // 4
             if (physical == (Key)32) TryDash();      // Space
+            if (physical == (Key)81) CycleClamor();  // Q
             if (physical == (Key)82) ResetArena();   // R
         }
 
@@ -219,6 +229,8 @@ public partial class CombatPrototype : Node2D
         _actionLock = 0f;
         _hitStop = 0f;
         _playerReaction = 0f;
+        _clamorForm = ClamorForm.Rest;
+        _clamorShiftDisplay = 0f;
         _kills = 0;
         _actions = 0;
         _goodActions = 0;
@@ -314,6 +326,7 @@ public partial class CombatPrototype : Node2D
         _actionLock = MathF.Max(0f, _actionLock - dt);
         _gradeDisplay = MathF.Max(0f, _gradeDisplay - dt);
         _playerReaction = MathF.Max(0f, _playerReaction - dt);
+        _clamorShiftDisplay = MathF.Max(0f, _clamorShiftDisplay - dt);
         _enemy.HitFlash = MathF.Max(0f, _enemy.HitFlash - dt);
         _requiemLock = MathF.Max(0f, _requiemLock - dt);
 
@@ -377,6 +390,35 @@ public partial class CombatPrototype : Node2D
             Line = true
         });
     }
+
+    private void CycleClamor()
+    {
+        if (!IsSessionRunning || IsBellMicroEchoActive || _actionLock > 0f)
+            return;
+
+        _clamorForm = _clamorForm switch
+        {
+            ClamorForm.Rest => ClamorForm.DoubleBlade,
+            ClamorForm.DoubleBlade => ClamorForm.TwinBatons,
+            _ => ClamorForm.Rest
+        };
+        _clamorShiftDisplay = 0.85f;
+        QueueRedraw();
+    }
+
+    private string GetClamorFormName() => _clamorForm switch
+    {
+        ClamorForm.Rest => "BASTÃO / REPOUSO",
+        ClamorForm.DoubleBlade => "LÂMINA DUPLA",
+        _ => "DOIS BASTÕES"
+    };
+
+    private string GetClamorFormRole() => _clamorForm switch
+    {
+        ClamorForm.Rest => "apoio · alcance",
+        ClamorForm.DoubleBlade => "arco · pressão",
+        _ => "mobilidade · sequência"
+    };
 
     private void TryPlayCard(int slot)
     {

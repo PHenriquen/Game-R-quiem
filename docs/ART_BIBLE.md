@@ -128,21 +128,29 @@ The aged-gold collar bell does not ring with every step. One isolated note may m
 
 The fragment stays visually quiet under the mantle until Cadência rises. Blue lines appear with mastery; ivory joins them briefly in RÉQUIEM. It never becomes a permanent oversized emblem.
 
-## 7. Agulha de Vesper
+## 7. Clamor
 
-Arma principal.
+Arma modular principal. A mesma linguagem material atravessa todas as formas: núcleo escuro, linha espectral controlada e um pequeno ponto dourado de união. A transformação deve parecer rearranjo e ressonância, não invocação de três armas sem relação.
 
-Direção:
+### Bastão / Repouso
 
-- estreita;
-- longa em proporção à largura;
-- guarda mínima;
-- material/base escuro com fio espectral, ou manifestação quase inteira de energia controlada;
-- ponta lembra uma agulha/instrumento de precisão sem virar uma agulha literal gigante.
+- haste longa e simples;
+- extremidades discretas, sem ornamento excessivo;
+- comunica apoio, alcance e travessia.
 
-O desenho deve comunicar **precisão**, não peso.
+### Lâmina dupla
 
-O Sino Partido é o contraste: o ataque parece pesado mesmo usando uma arma fina.
+- empunhadura central curta;
+- dois fios espectrais opostos;
+- comunica arco, pressão e continuidade.
+
+### Dois bastões
+
+- duas peças curtas com a mesma proporção e acabamento;
+- uma em cada mão, preservando a leitura das mãos de Noah;
+- comunica mobilidade, sequência e futura escalada.
+
+As três formas precisam continuar reconhecíveis como Clamor mesmo sem HUD. Efeitos de transformação são breves e econômicos.
 
 ## 8. Postura por Cadência
 

@@ -26,6 +26,7 @@ O roadmap prova a sensação do jogo antes de aumentar conteúdo.
 - [x] Baralho inicial de 8 cartas
 - [x] Corte Breve
 - [x] Agulha
+- [x] Clamor alternável em três formas visuais (modificadores aguardam playtest)
 - [x] Passo Fantasma
 - [x] Sino Partido
 - [x] Pulso provisório a 100 BPM

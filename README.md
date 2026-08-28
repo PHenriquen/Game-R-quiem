@@ -20,6 +20,7 @@ A influência de rhythm games entra no loop de domínio e replay, não em copiar
 A base atual tem um **combat toy jogável** em Godot/C# para testar o núcleo antes de investir em arte final:
 
 - movimento livre e esquiva;
+- **Clamor**, arma alternável entre Bastão/Repouso, Lâmina dupla e Dois bastões;
 - mão de 4 cartas usada em tempo real;
 - baralho inicial com 8 cartas;
 - Corte Breve, Agulha, Passo Fantasma e Sino Partido;
@@ -63,6 +64,7 @@ Quando a Cadência chega a **RÉQUIEM**, Noah entra por alguns segundos num esta
 |---|---|
 | `WASD` | mover |
 | `Space` | esquivar |
+| `Q` | alternar a forma de Clamor |
 | `1–4` | usar uma carta |
 | clique esquerdo | usar a carta clicada |
 | `R` | reiniciar a arena |
@@ -101,6 +103,8 @@ Réquiem deve passar principalmente:
 A primeira região planejada é a **Catedral Afogada**, parcialmente submersa, onde sinos antigos continuam tentando terminar uma sequência que não possui mais um final.
 
 A direção visual é pixel art moderna, personagem pequeno e legível, ambientes maiores que ele e efeitos espectrais usados com moderação. A silhueta não humana de Noah combina cabelo branco compacto e mais energético, rosto escuro com olhos ivory que reagem ao combate, manto branco, camada preta, **cachecol carmesim** e um pequeno sino dourado no colar.
+
+Clamor já pode assumir suas três formas no toy, com leitura visual e função pretendida indicadas no HUD. Nesta etapa a troca não altera dano, alcance ou cooldown: esses modificadores ficam deliberadamente reservados ao primeiro playtest, evitando transformar uma decisão visual nova em balanceamento fictício.
 
 ## Rodando localmente
 

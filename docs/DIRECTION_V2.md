@@ -262,7 +262,7 @@ Base atual:
 - detalhe carmesim usado com moderação;
 - pequeno sino dourado como assinatura;
 - fragmento azul-espectral próximo ao coração;
-- Agulha de Vesper fina e comprida.
+- Clamor modular, reconhecível como a mesma arma em Bastão/Repouso, Lâmina dupla e Dois bastões.
 
 ### Regra de design
 
