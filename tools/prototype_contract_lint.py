@@ -85,6 +85,17 @@ def validate_reset_contract(combat_source: str, bridge_source: str) -> None:
 def validate_briefing_contract(session_source: str, combat_source: str, draw_source: str) -> None:
     require("SessionState.Briefing" in session_source, "briefing: state is missing")
     require("BeginBriefedSession()" in combat_source, "briefing: input cannot start the trial")
+    require_in_order(
+        combat_source,
+        (
+            "if (IsSessionBriefing &&",
+            "BeginBriefedSession();",
+            "if (IsSessionBriefing)",
+            "if (@event.IsActionPressed(PrototypeInput.Pause",
+            "if (@event.IsActionPressed(PrototypeInput.Restart",
+        ),
+        "briefing input gate",
+    )
     require("_combatRhythmBridge?.SetPrototypePaused(false);" in session_source, "briefing: Pulse does not resume on confirmation")
     require("DrawBriefingOverlay();" in draw_source, "briefing: overlay is not drawn")
     require("if (IsSessionRunning || IsSessionBriefing)" in draw_source, "briefing: result overlay can cover the briefing")

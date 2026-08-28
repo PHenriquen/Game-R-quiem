@@ -206,6 +206,9 @@ public partial class CombatPrototype : Node2D
             return;
         }
 
+        if (IsSessionBriefing)
+            return;
+
         if (@event.IsActionPressed(PrototypeInput.Pause, false))
         {
             TogglePrototypePause();

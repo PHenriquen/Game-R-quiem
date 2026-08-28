@@ -337,3 +337,9 @@ Input, pause, briefing and synchronized reset depend on ordering across partial 
 Anna's Cast Board blockout now uses an original angular feline mask with rising black eye fields, sharper cheeks and a restrained crimson center. The theatrical contrast comes from broad visual principles rather than reproducing any referenced character's exact mask or symbol.
 
 The former collar line is removed. Hair mass, mask and grouped tails already provide three readable anchors, so an extra pendant would dilute the hierarchy instead of adding personality.
+
+## 2026-08-28 — The first briefing has one explicit exit
+
+The initial briefing only yields to the confirm action or a primary mouse click. Restart and pause inputs are ignored while it is visible; previously, restart could rebuild the arena without the briefing and silently begin the trial.
+
+This boundary is part of the executable prototype contract so a future input reordering cannot reintroduce the skip.

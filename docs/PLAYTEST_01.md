@@ -23,6 +23,8 @@ A pausa precisa congelar cronômetro, Pulso, inimigo, cartas e efeitos transitó
 
 Na primeira abertura, o briefing deve manter arena, Peregrino, Pulso e cronômetro imóveis até `Enter`, `A` ou clique. Depois do primeiro início, `R` / `Back` reinicia diretamente a tentativa para reduzir atrito de repetição.
 
+Ainda no briefing, pressionar `R` / `Back` ou `Esc` / `Start` não pode dispensar a tela nem iniciar os relógios. Somente a ação de confirmação começa a primeira tentativa.
+
 ## Passo 0 — Compilação
 
 Antes de avaliar gameplay:
