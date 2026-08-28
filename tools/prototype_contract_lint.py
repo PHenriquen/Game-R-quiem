@@ -64,6 +64,30 @@ def validate_pause_contract(combat_source: str, bridge_source: str) -> None:
     require("_director?.SetProcess(!paused);" in bridge_source, "pause: trial timeline is not frozen")
 
 
+def validate_micro_echo_contract(combat_source: str, session_source: str) -> None:
+    require(
+        "if (!IsBellMicroEchoActive)\n            _elapsed += dt;" in combat_source,
+        "micro-echo: fallback Pulse phase is not frozen",
+    )
+    require(
+        "_prototypePaused || IsBellMicroEchoActive" in combat_source,
+        "micro-echo: resuming screen pause can resume rhythm too early",
+    )
+    require(
+        "_combatRhythmBridge?.SetPrototypePaused(true);" in session_source,
+        "micro-echo: authored Pulse and timeline are not frozen",
+    )
+    require(
+        "_combatRhythmBridge?.SetPrototypePaused(_prototypePaused);" in session_source,
+        "micro-echo: authored rhythm does not resume with the owner pause state",
+    )
+    for method in ("TryDash", "CycleClamor", "TryPlayCard"):
+        start = combat_source.find(f"private void {method}(")
+        require(start >= 0, f"micro-echo: missing action boundary {method}")
+        boundary = combat_source[start : start + 420]
+        require("IsBellMicroEchoActive" in boundary, f"micro-echo: {method} is not blocked")
+
+
 def validate_reset_contract(combat_source: str, bridge_source: str) -> None:
     reset_start = combat_source.find("private void ResetArena(bool showBriefing)")
     require(reset_start >= 0, "reset: ResetArena boundary is missing")
@@ -111,6 +135,7 @@ def main() -> int:
 
         action_count = validate_input_contract(input_source, combat_source, bridge_source)
         validate_pause_contract(combat_source, bridge_source)
+        validate_micro_echo_contract(combat_source, session_source)
         validate_reset_contract(combat_source, bridge_source)
         validate_briefing_contract(session_source, combat_source, draw_source)
     except (ContractError, OSError, UnicodeError) as error:

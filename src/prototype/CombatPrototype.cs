@@ -166,7 +166,8 @@ public partial class CombatPrototype : Node2D
         }
 
         float dt = (float)delta;
-        _elapsed += dt;
+        if (!IsBellMicroEchoActive)
+            _elapsed += dt;
 
         UpdateTransient(dt);
         UpdateCards(dt);
@@ -300,7 +301,7 @@ public partial class CombatPrototype : Node2D
             return;
 
         _prototypePaused = !_prototypePaused;
-        _combatRhythmBridge?.SetPrototypePaused(_prototypePaused);
+        _combatRhythmBridge?.SetPrototypePaused(_prototypePaused || IsBellMicroEchoActive);
         QueueRedraw();
     }
 

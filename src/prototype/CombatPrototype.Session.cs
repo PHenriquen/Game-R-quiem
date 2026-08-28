@@ -51,13 +51,17 @@ public partial class CombatPrototype
         if (!IsBellMicroEchoActive)
             _sessionElapsed += delta;
 
+        bool echoWasActive = IsBellMicroEchoActive;
         _bellResponseRemaining = MathF.Max(0f, _bellResponseRemaining - delta);
+        if (echoWasActive && !IsBellMicroEchoActive)
+            _combatRhythmBridge?.SetPrototypePaused(_prototypePaused);
 
         Vector2 responsePoint = GetBellResponsePoint();
         if (_kills > 0 && !_bellResponseTriggered && _playerPosition.DistanceTo(responsePoint) <= 74f)
         {
             _bellResponseTriggered = true;
             _bellResponseRemaining = BellEchoDuration;
+            _combatRhythmBridge?.SetPrototypePaused(true);
             _enemy.Telegraphing = false;
             _enemy.TelegraphRemaining = 0f;
             _enemy.AttackCooldown = MathF.Max(_enemy.AttackCooldown, 0.82f);

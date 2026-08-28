@@ -343,3 +343,9 @@ The former collar line is removed. Hair mass, mask and grouped tails already pro
 The initial briefing only yields to the confirm action or a primary mouse click. Restart and pause inputs are ignored while it is visible; previously, restart could rebuild the arena without the briefing and silently begin the trial.
 
 This boundary is part of the executable prototype contract so a future input reordering cannot reintroduce the skip.
+
+## 2026-08-28 — The bell micro-Echo freezes both rhythm clocks
+
+The session timer already stopped during the optional memory, but the fallback Pulse phase and authored Echo Trial timeline continued behind it. Returning control could therefore place the player at an unrelated beat.
+
+The micro-Echo now pauses both clocks and resumes them from the same phase. Screen pause composes with this rule: unpausing the overlay cannot restart rhythm while the memory is still active. The contract linter covers both clocks and all three committed-action gates.

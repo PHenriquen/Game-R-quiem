@@ -21,6 +21,8 @@ Controles atuais:
 
 A pausa precisa congelar cronômetro, Pulso, inimigo, cartas e efeitos transitórios. Reiniciar a partir da pausa deve começar uma tentativa limpa e já retomada.
 
+Ao encontrar o micro‑Eco do sino, o Pulso local e a timeline também devem congelar durante toda a lembrança. Pausar e retomar a tela nesse intervalo não pode adiantar o ritmo; quando o micro‑Eco terminar, ambos retomam da mesma fase.
+
 Na primeira abertura, o briefing deve manter arena, Peregrino, Pulso e cronômetro imóveis até `Enter`, `A` ou clique. Depois do primeiro início, `R` / `Back` reinicia diretamente a tentativa para reduzir atrito de repetição.
 
 Ainda no briefing, pressionar `R` / `Back` ou `Esc` / `Start` não pode dispensar a tela nem iniciar os relógios. Somente a ação de confirmação começa a primeira tentativa.
