@@ -26,6 +26,9 @@ jobs:
       - name: Validate beatmaps
         run: python3 tools/beatmap_lint.py
 
+      - name: Validate prototype contracts
+        run: python3 tools/prototype_contract_lint.py
+
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v4
         with:

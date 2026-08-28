@@ -130,8 +130,11 @@ Ferramentas:
 ```bash
 python tools/generate_prototype_audio.py
 python tools/beatmap_lint.py
+python tools/prototype_contract_lint.py
 python tools/beatmap_seed.py --bpm 120 --duration 60 --out assets/beatmaps/test.json
 ```
+
+`prototype_contract_lint.py` protege os contratos de input, pausa, briefing e reinício sincronizado mesmo antes de abrir o editor.
 
 ## Documentação principal
 

@@ -327,3 +327,7 @@ Pause is local to the prototype rather than the whole SceneTree. It freezes the 
 The prototype no longer attacks a first-time player while controls are being read. Its initial state presents the concrete objective and both keyboard/controller bindings while arena, enemy, timer and Pulse remain still. Confirming starts all clocks from zero together.
 
 Retries skip this screen and return directly to play. Reset now also clears the combat toy's local Pulse phase, fixing the former mismatch in which the authored shadow timeline restarted but local timing evaluation kept its previous phase.
+
+## 2026-08-28 — Playable-loop contracts receive an executable guard
+
+Input, pause, briefing and synchronized reset depend on ordering across partial classes and the rhythm bridge. A small Python linter now verifies these boundaries before the C# restore/build step. It intentionally checks only high-risk invariants and remains explicit that source validation is not a Godot playtest.

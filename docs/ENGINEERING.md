@@ -270,6 +270,8 @@ Generated audio WAVs are ignored by Git and recreated from source script.
 
 `.github/workflows/dotnet-build.yml` performs restore/build for the C# project.
 
+Before restore, the workflow runs `tools/prototype_contract_lint.py`. This source-level guard catches accidental returns to raw key checks and verifies the ordering required to freeze and restart the arena, fallback Pulse clock, timeline and shadow score together. It complements compilation; it does not claim engine execution.
+
 This validates C# compilation but is not a substitute for:
 
 - opening the Godot project;
