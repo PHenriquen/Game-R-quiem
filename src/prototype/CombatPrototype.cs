@@ -168,8 +168,11 @@ public partial class CombatPrototype : Node2D
         }
 
         UpdatePlayer(dt);
-        UpdateEnemy(dt);
-        UpdateCadence(dt);
+        if (!IsBellMicroEchoActive)
+        {
+            UpdateEnemy(dt);
+            UpdateCadence(dt);
+        }
         QueueRedraw();
     }
 
@@ -352,7 +355,7 @@ public partial class CombatPrototype : Node2D
 
     private void TryDash()
     {
-        if (!IsSessionRunning || _dashCooldown > 0f)
+        if (!IsSessionRunning || IsBellMicroEchoActive || _dashCooldown > 0f)
             return;
 
         Vector2 direction = _playerFacing.LengthSquared() < 0.01f ? Vector2.Right : _playerFacing;
@@ -377,7 +380,7 @@ public partial class CombatPrototype : Node2D
 
     private void TryPlayCard(int slot)
     {
-        if (!IsSessionRunning || slot < 0 || slot >= _hand.Length || _hand[slot] == null || _actionLock > 0f || _playerHealth <= 0f)
+        if (!IsSessionRunning || IsBellMicroEchoActive || slot < 0 || slot >= _hand.Length || _hand[slot] == null || _actionLock > 0f || _playerHealth <= 0f)
             return;
 
         CardDefinition card = _hand[slot]!;

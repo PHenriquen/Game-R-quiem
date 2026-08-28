@@ -281,3 +281,15 @@ The response now unfolds as a short environmental memory instead of stopping at 
 4. the phrase **UM PULSO FALTA** closes the sequence.
 
 The second presence is intentionally unreadable: no face, name, costume or relationship is fixed by this blockout. The sequence strengthens the existing mystery without replacing the longer authored Eco planned for the Catedral Afogada.
+
+## 2026-08-28 — Micro-Echo receives a safe focus window
+
+The memory must not punish the player for noticing it. While the five-second sequence is active:
+
+- enemy movement, telegraphs and attacks are suspended;
+- session time and Cadência decay are paused;
+- cards and dash cannot fire accidentally;
+- Noah may still walk and reposition;
+- the HUD communicates that movement remains available.
+
+The enemy resumes with a full attack cooldown, preventing an immediate hit on the first frame after the memory. This focus window is scoped to the prototype and still requires playtest before becoming a campaign-wide rule.

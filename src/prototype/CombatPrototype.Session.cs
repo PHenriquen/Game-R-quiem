@@ -21,6 +21,7 @@ public partial class CombatPrototype
     private float _bellResponseRemaining;
 
     private bool IsSessionRunning => _sessionState == SessionState.Playing;
+    private bool IsBellMicroEchoActive => _bellResponseRemaining > 0f;
 
     private void StartSession()
     {
@@ -35,7 +36,9 @@ public partial class CombatPrototype
         if (!IsSessionRunning)
             return;
 
-        _sessionElapsed += delta;
+        if (!IsBellMicroEchoActive)
+            _sessionElapsed += delta;
+
         _bellResponseRemaining = MathF.Max(0f, _bellResponseRemaining - delta);
 
         Vector2 responsePoint = GetBellResponsePoint();
@@ -43,6 +46,9 @@ public partial class CombatPrototype
         {
             _bellResponseTriggered = true;
             _bellResponseRemaining = BellEchoDuration;
+            _enemy.Telegraphing = false;
+            _enemy.TelegraphRemaining = 0f;
+            _enemy.AttackCooldown = MathF.Max(_enemy.AttackCooldown, 0.82f);
         }
     }
 

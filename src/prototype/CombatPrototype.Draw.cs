@@ -285,7 +285,11 @@ public partial class CombatPrototype
         string accuracy = _actions == 0 ? "—" : $"{MathF.Round((_goodActions + _perfectActions) * 100f / _actions)}%";
         DrawString(_font, new Vector2(size.X - 325f, 32f), $"PROVA {_kills}/{TargetKills}   //   NO PULSO {accuracy}", HorizontalAlignment.Left, 300f, 14, Ivory.Darkened(0.28f));
 
-        if (_bellResponseTriggered)
+        if (IsBellMicroEchoActive)
+        {
+            DrawString(_font, new Vector2(size.X - 356f, 116f), "MICRO-ECO  //  MOVIMENTO LIVRE", HorizontalAlignment.Right, 328f, 13, Spectral.Lightened(0.12f));
+        }
+        else if (_bellResponseTriggered)
         {
             DrawString(_font, new Vector2(size.X - 356f, 116f), "ECO DO SINO  //  ENCONTRADO", HorizontalAlignment.Right, 328f, 13, Gold);
         }
