@@ -147,6 +147,7 @@ public partial class CombatPrototype : Node2D
     private const float BeatPeriod = 0.60f; // 100 BPM
     private const float PerfectWindow = 0.065f;
     private const float GoodWindow = 0.140f;
+    private const float ClamorShiftFeedbackDuration = 0.36f;
 
     public override void _Ready()
     {
@@ -402,7 +403,7 @@ public partial class CombatPrototype : Node2D
             ClamorForm.DoubleBlade => ClamorForm.TwinBatons,
             _ => ClamorForm.Rest
         };
-        _clamorShiftDisplay = 0.85f;
+        _clamorShiftDisplay = ClamorShiftFeedbackDuration;
         QueueRedraw();
     }
 

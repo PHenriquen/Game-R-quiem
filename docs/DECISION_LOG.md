@@ -305,3 +305,5 @@ The fixed narrow blade no longer covers the traversal and expressive range estab
 The card named **Agulha** remains a combat action; it is not the weapon's identity. The prototype now lets the player cycle Clamor with `Q`, resets each attempt in Repouso and draws every form with a shared dark core, spectral line and restrained gold junction.
 
 This first integration deliberately changes no damage, range or cooldown. Mechanical differences need build validation and playtest evidence before entering combat balance.
+
+The shift itself receives a short procedural response around Noah's hands: one spectral arc, a restrained gold junction and a connecting line. It is feedback for state change rather than an attack effect, and the HUD position follows viewport width instead of relying on one fixed desktop coordinate.

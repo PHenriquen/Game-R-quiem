@@ -152,6 +152,9 @@ public partial class CombatPrototype
 
         DrawClamor(forward, side, leftHand, rightHand, requiem);
 
+        if (_clamorShiftDisplay > 0f)
+            DrawClamorShift(forward, side, leftHand, rightHand);
+
         if (requiem)
         {
             DrawArc(_playerPosition, 29f, 0f, Mathf.Tau, 40, Spectral, 2f);
@@ -194,6 +197,20 @@ public partial class CombatPrototype
                 break;
             }
         }
+    }
+
+    private void DrawClamorShift(Vector2 forward, Vector2 side, Vector2 leftHand, Vector2 rightHand)
+    {
+        float progress = 1f - _clamorShiftDisplay / ClamorShiftFeedbackDuration;
+        float alpha = 1f - Mathf.Clamp(progress, 0f, 1f);
+        Color spectral = new(Spectral.R, Spectral.G, Spectral.B, alpha * 0.72f);
+        Color gold = new(Gold.R, Gold.G, Gold.B, alpha * 0.86f);
+        Vector2 center = (leftHand + rightHand) * 0.5f + forward * 5f;
+        float radius = 10f + progress * 18f;
+
+        DrawArc(center, radius, -Mathf.Pi * 0.82f, Mathf.Pi * 0.82f, 24, spectral, 1.8f);
+        DrawCircle(center + forward * (7f + progress * 8f), 2.2f, gold);
+        DrawLine(leftHand - side * progress * 5f, rightHand + side * progress * 5f, spectral.Darkened(0.20f), 1.2f);
     }
 
     private void DrawNoahHair(Vector2 forward, Vector2 side)
@@ -319,8 +336,9 @@ public partial class CombatPrototype
         DrawString(_font, new Vector2(size.X - 325f, 32f), $"PROVA {_kills}/{TargetKills}   //   NO PULSO {accuracy}", HorizontalAlignment.Left, 300f, 14, Ivory.Darkened(0.28f));
 
         Color clamorColor = _clamorShiftDisplay > 0f ? Gold : Spectral.Darkened(0.08f);
-        DrawString(_font, new Vector2(590f, 88f), $"CLAMOR  //  {GetClamorFormName()}", HorizontalAlignment.Left, 310f, 13, clamorColor);
-        DrawString(_font, new Vector2(590f, 108f), GetClamorFormRole(), HorizontalAlignment.Left, 250f, 12, Ivory.Darkened(0.46f));
+        float clamorX = Mathf.Clamp(size.X * 0.5f - 155f, 290f, MathF.Max(290f, size.X - 650f));
+        DrawString(_font, new Vector2(clamorX, 88f), $"CLAMOR  //  {GetClamorFormName()}", HorizontalAlignment.Left, 310f, 13, clamorColor);
+        DrawString(_font, new Vector2(clamorX, 108f), GetClamorFormRole(), HorizontalAlignment.Left, 250f, 12, Ivory.Darkened(0.46f));
 
         if (IsBellMicroEchoActive)
         {
