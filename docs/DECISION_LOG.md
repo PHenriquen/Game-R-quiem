@@ -349,3 +349,9 @@ This boundary is part of the executable prototype contract so a future input reo
 The session timer already stopped during the optional memory, but the fallback Pulse phase and authored Echo Trial timeline continued behind it. Returning control could therefore place the player at an unrelated beat.
 
 The micro-Echo now pauses both clocks and resumes them from the same phase. Screen pause composes with this rule: unpausing the overlay cannot restart rhythm while the memory is still active. The contract linter covers both clocks and all three committed-action gates.
+
+## 2026-08-28 — A resolved trial is a frozen state
+
+Victory and defeat previously stopped the session timer but left the local Pulse and authored timeline running beneath the result panel. A resolved trial now freezes the owner loop and rhythm bridge together.
+
+Restart remains the only exit from the result and already rebuilds the arena, local phase, timeline and shadow score atomically. The contract linter now covers this terminal-state boundary.

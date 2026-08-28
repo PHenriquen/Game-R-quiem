@@ -23,6 +23,7 @@ public partial class CombatPrototype
 
     private bool IsSessionRunning => _sessionState == SessionState.Playing;
     private bool IsSessionBriefing => _sessionState == SessionState.Briefing;
+    private bool IsSessionResolved => _sessionState is SessionState.Victory or SessionState.Defeat;
     private bool IsBellMicroEchoActive => _bellResponseRemaining > 0f;
 
     private void StartSession(bool showBriefing)
@@ -79,6 +80,7 @@ public partial class CombatPrototype
         _actionLock = 0f;
         _dashRemaining = 0f;
         _enemy.Telegraphing = false;
+        _combatRhythmBridge?.SetPrototypePaused(true);
     }
 
     private string FormatSessionTime()

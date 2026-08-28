@@ -57,7 +57,7 @@ def validate_input_contract(input_source: str, combat_source: str, bridge_source
 def validate_pause_contract(combat_source: str, bridge_source: str) -> None:
     require_in_order(
         combat_source,
-        ("if (_prototypePaused || IsSessionBriefing)", "_elapsed += dt;"),
+        ("if (_prototypePaused || IsSessionBriefing || IsSessionResolved)", "_elapsed += dt;"),
         "pause",
     )
     require("_clock?.SetProcess(!paused);" in bridge_source, "pause: Pulse clock is not frozen")
@@ -74,12 +74,15 @@ def validate_micro_echo_contract(combat_source: str, session_source: str) -> Non
         "micro-echo: resuming screen pause can resume rhythm too early",
     )
     require(
-        "_combatRhythmBridge?.SetPrototypePaused(true);" in session_source,
-        "micro-echo: authored Pulse and timeline are not frozen",
-    )
-    require(
         "_combatRhythmBridge?.SetPrototypePaused(_prototypePaused);" in session_source,
         "micro-echo: authored rhythm does not resume with the owner pause state",
+    )
+    update_start = session_source.find("private void UpdateSession(float delta)")
+    require(update_start >= 0, "micro-echo: session update boundary is missing")
+    update_source = session_source[update_start : update_start + 1200]
+    require(
+        "_combatRhythmBridge?.SetPrototypePaused(true);" in update_source,
+        "micro-echo: authored Pulse and timeline are not frozen",
     )
     for method in ("TryDash", "CycleClamor", "TryPlayCard"):
         start = combat_source.find(f"private void {method}(")
@@ -125,6 +128,24 @@ def validate_briefing_contract(session_source: str, combat_source: str, draw_sou
     require("if (IsSessionRunning || IsSessionBriefing)" in draw_source, "briefing: result overlay can cover the briefing")
 
 
+def validate_outcome_contract(session_source: str, combat_source: str) -> None:
+    require(
+        "private bool IsSessionResolved => _sessionState is SessionState.Victory or SessionState.Defeat;" in session_source,
+        "outcome: resolved-state boundary is missing",
+    )
+    require(
+        "if (_prototypePaused || IsSessionBriefing || IsSessionResolved)" in combat_source,
+        "outcome: owner clocks continue behind the result",
+    )
+    complete_start = session_source.find("private void CompleteSession(SessionState outcome)")
+    require(complete_start >= 0, "outcome: completion boundary is missing")
+    complete_source = session_source[complete_start : complete_start + 520]
+    require(
+        "_combatRhythmBridge?.SetPrototypePaused(true);" in complete_source,
+        "outcome: authored Pulse and timeline continue behind the result",
+    )
+
+
 def main() -> int:
     try:
         input_source = read("src/prototype/PrototypeInput.cs")
@@ -138,6 +159,7 @@ def main() -> int:
         validate_micro_echo_contract(combat_source, session_source)
         validate_reset_contract(combat_source, bridge_source)
         validate_briefing_contract(session_source, combat_source, draw_source)
+        validate_outcome_contract(session_source, combat_source)
     except (ContractError, OSError, UnicodeError) as error:
         print(f"ERROR prototype contract: {error}", file=sys.stderr)
         return 1

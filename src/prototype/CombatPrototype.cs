@@ -159,7 +159,7 @@ public partial class CombatPrototype : Node2D
 
     public override void _Process(double delta)
     {
-        if (_prototypePaused || IsSessionBriefing)
+        if (_prototypePaused || IsSessionBriefing || IsSessionResolved)
         {
             QueueRedraw();
             return;
