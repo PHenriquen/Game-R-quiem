@@ -11,7 +11,7 @@ A imagem de Réquiem precisa transmitir quatro coisas antes de qualquer texto:
 3. memória;
 4. presença conquistada no combate.
 
-O mundo é visualmente mais complexo que Nox. O protagonista é simples o bastante para continuar legível em movimento.
+O mundo é visualmente mais complexo que Noah. O protagonista é simples o bastante para continuar legível em movimento.
 
 ## 2. Regra de originalidade
 
@@ -32,16 +32,16 @@ Evitar personagem com excesso de cintos, placas, símbolos, aura permanente ou c
 - câmera top-down/3/4;
 - composição-base 1280×720;
 - tile-base inicial de 32 px;
-- Nox deve ler aproximadamente como personagem de 48–64 px de altura;
+- Noah deve ler aproximadamente como personagem de 48–64 px de altura;
 - efeitos podem ultrapassar a grade;
-- chefes podem ocupar 2–4× a massa visual de Nox;
+- chefes podem ocupar 2–4× a massa visual de Noah;
 - arquitetura deve parecer enorme mesmo em sala pequena.
 
 ### Regra de escala
 
 Sempre que possível, existir um elemento arquitetônico maior que o necessário para a função prática: porta alta, sino enorme, coluna espessa, vitral distante.
 
-Isso faz Nox parecer estar atravessando algo antigo demais para ter sido criado para ele.
+Isso faz Noah parecer estar atravessando algo antigo demais para ter sido criado para ele.
 
 ## 4. Paleta funcional
 
@@ -49,7 +49,7 @@ Isso faz Nox parecer estar atravessando algo antigo demais para ter sido criado 
 |---|---|---|
 | Night black | `#090B12` | silêncio, fundos, vazio |
 | Ivory | `#E9E2D0` | legibilidade, máscaras, RÉQUIEM |
-| Spectral blue | `#54C7CE` | Nox, memória, Ecos |
+| Spectral blue | `#54C7CE` | Noah, memória, Ecos |
 | Aged gold | `#C4A35A` | sino, calor, lembrança preservada |
 | Crimson | `#9E1738` | vínculo, perigo, ruptura |
 | Veil violet | `#6651A6` | distorção, mobilidade, estranheza |
@@ -64,118 +64,93 @@ Escolher:
 - uma secundária;
 - uma cor rara de atenção.
 
-## 5. Nox — objetivo
+## 5. Protagonista — objetivo
 
-Nox deve ser reconhecível em três níveis:
+**Noah** is the canonical name.
 
-### Silhueta
+The protagonist is a small non-human being built from six anchors:
 
-Corpo leve, parte superior curta e assimétrica, elemento de tecido que quebra a forma e arma longa/fina.
+- compact white hair mass;
+- large ivory eye-shapes on a dark face;
+- short white mantle;
+- black underlayer;
+- crimson scarf;
+- small aged-gold bell at the collar.
 
-### Cor
+The world stays more detailed than the character. If the design needs surface symbols to remain interesting, simplify and strengthen the silhouette.
 
-Azul-negro + um detalhe carmesim + ponto espectral no peito.
+## 6. Protagonista — construção visual
 
-### Símbolo
+### Form
 
-Fragmento + pequeno sino dourado.
+- compact body with proportions that do not read as an ordinary human in costume;
+- slightly enlarged head so the eyes can act at sprite scale;
+- simple limbs with readable hands and feet;
+- movement alternates playful elasticity and focused economy.
 
-Se o sprite precisa de quinze acessórios para ser interessante, o design falhou.
+### Face and eyes
 
-## 6. Nox — construção visual
+The dark face is part of the being, not a removable mask. Ivory eye-shapes replace realistic facial anatomy and carry the performance through angle, width, spacing and asymmetry.
 
-### Corpo
+Exploration favors curiosity. Friendly moments allow softer and playful shapes. Combat focus narrows the eyes. RÉQUIEM makes them calm and nearly symmetrical with a thin spectral edge.
 
-- jovem adulto;
-- magro/atlético, não frágil;
-- postura inicial discretamente defensiva;
-- centro de gravidade baixo durante combate;
-- movimento econômico.
+### White hair
 
-### Rosto
+- one readable mass rather than separate realistic strands;
+- the crown rises before breaking backward, avoiding a flat or overly relaxed profile;
+- side spikes open the silhouette without becoming a radial star;
+- two short front fringes frame the eyes without covering them;
+- silhouette remains original and must not reproduce the outline of any reference character;
+- idle keeps a slight upward tension; dash briefly opens the rear and side spikes.
 
-No gameplay, detalhe mínimo.
+### White mantle
 
-Em ilustrações/retratos:
+- ivory-white, short and graphic;
+- one overlap/notch at most;
+- broad shapes rather than embroidery;
+- leaves the legs free and the scarf visible.
 
-- expressão observadora;
-- aparência cansada sem parecer doente;
-- olhar mais atento que agressivo;
-- evitar beleza perfeita/genérica de personagem de IA.
+### Black underlayer
 
-### Cabelo
+- matte and narrow;
+- no armor plates, belts or decorative seams;
+- hands use a cuff, rim or value break so they never disappear into the torso.
 
-- escuro;
-- irregular, porém com massas grandes e desenháveis;
-- franja ajuda a quebrar a simetria;
-- sem mechas coloridas permanentes.
+### Crimson scarf
 
-A luz espectral pode tingir bordas durante alta Cadência.
+The scarf is the movement accent: medium-short, readable during dash and quieter while idle. It carries personality without becoming the largest part of the silhouette.
 
-### Roupa
+### Bell
 
-Base: casaco curto ou peça superior assimétrica azul-negra.
+The aged-gold collar bell does not ring with every step. One isolated note may mark a completed pulse in a memory, room or encounter. It is a relationship between character and world, not decoration.
 
-Características:
+### Heart fragment
 
-- tecido funcional;
-- comprimento que deixe pernas livres;
-- gola ou sobreposição que crie triângulo visual no peito;
-- pouca ornamentação;
-- desgaste visível apenas em áreas importantes.
+The fragment stays visually quiet under the mantle until Cadência rises. Blue lines appear with mastery; ivory joins them briefly in RÉQUIEM. It never becomes a permanent oversized emblem.
 
-### Carmesim
+## 7. Clamor
 
-Não usar um cachecol gigante como assinatura obrigatória.
+Arma modular principal. A mesma linguagem material atravessa todas as formas: núcleo escuro, linha espectral controlada e um pequeno ponto dourado de união. A transformação deve parecer rearranjo e ressonância, não invocação de três armas sem relação.
 
-Direção V2: **faixa curta, tira de tecido, forro ou pequeno lenço** que apareça no movimento sem dominar Nox.
+### Bastão / Repouso
 
-A cor representa vínculo/ruptura e deve ser rara o suficiente para ganhar significado narrativo.
+- haste longa e simples;
+- extremidades discretas, sem ornamento excessivo;
+- comunica apoio, alcance e travessia.
 
-### Sino
+### Lâmina dupla
 
-Pequeno, dourado envelhecido, preso próximo ao peito/cintura.
+- empunhadura central curta;
+- dois fios espectrais opostos;
+- comunica arco, pressão e continuidade.
 
-Ele não balança fazendo barulho o tempo inteiro.
+### Dois bastões
 
-O primeiro momento em que ele toca sozinho pode ser narrativamente importante.
+- duas peças curtas com a mesma proporção e acabamento;
+- uma em cada mão, preservando a leitura das mãos de Noah;
+- comunica mobilidade, sequência e futura escalada.
 
-### Fragmento
-
-Não é uma joia redonda.
-
-Forma: lasca irregular inserida/ancorada próxima ao coração, com linhas finas como rachaduras.
-
-Baixa Cadência:
-
-- brilho fraco;
-- quase nenhum efeito.
-
-Alta Cadência:
-
-- fissuras pequenas aparecem ao redor.
-
-RÉQUIEM:
-
-- fissuras se organizam por alguns segundos como se o corpo lembrasse uma forma anterior;
-- ivory aparece junto do azul;
-- não virar aura flamejante.
-
-## 7. Agulha de Vesper
-
-Arma principal.
-
-Direção:
-
-- estreita;
-- longa em proporção à largura;
-- guarda mínima;
-- material/base escuro com fio espectral, ou manifestação quase inteira de energia controlada;
-- ponta lembra uma agulha/instrumento de precisão sem virar uma agulha literal gigante.
-
-O desenho deve comunicar **precisão**, não peso.
-
-O Sino Partido é o contraste: o ataque parece pesado mesmo usando uma arma fina.
+As três formas precisam continuar reconhecíveis como Clamor mesmo sem HUD. Efeitos de transformação são breves e econômicos.
 
 ## 8. Postura por Cadência
 
@@ -188,7 +163,7 @@ O Sino Partido é o contraste: o ataque parece pesado mesmo usando uma arma fina
 ### B/A
 
 - movimentos mais contínuos;
-- Nox deixa de “confirmar” cada ação com o corpo.
+- Noah deixa de “confirmar” cada ação com o corpo.
 
 ### S
 
@@ -287,7 +262,7 @@ Combate:
 RÉQUIEM:
 
 - não aumentar saturação de tudo;
-- deixar Nox e alguns contornos mais claros enquanto o restante fica mais calmo.
+- deixar Noah e alguns contornos mais claros enquanto o restante fica mais calmo.
 
 ## 12. UI e cartas
 
@@ -311,7 +286,7 @@ A animação de compra deve parecer uma **memória entrando em foco**, não uma 
 
 ### Pulso
 
-Preferencialmente perto de Nox ou integrado ao chão.
+Preferencialmente perto de Noah ou integrado ao chão.
 
 Nunca um círculo enorme no centro da tela.
 
@@ -347,7 +322,7 @@ Se a partícula impede leitura de inimigo ou próxima carta, cortar a partícula
 
 Composição para o primeiro ambiente autoral:
 
-- Nox no terço inferior/esquerdo;
+- Noah no terço inferior/esquerdo;
 - corredor de água conduzindo para uma porta alta ao fundo;
 - um sino quebrado grande fora do centro;
 - Peregrino Oco em espaço de contraste suficiente;
@@ -372,7 +347,7 @@ O jogador que revisita screenshots deve conseguir notar coisas que passaram desp
 
 ### Capa
 
-- Nox pequeno/médio, não close de rosto genérico;
+- Noah pequeno/médio, não close de rosto genérico;
 - arquitetura domina;
 - fragmento cria foco;
 - segunda presença pode existir apenas como composição/reflexo;
@@ -415,7 +390,7 @@ Todo asset externo precisa registrar:
 Antes de aprovar arte, perguntar:
 
 1. a silhueta funciona sem detalhe?;
-2. consigo separar Nox do cenário em movimento?;
+2. consigo separar Noah do cenário em movimento?;
 3. existe espaço negativo?;
 4. a cor usada tem função?;
 5. o efeito melhora impacto ou só adiciona ruído?;

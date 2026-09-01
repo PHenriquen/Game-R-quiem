@@ -24,6 +24,9 @@ public partial class CombatPrototype
         DrawPlayer();
         DrawEffects();
         DrawHud();
+        DrawSessionOverlay();
+        DrawPauseOverlay();
+        DrawBriefingOverlay();
     }
 
     private void DrawBackground()
@@ -48,33 +51,219 @@ public partial class CombatPrototype
 
         Rect2 door = new(_arena.GetCenter().X - 44f, _arena.Position.Y + 8f, 88f, 58f);
         DrawRect(door, Night.Lightened(0.02f));
-        DrawArc(new Vector2(door.GetCenter().X, door.Position.Y + 26f), 20f, Mathf.Pi, Mathf.Tau, 20, Ivory.Darkened(0.58f), 2f);
+        Color doorAccent = _bellResponseTriggered ? Gold : Ivory.Darkened(0.58f);
+        DrawRect(door, doorAccent.Darkened(0.28f), false, _bellResponseTriggered ? 2.4f : 1.4f);
+        DrawArc(new Vector2(door.GetCenter().X, door.Position.Y + 26f), 20f, Mathf.Pi, Mathf.Tau, 20, doorAccent, 2f);
+
+        if (_bellResponseTriggered)
+        {
+            Vector2 memoryMark = new(door.GetCenter().X, door.End.Y - 10f);
+            DrawCircle(memoryMark, 3.5f, Gold);
+            DrawArc(memoryMark, 8f, 0f, Mathf.Tau, 20, Gold.Darkened(0.24f), 1.2f);
+        }
+
+        if (_bellResponseRemaining > 0f)
+            DrawBellMicroEcho();
+    }
+
+    private void DrawBellMicroEcho()
+    {
+        float progress = 1f - _bellResponseRemaining / BellEchoDuration;
+        Vector2 point = GetBellResponsePoint();
+
+        if (progress < 0.34f)
+        {
+            float phase = progress / 0.34f;
+            float radius = 18f + phase * 42f;
+            float alpha = 0.86f * (1f - phase);
+            Color response = new(Gold.R, Gold.G, Gold.B, alpha);
+            DrawArc(point, radius, -Mathf.Pi * 0.86f, -Mathf.Pi * 0.14f, 32, response, 2.4f);
+            DrawArc(point, radius + 11f, -Mathf.Pi * 0.78f, -Mathf.Pi * 0.22f, 28, response.Darkened(0.16f), 1.4f);
+            DrawString(_font, point + new Vector2(-74f, 34f), "O SINO RESPONDE", HorizontalAlignment.Center, 148f, 12, Gold);
+        }
+
+        if (progress >= 0.20f && progress < 0.78f)
+        {
+            float phase = (progress - 0.20f) / 0.58f;
+            float alpha = MathF.Sin(phase * MathF.PI) * 0.64f;
+            Color memory = new(Spectral.R, Spectral.G, Spectral.B, alpha);
+            Vector2 waterLine = point + new Vector2(0f, 24f);
+
+            DrawLine(waterLine + new Vector2(-19f, 0f), waterLine + new Vector2(-15f, 34f), memory, 5f);
+            DrawCircle(waterLine + new Vector2(-19f, -7f), 6f, memory);
+            DrawLine(waterLine + new Vector2(19f, 4f), waterLine + new Vector2(22f, 28f), memory.Darkened(0.26f), 4f);
+            DrawArc(waterLine + new Vector2(19f, -3f), 5f, 0.2f, Mathf.Pi * 1.7f, 14, memory.Darkened(0.26f), 2f);
+            DrawLine(waterLine + new Vector2(-36f, 42f), waterLine + new Vector2(39f, 42f), memory.Darkened(0.38f), 1.2f);
+        }
+
+        if (progress >= 0.62f)
+        {
+            float phase = (progress - 0.62f) / 0.38f;
+            float alpha = MathF.Sin(Mathf.Clamp(phase, 0f, 1f) * MathF.PI) * 0.86f;
+            Color memoryGold = new(Gold.R, Gold.G, Gold.B, alpha);
+            Vector2 sequence = point + new Vector2(-30f, 58f);
+            DrawCircle(sequence, 3f, memoryGold);
+            DrawCircle(sequence + new Vector2(20f, 0f), 3f, memoryGold);
+            DrawCircle(sequence + new Vector2(40f, 0f), 3f, memoryGold);
+            DrawArc(sequence + new Vector2(60f, 0f), 4f, 0f, Mathf.Tau, 16, memoryGold.Darkened(0.62f), 1.2f);
+            DrawString(_font, point + new Vector2(-68f, 84f), "UM PULSO FALTA", HorizontalAlignment.Center, 136f, 11, memoryGold);
+        }
     }
 
     private void DrawPlayer()
     {
+        if (DrawNoahProductionSprite())
+            return;
+
         bool requiem = _cadence >= 90f;
-        Color body = requiem ? Ivory.Darkened(0.70f) : new Color(0.07f, 0.12f, 0.18f, 1f);
+        Vector2 forward = _playerFacing.LengthSquared() > 0.01f ? _playerFacing.Normalized() : Vector2.Right;
+        Vector2 side = new(-forward.Y, forward.X);
+        Color mantle = requiem ? Ivory : Ivory.Darkened(0.08f);
+        Color underlayer = new(0.025f, 0.035f, 0.055f, 1f);
+        Color face = new(0.018f, 0.024f, 0.04f, 1f);
+        Color eyes = requiem ? Spectral.Lightened(0.35f) : Ivory;
 
-        DrawCircle(_playerPosition + new Vector2(2f, 9f), 19f, new Color(0f, 0f, 0f, 0.28f));
-        DrawRect(new Rect2(_playerPosition + new Vector2(-12f, -13f), new Vector2(24f, 33f)), body);
-        DrawCircle(_playerPosition + new Vector2(0f, -19f), 11f, new Color(0.035f, 0.035f, 0.05f, 1f));
-        DrawLine(_playerPosition + new Vector2(-6f, -8f), _playerPosition - _playerFacing * 28f + new Vector2(-4f, 4f), Crimson, 4f);
+        DrawCircle(_playerPosition + new Vector2(2f, 10f), 20f, new Color(0f, 0f, 0f, 0.28f));
 
-        float pulse = 3.6f + (MathF.Sin(_elapsed * 6f) + 1f) * 0.8f;
-        DrawCircle(_playerPosition + new Vector2(4f, -4f), pulse, requiem ? Ivory : Spectral);
+        DrawLine(_playerPosition - forward * 2f + side * 7f, _playerPosition - forward * 15f + side * 8f, underlayer, 7f);
+        DrawLine(_playerPosition - forward * 2f - side * 7f, _playerPosition - forward * 15f - side * 8f, underlayer, 7f);
+        DrawCircle(_playerPosition - forward * 3f, 13f, underlayer);
 
-        Vector2 bladeStart = _playerPosition + _playerFacing * 13f;
-        Vector2 bladeEnd = _playerPosition + _playerFacing * 42f;
-        DrawLine(bladeStart, bladeEnd, requiem ? Ivory : Spectral, 3f);
+        DrawCircle(_playerPosition + forward * 2f, 16f, mantle);
+        DrawLine(_playerPosition - side * 14f, _playerPosition + side * 14f, mantle.Darkened(0.22f), 2f);
+
+        DrawNoahHair(forward, side);
+        DrawCircle(_playerPosition + forward * 7f, 10.5f, face);
+        DrawNoahEyes(forward, side, eyes, requiem);
+
+        Vector2 scarfStart = _playerPosition - forward * 3f + side * 10f;
+        Vector2 scarfTurn = _playerPosition - forward * 18f + side * 13f;
+        Vector2 scarfEnd = _playerPosition - forward * 31f + side * 7f;
+        DrawLine(scarfStart, scarfTurn, Crimson, 5f);
+        DrawLine(scarfTurn, scarfEnd, Crimson.Darkened(0.08f), 4f);
+
+        Vector2 leftHand = _playerPosition + forward * 3f + side * 14f;
+        Vector2 rightHand = _playerPosition + forward * 3f - side * 14f;
+        DrawCircle(leftHand, 3.5f, Ivory.Darkened(0.18f));
+        DrawCircle(rightHand, 3.5f, Ivory.Darkened(0.18f));
+
+        Vector2 bell = _playerPosition - forward * 5f;
+        DrawLine(bell - forward * 4f, bell, Gold.Darkened(0.20f), 1.5f);
+        DrawCircle(bell, 2.8f, Gold);
+        DrawLine(bell - side * 2f, bell + side * 2f, Gold.Darkened(0.42f), 1f);
+
+        float pulse = 2.8f + (MathF.Sin(_elapsed * 6f) + 1f) * 0.55f;
+        DrawCircle(_playerPosition + forward * 1f, pulse, requiem ? Ivory : Spectral.Darkened(0.08f));
+
+        DrawClamor(forward, side, leftHand, rightHand, requiem);
+
+        if (_clamorShiftDisplay > 0f)
+            DrawClamorShift(forward, side, leftHand, rightHand);
 
         if (requiem)
         {
-            DrawArc(_playerPosition, 28f, 0f, Mathf.Tau, 40, Spectral, 2f);
-            DrawLine(_playerPosition + new Vector2(-8f, -4f), _playerPosition + new Vector2(-20f, 12f), Gold, 1.5f);
+            DrawArc(_playerPosition, 29f, 0f, Mathf.Tau, 40, Spectral, 2f);
+            DrawArc(_playerPosition + forward * 7f, 13f, -0.45f, Mathf.Pi + 0.45f, 20, Ivory.Darkened(0.18f), 1.4f);
         }
 
         DrawPulseIndicator();
+    }
+
+    private void DrawClamor(Vector2 forward, Vector2 side, Vector2 leftHand, Vector2 rightHand, bool requiem)
+    {
+        Color core = Night.Lightened(0.20f);
+        Color edge = requiem ? Ivory : Spectral;
+
+        switch (_clamorForm)
+        {
+            case ClamorForm.Rest:
+            {
+                Vector2 center = rightHand + forward * 2f;
+                DrawLine(center - forward * 25f, center + forward * 42f, core, 5f);
+                DrawLine(center - forward * 24f, center + forward * 41f, edge.Darkened(0.18f), 1.6f);
+                DrawCircle(center + forward * 43f, 2.4f, Gold);
+                break;
+            }
+            case ClamorForm.DoubleBlade:
+            {
+                Vector2 center = rightHand + forward * 3f;
+                DrawLine(center - forward * 11f, center + forward * 11f, core, 5.5f);
+                DrawLine(center + forward * 10f, center + forward * 39f, edge, 3f);
+                DrawLine(center - forward * 10f, center - forward * 34f, edge.Darkened(0.12f), 3f);
+                DrawCircle(center, 2.2f, Gold.Darkened(0.10f));
+                break;
+            }
+            default:
+            {
+                DrawLine(leftHand - forward * 8f, leftHand + forward * 21f + side * 2f, core, 5f);
+                DrawLine(rightHand - forward * 8f, rightHand + forward * 21f - side * 2f, core, 5f);
+                DrawLine(leftHand - forward * 7f, leftHand + forward * 20f + side * 2f, edge, 1.5f);
+                DrawLine(rightHand - forward * 7f, rightHand + forward * 20f - side * 2f, edge.Darkened(0.10f), 1.5f);
+                break;
+            }
+        }
+    }
+
+    private void DrawClamorShift(Vector2 forward, Vector2 side, Vector2 leftHand, Vector2 rightHand)
+    {
+        float progress = 1f - _clamorShiftDisplay / ClamorShiftFeedbackDuration;
+        float alpha = 1f - Mathf.Clamp(progress, 0f, 1f);
+        Color spectral = new(Spectral.R, Spectral.G, Spectral.B, alpha * 0.72f);
+        Color gold = new(Gold.R, Gold.G, Gold.B, alpha * 0.86f);
+        Vector2 center = (leftHand + rightHand) * 0.5f + forward * 5f;
+        float radius = 10f + progress * 18f;
+
+        DrawArc(center, radius, -Mathf.Pi * 0.82f, Mathf.Pi * 0.82f, 24, spectral, 1.8f);
+        DrawCircle(center + forward * (7f + progress * 8f), 2.2f, gold);
+        DrawLine(leftHand - side * progress * 5f, rightHand + side * progress * 5f, spectral.Darkened(0.20f), 1.2f);
+    }
+
+    private void DrawNoahHair(Vector2 forward, Vector2 side)
+    {
+        Vector2 root = _playerPosition + forward * 7f;
+        Color hair = Ivory.Lightened(0.05f);
+        float flare = _dashRemaining > 0f ? 4f : 0f;
+
+        DrawLine(root - forward + side * 7f, root - forward * 7f + side * (18f + flare), hair, 4.2f);
+        DrawLine(root - forward * 3f + side * 4f, root - forward * 15f + side * (13f + flare), hair.Darkened(0.05f), 4.6f);
+        DrawLine(root - forward * 4f, root - forward * (18f + flare), hair, 4.8f);
+        DrawLine(root - forward * 3f - side * 4f, root - forward * 14f - side * (14f + flare), hair.Darkened(0.08f), 4.4f);
+        DrawLine(root - forward + side * 6f, root + forward * 6f + side * 3f, hair, 3.4f);
+        DrawLine(root - forward - side * 4f, root + forward * 6f - side * 2f, hair.Darkened(0.04f), 3.2f);
+    }
+
+    private void DrawNoahEyes(Vector2 forward, Vector2 side, Color color, bool requiem)
+    {
+        bool recoiling = _playerReaction > 0f;
+        bool perfect = _gradeDisplay > 0f && _lastGrade == TimingGrade.Perfect;
+        bool dashing = _dashRemaining > 0f;
+        float focus = Mathf.Clamp(_cadence / 100f, 0f, 1f);
+        float spread = requiem ? 3.7f : 4.7f - focus * 0.7f;
+        float tilt = requiem ? 2.2f : 1.7f + focus * 1.3f;
+        float leftInner = 1.2f;
+        float rightInner = 1.2f;
+
+        if (recoiling)
+        {
+            spread += 0.9f;
+            tilt = 0.8f;
+            leftInner = 0.2f;
+            rightInner = 1.8f;
+        }
+        else if (perfect)
+        {
+            spread += 0.7f;
+            tilt = 1.4f;
+        }
+        else if (dashing)
+        {
+            spread -= 0.4f;
+            tilt += 0.8f;
+        }
+        Vector2 center = _playerPosition + forward * 10f;
+        Vector2 eyeTilt = forward * tilt;
+        DrawLine(center + side * spread - eyeTilt, center + side * leftInner + eyeTilt * 0.35f, color, 2.6f);
+        DrawLine(center - side * spread - eyeTilt, center - side * rightInner + eyeTilt * 0.35f, color, recoiling ? 2.1f : 2.6f);
     }
 
     private void DrawPulseIndicator()
@@ -89,6 +278,9 @@ public partial class CombatPrototype
 
     private void DrawEnemy()
     {
+        if (_enemy.Health <= 0f)
+            return;
+
         Color mask = _enemy.HitFlash > 0f ? Ivory : new Color(0.58f, 0.60f, 0.59f, 1f);
         Color cloth = new Color(0.16f, 0.17f, 0.19f, 1f);
 
@@ -132,7 +324,7 @@ public partial class CombatPrototype
         Vector2 size = GetViewportRect().Size;
 
         DrawString(_font, new Vector2(28f, 30f), "RÉQUIEM // NAVE SILENCIOSA — PROTÓTIPO V2", HorizontalAlignment.Left, -1f, 18, Ivory.Darkened(0.12f));
-        DrawString(_font, new Vector2(28f, 54f), "WASD mover  ·  ESPAÇO esquiva  ·  1–4 cartas  ·  clique nas cartas  ·  R reiniciar", HorizontalAlignment.Left, -1f, 14, Ivory.Darkened(0.42f));
+        DrawString(_font, new Vector2(28f, 54f), "WASD/analógico mover  ·  ESPAÇO/A esquiva  ·  Q/LB Clamor  ·  1–4/D-pad cartas  ·  ESC/START pausa", HorizontalAlignment.Left, -1f, 14, Ivory.Darkened(0.42f));
 
         Rect2 healthBack = new(28f, 76f, 210f, 12f);
         DrawRect(healthBack, Night.Lightened(0.11f));
@@ -146,7 +338,25 @@ public partial class CombatPrototype
         DrawString(_font, new Vector2(265f, 110f), $"CADÊNCIA  {GetCadenceRank()}  {MathF.Round(_cadence)}", HorizontalAlignment.Left, 300f, 14, cadenceColor);
 
         string accuracy = _actions == 0 ? "—" : $"{MathF.Round((_goodActions + _perfectActions) * 100f / _actions)}%";
-        DrawString(_font, new Vector2(size.X - 265f, 32f), $"ABATES {_kills}   //   NO PULSO {accuracy}", HorizontalAlignment.Left, 240f, 14, Ivory.Darkened(0.28f));
+        DrawString(_font, new Vector2(size.X - 325f, 32f), $"PROVA {_kills}/{TargetKills}   //   NO PULSO {accuracy}", HorizontalAlignment.Left, 300f, 14, Ivory.Darkened(0.28f));
+
+        Color clamorColor = _clamorShiftDisplay > 0f ? Gold : Spectral.Darkened(0.08f);
+        float clamorX = Mathf.Clamp(size.X * 0.5f - 155f, 290f, MathF.Max(290f, size.X - 650f));
+        DrawString(_font, new Vector2(clamorX, 88f), $"CLAMOR  //  {GetClamorFormName()}", HorizontalAlignment.Left, 310f, 13, clamorColor);
+        DrawString(_font, new Vector2(clamorX, 108f), GetClamorFormRole(), HorizontalAlignment.Left, 250f, 12, Ivory.Darkened(0.46f));
+
+        if (IsBellMicroEchoActive)
+        {
+            DrawString(_font, new Vector2(size.X - 356f, 116f), "MICRO-ECO  //  MOVIMENTO LIVRE", HorizontalAlignment.Right, 328f, 13, Spectral.Lightened(0.12f));
+        }
+        else if (_bellResponseTriggered)
+        {
+            DrawString(_font, new Vector2(size.X - 356f, 116f), "ECO DO SINO  //  ENCONTRADO", HorizontalAlignment.Right, 328f, 13, Gold);
+        }
+        else if (_kills > 0)
+        {
+            DrawString(_font, new Vector2(size.X - 356f, 116f), "PISTA  //  O SINO VIBRA PERTO DA PORTA", HorizontalAlignment.Right, 328f, 13, Gold.Darkened(0.12f));
+        }
 
         if (_gradeDisplay > 0f)
         {
@@ -162,6 +372,86 @@ public partial class CombatPrototype
 
         for (int i = 0; i < 4; i++)
             DrawCardSlot(i);
+    }
+
+    private void DrawSessionOverlay()
+    {
+        if (IsSessionRunning || IsSessionBriefing)
+            return;
+
+        Vector2 size = GetViewportRect().Size;
+        DrawRect(new Rect2(Vector2.Zero, size), new Color(0.01f, 0.015f, 0.025f, 0.76f));
+
+        Rect2 panel = new(size * 0.5f - new Vector2(275f, 132f), new Vector2(550f, 264f));
+        Color accent = _sessionState == SessionState.Victory ? Spectral : Crimson;
+        DrawRect(panel, new Color(0.025f, 0.03f, 0.05f, 0.98f));
+        DrawRect(panel, accent.Darkened(0.15f), false, 2f);
+        DrawRect(new Rect2(panel.Position, new Vector2(6f, panel.Size.Y)), accent);
+
+        string title = _sessionState == SessionState.Victory
+            ? "O PRIMEIRO ECO RESPONDEU"
+            : "A NAVE VOLTOU AO SILÊNCIO";
+        string subtitle = _sessionState == SessionState.Victory
+            ? (_bellResponseTriggered
+                ? "Três Peregrinos cederam. A porta da Catedral reconhece o fragmento."
+                : "Três Peregrinos cederam, mas um eco continua oculto junto à porta.")
+            : "O fragmento ainda pulsa. Recomece e leia os sinais do Peregrino.";
+
+        float pulseAccuracy = _actions == 0 ? 0f : (_goodActions + _perfectActions) * 100f / _actions;
+        DrawString(_font, panel.Position + new Vector2(30f, 48f), title, HorizontalAlignment.Left, panel.Size.X - 60f, 24, Ivory);
+        DrawString(_font, panel.Position + new Vector2(30f, 82f), subtitle, HorizontalAlignment.Left, panel.Size.X - 60f, 14, Ivory.Darkened(0.32f));
+        DrawString(_font, panel.Position + new Vector2(30f, 124f), $"TEMPO {FormatSessionTime()}   ·   PULSO {pulseAccuracy:0}%   ·   PERFEITOS {_perfectActions}", HorizontalAlignment.Left, panel.Size.X - 60f, 15, accent);
+        DrawString(_font, panel.Position + new Vector2(30f, 164f), $"CADÊNCIA FINAL {GetCadenceRank()}   ·   AÇÕES {_actions}", HorizontalAlignment.Left, panel.Size.X - 60f, 14, Ivory.Darkened(0.18f));
+        string discovery = _bellResponseTriggered ? "ECO DO SINO  ENCONTRADO" : "ECO DO SINO  OCULTO";
+        DrawString(_font, panel.Position + new Vector2(30f, 198f), discovery, HorizontalAlignment.Left, panel.Size.X - 60f, 14, _bellResponseTriggered ? Gold : Ivory.Darkened(0.48f));
+        DrawString(_font, panel.Position + new Vector2(30f, 238f), "R  REINICIAR A PROVA", HorizontalAlignment.Left, panel.Size.X - 60f, 16, Gold);
+    }
+
+    private void DrawBriefingOverlay()
+    {
+        if (!IsSessionBriefing)
+            return;
+
+        Vector2 size = GetViewportRect().Size;
+        DrawRect(new Rect2(Vector2.Zero, size), new Color(0.01f, 0.015f, 0.025f, 0.86f));
+
+        Rect2 panel = new(size * 0.5f - new Vector2(310f, 174f), new Vector2(620f, 348f));
+        DrawRect(panel, new Color(0.025f, 0.03f, 0.05f, 0.99f));
+        DrawRect(panel, Gold.Darkened(0.18f), false, 2f);
+        DrawRect(new Rect2(panel.Position, new Vector2(6f, panel.Size.Y)), Gold);
+
+        DrawString(_font, panel.Position + new Vector2(34f, 48f), "PROVA DO PRIMEIRO ECO", HorizontalAlignment.Left, panel.Size.X - 68f, 25, Ivory);
+        DrawString(_font, panel.Position + new Vector2(34f, 80f), "Supere três Peregrinos. O Pulso ajuda, mas nunca obriga.", HorizontalAlignment.Left, panel.Size.X - 68f, 14, Ivory.Darkened(0.30f));
+
+        DrawString(_font, panel.Position + new Vector2(34f, 128f), "MOVER", HorizontalAlignment.Left, 120f, 11, Spectral);
+        DrawString(_font, panel.Position + new Vector2(170f, 128f), "WASD / SETAS / ANALÓGICO", HorizontalAlignment.Left, 360f, 14, Ivory.Darkened(0.12f));
+        DrawString(_font, panel.Position + new Vector2(34f, 166f), "ESQUIVAR", HorizontalAlignment.Left, 120f, 11, Spectral);
+        DrawString(_font, panel.Position + new Vector2(170f, 166f), "ESPAÇO / A", HorizontalAlignment.Left, 360f, 14, Ivory.Darkened(0.12f));
+        DrawString(_font, panel.Position + new Vector2(34f, 204f), "CLAMOR", HorizontalAlignment.Left, 120f, 11, Spectral);
+        DrawString(_font, panel.Position + new Vector2(170f, 204f), "Q / LB", HorizontalAlignment.Left, 360f, 14, Ivory.Darkened(0.12f));
+        DrawString(_font, panel.Position + new Vector2(34f, 242f), "CARTAS", HorizontalAlignment.Left, 120f, 11, Spectral);
+        DrawString(_font, panel.Position + new Vector2(170f, 242f), "1–4 / DIRECIONAL / CLIQUE", HorizontalAlignment.Left, 360f, 14, Ivory.Darkened(0.12f));
+
+        DrawString(_font, panel.Position + new Vector2(34f, 306f), "ENTER / A / CLIQUE   INICIAR", HorizontalAlignment.Left, panel.Size.X - 68f, 17, Gold);
+    }
+
+    private void DrawPauseOverlay()
+    {
+        if (!_prototypePaused)
+            return;
+
+        Vector2 size = GetViewportRect().Size;
+        DrawRect(new Rect2(Vector2.Zero, size), new Color(0.01f, 0.015f, 0.025f, 0.82f));
+
+        Rect2 panel = new(size * 0.5f - new Vector2(245f, 102f), new Vector2(490f, 204f));
+        DrawRect(panel, new Color(0.025f, 0.03f, 0.05f, 0.98f));
+        DrawRect(panel, Spectral.Darkened(0.18f), false, 2f);
+        DrawRect(new Rect2(panel.Position, new Vector2(6f, panel.Size.Y)), Spectral);
+
+        DrawString(_font, panel.Position + new Vector2(30f, 48f), "PROVA SUSPENSA", HorizontalAlignment.Left, panel.Size.X - 60f, 24, Ivory);
+        DrawString(_font, panel.Position + new Vector2(30f, 82f), "O Pulso, o Peregrino e o cronômetro aguardam.", HorizontalAlignment.Left, panel.Size.X - 60f, 14, Ivory.Darkened(0.32f));
+        DrawString(_font, panel.Position + new Vector2(30f, 126f), "ESC / START   RETOMAR", HorizontalAlignment.Left, panel.Size.X - 60f, 16, Spectral);
+        DrawString(_font, panel.Position + new Vector2(30f, 164f), "R / BACK      REINICIAR A PROVA", HorizontalAlignment.Left, panel.Size.X - 60f, 14, Gold);
     }
 
     private void DrawCardSlot(int index)

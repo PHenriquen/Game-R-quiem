@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Painel local para testar unidade visual, silhueta e leitura do elenco de Réquiem." />
+  <title>Réquiem — Cast Board</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top shell">
+    <div>
+      <p class="eyebrow">Réquiem / visual development</p>
+      <h1>Cast Board</h1>
+      <p class="lede">Dois benchmarks para testar universo, diferença e leitura antes de ampliar o elenco.</p>
+    </div>
+    <div class="modes" role="group" aria-label="Modo de inspeção">
+      <button class="mode active" data-mode="color" aria-pressed="true">Cor</button>
+      <button class="mode" data-mode="silhouette" aria-pressed="false">Silhueta</button>
+      <button class="mode" data-mode="sprite" aria-pressed="false">64 px</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="rulebar" aria-label="Regra compartilhada">
+      <span>regra de rosto</span>
+      <strong>Noah: escuro + ivory</strong>
+      <i aria-hidden="true"></i>
+      <strong>elenco mascarado: claro + preto</strong>
+    </section>
+
+    <section class="cast-grid" id="castGrid">
+      <article class="character noah">
+        <div class="portrait-wrap">
+          <svg class="portrait" viewBox="0 0 320 360" role="img" aria-labelledby="noah-title noah-desc">
+            <title id="noah-title">Blockout visual de Noah</title>
+            <desc id="noah-desc">Personagem compacto com cabelo branco, rosto escuro, olhos claros, manto e cachecol.</desc>
+            <path class="shadow" d="M80 318 Q160 344 244 316 Q230 350 82 346Z" />
+            <path class="scarf" d="M107 176 Q60 187 33 239 Q77 218 119 209Z" />
+            <path class="under" d="M123 194 Q96 255 112 318 L148 286 L162 325 L197 286 L221 318 Q228 247 200 194Z" />
+            <path class="mantle" d="M105 177 Q160 148 217 179 L239 246 Q198 230 161 242 Q120 228 83 246Z" />
+            <path class="hair" d="M103 107 L79 79 L116 84 L110 45 L139 72 L158 30 L174 70 L210 42 L202 83 L242 73 L218 111Z" />
+            <path class="face" d="M111 100 Q160 67 210 101 Q223 137 203 177 Q160 205 117 177 Q96 139 111 100Z" />
+            <path class="eye light" d="M124 125 Q140 112 151 125 Q140 146 124 137Z" />
+            <path class="eye light" d="M169 125 Q184 111 199 125 Q188 145 171 137Z" />
+            <path class="clamor-core" d="M220 194 L269 278" />
+            <path class="clamor-edge" d="M231 213 L276 290" />
+            <circle class="gold" cx="228" cy="207" r="5" />
+            <circle class="gold" cx="161" cy="188" r="5" />
+          </svg>
+        </div>
+        <div class="content">
+          <div class="identity"><span>protagonista</span><h2>Noah</h2></div>
+          <p>Cabelo · olhos · manto · cachecol · sino · Clamor</p>
+          <dl><div><dt>forma</dt><dd>compacta / elástica</dd></div><div><dt>rosto</dt><dd>escuro / olhos ivory</dd></div><div><dt>acento</dt><dd>carmesim</dd></div></dl>
+        </div>
+      </article>
+
+      <article class="character anna">
+        <div class="portrait-wrap">
+          <svg class="portrait" viewBox="0 0 320 360" role="img" aria-labelledby="anna-title anna-desc">
+            <title id="anna-title">Blockout visual de Anna</title>
+            <desc id="anna-desc">Personagem felina compacta com máscara clara e angular, olhos escuros, massa ondulada castanha e acento carmesim.</desc>
+            <path class="shadow" d="M72 320 Q160 344 250 316 Q232 352 76 346Z" />
+            <path class="tail" d="M210 250 Q287 235 267 166 Q295 213 264 285 Q235 305 198 292Z" />
+            <path class="tail second" d="M203 262 Q266 281 282 229 Q286 289 226 318 L190 294Z" />
+            <path class="body" d="M108 188 Q82 260 101 322 L147 292 L169 326 L207 287 L232 316 Q236 247 207 186Z" />
+            <path class="mane" d="M102 93 Q75 104 86 132 Q61 151 84 177 Q69 209 110 218 Q126 241 155 225 Q184 245 207 219 Q244 212 229 178 Q254 149 226 130 Q235 98 202 91 Q179 63 154 82 Q126 62 102 93Z" />
+            <path class="ear mask" d="M112 106 L97 52 L145 83 L136 105Z" />
+            <path class="ear mask" d="M181 84 L224 51 L209 108 L187 104Z" />
+            <path class="mask" d="M106 96 Q159 66 215 96 L220 126 L207 142 L212 165 L190 184 L162 194 L132 184 L108 164 L114 143 L103 126Z" />
+            <path class="eye dark" d="M116 120 L149 110 L154 124 Q140 149 119 137Z" />
+            <path class="eye dark" d="M169 124 L175 110 L207 120 L204 137 Q183 149 169 124Z" />
+            <circle class="green-glint" cx="140" cy="124" r="3" />
+            <circle class="green-glint" cx="186" cy="124" r="3" />
+            <path class="forehead" d="M151 91 L162 75 L173 91 L162 102Z" />
+          </svg>
+        </div>
+        <div class="content">
+          <div class="identity"><span>benchmark de elenco</span><h2>Anna</h2></div>
+          <p>Máscara felina angular · massa ondulada · olhos pretos · caudas agrupadas</p>
+          <dl><div><dt>forma</dt><dd>acolhedora / segura</dd></div><div><dt>rosto</dt><dd>claro / campos pretos</dd></div><div><dt>acento</dt><dd>verde contido + carmesim</dd></div></dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="checks">
+      <p class="eyebrow">gate de aprovação</p>
+      <h2>Se falhar em um destes testes, ainda é estudo.</h2>
+      <div class="check-grid"><span>silhueta única</span><span>espécie legível</span><span>64 px funcional</span><span>até 3 âncoras</span><span>objeto com função</span><span>diferença sem perder família</span></div>
+    </section>
+  </main>
+
+  <footer class="shell">Concept blockouts · não são sprites finais nem confirmação de presença na campanha.</footer>
+  <script src="cast-board.js"></script>
+</body>
+</html>

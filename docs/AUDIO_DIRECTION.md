@@ -228,7 +228,7 @@ Inimigos precisam ser legíveis sem olhar para eles o tempo inteiro.
 
 - tecido/água nos passos;
 - telegraph com som curto e reconhecível;
-- golpe não pode usar o mesmo timbre de Nox.
+- golpe não pode usar o mesmo timbre de Noah.
 
 ### Cantor Partido
 
@@ -253,7 +253,7 @@ Quando uma voz humana aparece depois de horas de poucos diálogos, ela ganha pes
 
 ## 12. Segunda presença
 
-A segunda pessoa possui um elemento musical próprio que é, na verdade, metade complementar do motivo de Nox.
+A segunda pessoa possui um elemento musical próprio que é, na verdade, metade complementar do motivo de Noah.
 
 Não tocar a versão completa cedo.
 
@@ -262,7 +262,7 @@ Pistas possíveis:
 - mesma nota com timbre diferente;
 - resposta em intervalo;
 - motivo invertido;
-- nota final sustentada que Nox nunca completa sozinho.
+- nota final sustentada que Noah nunca completa sozinho.
 
 O jogador pode reconhecer musicalmente a conexão antes de entender narrativamente.
 

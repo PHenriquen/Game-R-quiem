@@ -2,7 +2,7 @@
 
 > **Título internacional:** REQUIEM: ECHOES OF SILENCE
 >
-> **Pitch:** action roguelite 2D solitário em que Nox se move livremente, luta através de uma mão de cartas em tempo real e devolve música ao mundo conforme domina o combate.
+> **Pitch:** action roguelite 2D solitário em que Noah se move livremente, luta através de uma mão de cartas em tempo real e devolve música ao mundo conforme domina o combate.
 
 ## 1. Promessa do jogo
 
@@ -30,19 +30,19 @@ A primeira versão não tenta vencer outros roguelites em quantidade. Precisa pr
 
 O personagem deve parecer pequeno diante da arquitetura, mas nunca pequeno demais para leitura de combate.
 
-## 3. Nox
+## 3. Noah
 
 Único personagem jogável.
 
 ### Visual
 
 - porte leve;
-- cabelo escuro irregular;
+- cabelo branco estilizado, compacto, com pontas relaxadas e duas franjas frontais;
 - roupa curta assimétrica azul-negra;
 - detalhe carmesim controlado;
 - pequeno sino dourado;
 - fragmento azul-espectral próximo ao coração;
-- arma fina: **Agulha de Vesper**.
+- arma modular: **Clamor**, legível em três formas.
 
 Silhueta antes de detalhe. Evitar excesso de acessórios.
 
@@ -54,7 +54,7 @@ Ele não comenta tudo que vê. Quando fala, deve ser curto e específico.
 
 ## 4. Loop
 
-1. Nox desperta/retorna ao Santuário do Último Som.
+1. Noah desperta/retorna ao Santuário do Último Som.
 2. Observa mudanças no espaço e escolhe a configuração inicial disponível.
 3. Entra na Catedral Afogada.
 4. Explora uma sala autoral.
@@ -71,7 +71,7 @@ Não há obrigação de conversar com NPCs no hub.
 
 **Movimento é direto. Ataque é uma decisão de mão.**
 
-Nox se move livremente e possui uma evasão universal. As principais ações ofensivas são cartas visíveis na HUD, usadas em tempo real.
+Noah se move livremente e possui uma evasão universal. As principais ações ofensivas são cartas visíveis na HUD, usadas em tempo real.
 
 A inspiração estrutural é a combinação de ação livre com seleção rápida de ações; não reproduzir interface, economia ou gacha de jogos mobile.
 
@@ -79,6 +79,7 @@ A inspiração estrutural é a combinação de ação livre com seleção rápid
 
 - mover: WASD / analógico;
 - evasão: botão direto;
+- Clamor: alternar forma por botão direto;
 - cartas: quatro slots/botões;
 - pausa e reorganização apenas fora da pressão imediata.
 
@@ -110,6 +111,16 @@ A pergunta durante a luta deve ser:
 - 2× Sino Partido.
 
 Antes de criar dezenas de cartas, essas quatro ações precisam ser diferentes pelo toque, timing e utilidade.
+
+### Clamor
+
+Clamor é a arma de Noah e traduz o princípio de ressonância: uma estrutura simples muda a relação entre suas partes para produzir funções diferentes.
+
+- **Bastão / Repouso:** forma longa de apoio, alcance e travessia;
+- **Lâmina dupla:** pressão em arco e controle próximo;
+- **Dois bastões:** mobilidade, sequência e futura interação com escalada.
+
+No protótipo atual, `Q` percorre as três formas e altera sua leitura visual. Modificadores de combate e travessia permanecem fora do balanceamento até o primeiro playtest no Godot.
 
 ## 7. Quatro ações-base
 
@@ -189,7 +200,7 @@ RÉQUIEM é o grande momento de presença do combate.
 
 Não é transformação destrutiva.
 
-Por alguns segundos Nox parece lembrar exatamente como lutar.
+Por alguns segundos Noah parece lembrar exatamente como lutar.
 
 Mudanças:
 
@@ -339,11 +350,11 @@ A história é contada prioritariamente por:
 5. Ecos curtos;
 6. texto.
 
-Nox é a única presença humana clara durante quase toda a experiência.
+Noah é a única presença aliada clara durante quase toda a experiência.
 
 Uma segunda pessoa aparece indiretamente ao longo da história e fisicamente apenas perto do final.
 
-A pergunta inicial é se Nox causou ou tentou impedir o colapso do Coração. A pergunta maior é por que ele escolheu esquecer.
+A pergunta inicial é se Noah causou ou tentou impedir o colapso do Coração. A pergunta maior é por que ele escolheu esquecer.
 
 Ver `docs/STORY.md`.
 
@@ -457,7 +468,7 @@ Planejar desde cedo:
 
 ### Fase A — Combat toy
 
-- Nox provisório;
+- Noah provisório;
 - Nave Silenciosa provisória;
 - movimento;
 - evasão;
@@ -509,7 +520,7 @@ Planejar desde cedo:
 
 Antes de produzir muito conteúdo, deve ser possível mostrar 30 segundos mudos do jogo e reconhecer:
 
-- Nox;
+- Noah;
 - as quatro cartas;
 - o Pulso;
 - a escalada de Cadência;

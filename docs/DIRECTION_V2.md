@@ -4,7 +4,7 @@
 
 ## 1. Identidade em uma frase
 
-**Réquiem é um action roguelite 2D solitário em que Nox se move livremente, mas luta através de uma mão de cartas que representa técnicas e memórias; jogar bem devolve música, cor e presença a um mundo que esqueceu como soar.**
+**Réquiem é um action roguelite 2D solitário em que Noah se move livremente, mas luta através de uma mão de cartas que representa técnicas e memórias; jogar bem devolve música, cor e presença a um mundo que esqueceu como soar.**
 
 A fantasia principal do jogador é tripla:
 
@@ -18,7 +18,7 @@ A fantasia principal do jogador é tripla:
 
 Pequeno, observado e curioso.
 
-O mundo é maior que Nox. Corredores, sinos, portas, estátuas e objetos contam histórias sem pedir que alguém pare para explicar tudo.
+O mundo é maior que Noah. Corredores, sinos, portas, estátuas e objetos contam histórias sem pedir que alguém pare para explicar tudo.
 
 ### Descoberta
 
@@ -28,7 +28,7 @@ Segredos podem depender de posição, sequência de sinos, uso de determinada ca
 
 ### Combate
 
-Nox começa contido. O jogador conquista a presença.
+Noah começa contido. O jogador conquista a presença.
 
 Os melhores momentos de aura vêm de:
 
@@ -96,7 +96,7 @@ Referência para:
 
 ## 4. Regra de elenco
 
-**Nox é a única presença humana clara durante quase todo o jogo.**
+**Noah é a única presença aliada clara durante quase todo o jogo.**
 
 Não existe hub cheio de NPCs.
 
@@ -104,7 +104,7 @@ O Santuário do Último Som é vazio, funcional e íntimo. Seus "personagens" s�
 
 ### Segundo personagem
 
-Existe uma segunda pessoa ligada a Nox, mas ela deve permanecer como:
+Existe uma segunda pessoa ligada a Noah, mas ela deve permanecer como:
 
 - voz incompleta;
 - silhueta;
@@ -115,7 +115,7 @@ Existe uma segunda pessoa ligada a Nox, mas ela deve permanecer como:
 
 Ela só aparece fisicamente perto do final da história.
 
-**O nome definitivo dessa pessoa não será fechado antes de a relação com Nox estar fechada.**
+**O nome definitivo dessa pessoa não será fechado antes de a relação com Noah estar fechada.**
 
 ## 5. Narrativa central
 
@@ -125,7 +125,7 @@ Quando o Coração executou o chamado **Último Acorde**, sua música foi interr
 
 O silêncio não significa ausência de áudio. É uma condição do mundo: memórias deixam de terminar, lugares repetem ações e pessoas perdem continuidade.
 
-Nox desperta com um fragmento do Coração no peito.
+Noah desperta com um fragmento do Coração no peito.
 
 Ele não sabe:
 
@@ -136,11 +136,11 @@ Ele não sabe:
 
 A pergunta inicial é:
 
-**Nox causou a ruptura ou tentou impedi-la?**
+**Noah causou a ruptura ou tentou impedi-la?**
 
 A pergunta maior da história é:
 
-**por que Nox escolheu esquecer?**
+**por que Noah escolheu esquecer?**
 
 ## 6. Tema e mensagens
 
@@ -187,7 +187,7 @@ Estas regiões são direção futura. O vertical slice continua focado apenas na
 
 As cartas **não são um menu de buffs**.
 
-Elas são ações que Nox sabe executar naquele momento.
+Elas são ações que Noah sabe executar naquele momento.
 
 Movimento e evasão básica permanecem diretos para preservar responsividade. Ataques, técnicas e ações ofensivas especiais vêm da mão.
 
@@ -237,7 +237,7 @@ Ela cai principalmente ao receber dano ou quebrar o fluxo.
 
 Não é transformação explosiva.
 
-É Nox parecendo, por alguns segundos, lembrar exatamente quem era.
+É Noah parecendo, por alguns segundos, lembrar exatamente quem era.
 
 Mudanças sugeridas:
 
@@ -250,19 +250,19 @@ Mudanças sugeridas:
 
 A sensação deve ser de **controle absoluto**, não caos.
 
-## 11. Nox — direção visual
+## 11. Noah — direção visual
 
-Nox precisa funcionar como silhueta antes de funcionar como ilustração.
+Noah precisa funcionar como silhueta antes de funcionar como ilustração.
 
 Base atual:
 
 - jovem, porte leve;
-- cabelo escuro irregular;
+- cabelo branco estilizado, compacto, com pontas relaxadas e duas franjas frontais;
 - roupa curta assimétrica azul-negra;
 - detalhe carmesim usado com moderação;
 - pequeno sino dourado como assinatura;
 - fragmento azul-espectral próximo ao coração;
-- Agulha de Vesper fina e comprida.
+- Clamor modular, reconhecível como a mesma arma em Bastão/Repouso, Lâmina dupla e Dois bastões.
 
 ### Regra de design
 
@@ -285,14 +285,14 @@ Direção de escala:
 - tile-base: 32 px;
 - personagem desenhado para leitura equivalente a 48–64 px de altura;
 - efeitos podem romper a grade;
-- chefes podem ser 2–4× maiores que Nox;
+- chefes podem ser 2–4× maiores que Noah;
 - arquitetura deve parecer grande sem exigir mapas gigantes.
 
 ### Paleta funcional
 
 - Night black `#090B12` — silêncio / fundo;
 - Ivory `#E9E2D0` — vazio / máscara / leitura;
-- Spectral blue `#54C7CE` — memória / Nox / Eco;
+- Spectral blue `#54C7CE` — memória / Noah / Eco;
 - Aged gold `#C4A35A` — lembrança preservada / sino / segurança;
 - Crimson `#9E1738` — risco / vínculo / ruptura;
 - Veil violet `#6651A6` — distorção / mobilidade.
@@ -315,7 +315,7 @@ Exemplo: tocar quatro sinos em uma ordem percebida anteriormente abre uma passag
 
 Os mais importantes.
 
-Exemplo: uma sala sem indicação no mapa só abre se Nox permanecer em silêncio durante uma sequência inteira de Pulsos. Dentro dela existe uma memória curta que muda a interpretação de uma cena anterior.
+Exemplo: uma sala sem indicação no mapa só abre se Noah permanecer em silêncio durante uma sequência inteira de Pulsos. Dentro dela existe uma memória curta que muda a interpretação de uma cena anterior.
 
 **Segredo bom não existe só para dar loot.**
 
@@ -325,7 +325,7 @@ O objetivo não é construir o jogo inteiro. É provar a identidade.
 
 Conteúdo:
 
-- Nox;
+- Noah;
 - 1 arena jogável: **Nave Silenciosa**;
 - movimento livre;
 - evasão universal;
@@ -374,6 +374,6 @@ Ordem:
 6. inimigo;
 7. arena;
 8. som adaptativo;
-9. arte de Nox;
+9. arte de Noah;
 10. primeira sala narrativa;
 11. expansão.

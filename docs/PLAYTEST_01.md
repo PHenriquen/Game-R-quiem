@@ -11,11 +11,23 @@
 
 Controles atuais:
 
-- `WASD` — mover;
-- `Espaço` — esquiva universal;
-- `1–4` — usar carta;
+- `WASD` / setas / analógico esquerdo — mover;
+- `Espaço` / botão sul (`A`) — esquiva universal;
+- `Q` / `LB` — alternar a forma de Clamor;
+- `1–4` / direcional digital — usar carta;
 - clique — usar carta;
-- `R` — reiniciar arena.
+- `Esc` / `Start` — pausar e retomar;
+- `R` / `Back` — reiniciar arena.
+
+A pausa precisa congelar cronômetro, Pulso, inimigo, cartas e efeitos transitórios. Reiniciar a partir da pausa deve começar uma tentativa limpa e já retomada.
+
+Ao encontrar o micro‑Eco do sino, o Pulso local e a timeline também devem congelar durante toda a lembrança. Pausar e retomar a tela nesse intervalo não pode adiantar o ritmo; quando o micro‑Eco terminar, ambos retomam da mesma fase.
+
+Ao vencer ou perder, arena, Pulso e timeline devem permanecer estáticos atrás do relatório. `R` / `Back` inicia uma nova tentativa com todos os relógios zerados e ativos novamente.
+
+Na primeira abertura, o briefing deve manter arena, Peregrino, Pulso e cronômetro imóveis até `Enter`, `A` ou clique. Depois do primeiro início, `R` / `Back` reinicia diretamente a tentativa para reduzir atrito de repetição.
+
+Ainda no briefing, pressionar `R` / `Back` ou `Esc` / `Start` não pode dispensar a tela nem iniciar os relógios. Somente a ação de confirmação começa a primeira tentativa.
 
 ## Passo 0 — Compilação
 
@@ -200,7 +212,7 @@ Marcar:
 - [ ] ataque impossível de ler;
 - [ ] ataque fácil demais;
 - [ ] inimigo passa tempo demais andando;
-- [ ] inimigo cola demais em Nox;
+- [ ] inimigo cola demais em Noah;
 - [ ] esquiva responde bem ao ataque;
 - [ ] dano recebido parece claro.
 
@@ -273,7 +285,7 @@ Notas rápidas:
 
 Estes pontos são conscientes e **não** devem ser confundidos com feature final:
 
-- o toy ainda usa formas primitivas, não sprite final de Nox;
+- o toy ainda usa formas primitivas, não sprite final de Noah;
 - não há trilha adaptativa ligada à cena;
 - `PulseClock` de produção existe, mas o toy ainda usa seu relógio provisório interno;
 - efeitos de Eco de algumas cartas ainda são simplificados;

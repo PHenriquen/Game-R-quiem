@@ -21,6 +21,13 @@ public partial class CombatPrototype : Node2D
         BrokenBell
     }
 
+    private enum ClamorForm
+    {
+        Rest,
+        DoubleBlade,
+        TwinBatons
+    }
+
     private sealed class CardDefinition
     {
         public CardKind Kind { get; init; }
@@ -125,6 +132,9 @@ public partial class CombatPrototype : Node2D
     private float _requiemLock;
     private TimingGrade _lastGrade = TimingGrade.Free;
     private float _gradeDisplay;
+    private float _playerReaction;
+    private ClamorForm _clamorForm = ClamorForm.Rest;
+    private float _clamorShiftDisplay;
     private string _lastAction = string.Empty;
     private EnemyState _enemy = new();
     private int _kills;
@@ -132,25 +142,42 @@ public partial class CombatPrototype : Node2D
     private int _goodActions;
     private int _perfectActions;
     private Rect2 _arena;
+    private bool _prototypePaused;
 
     private const float PlayerSpeed = 245f;
     private const float BeatPeriod = 0.60f; // 100 BPM
     private const float PerfectWindow = 0.065f;
     private const float GoodWindow = 0.140f;
+    private const float ClamorShiftFeedbackDuration = 0.36f;
 
     public override void _Ready()
     {
-        ResetArena();
-        GD.Print("Réquiem combat prototype ready: WASD, Espaço, 1-4, R.");
+        PrototypeInput.EnsureDefaultBindings();
+        ResetArena(true);
+        GD.Print("Réquiem combat prototype ready: teclado, mouse ou gamepad.");
     }
 
     public override void _Process(double delta)
     {
+        if (_prototypePaused || IsSessionBriefing || IsSessionResolved)
+        {
+            QueueRedraw();
+            return;
+        }
+
         float dt = (float)delta;
-        _elapsed += dt;
+        if (!IsBellMicroEchoActive)
+            _elapsed += dt;
 
         UpdateTransient(dt);
         UpdateCards(dt);
+        UpdateSession(dt);
+
+        if (!IsSessionRunning)
+        {
+            QueueRedraw();
+            return;
+        }
 
         if (_hitStop > 0f)
         {
@@ -160,24 +187,59 @@ public partial class CombatPrototype : Node2D
         }
 
         UpdatePlayer(dt);
-        UpdateEnemy(dt);
-        UpdateCadence(dt);
+        if (!IsBellMicroEchoActive)
+        {
+            UpdateEnemy(dt);
+            UpdateCadence(dt);
+        }
         QueueRedraw();
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventKey key && key.Pressed && !key.Echo)
+        bool mousePressed = @event is InputEventMouseButton mouseStart
+            && mouseStart.Pressed
+            && mouseStart.ButtonIndex == MouseButton.Left;
+        if (IsSessionBriefing && (@event.IsActionPressed(PrototypeInput.Confirm, false) || mousePressed))
         {
-            Key physical = key.PhysicalKeycode;
-
-            if (physical == (Key)49) TryPlayCard(0); // 1
-            if (physical == (Key)50) TryPlayCard(1); // 2
-            if (physical == (Key)51) TryPlayCard(2); // 3
-            if (physical == (Key)52) TryPlayCard(3); // 4
-            if (physical == (Key)32) TryDash();      // Space
-            if (physical == (Key)82) ResetArena();   // R
+            BeginBriefedSession();
+            GetViewport().SetInputAsHandled();
+            return;
         }
+
+        if (IsSessionBriefing)
+            return;
+
+        if (@event.IsActionPressed(PrototypeInput.Pause, false))
+        {
+            TogglePrototypePause();
+            GetViewport().SetInputAsHandled();
+            return;
+        }
+
+        if (@event.IsActionPressed(PrototypeInput.Restart, false))
+        {
+            ResetArena(false);
+            return;
+        }
+
+        if (_prototypePaused)
+            return;
+
+        for (int i = 0; i < PrototypeInput.CardActions.Length; i++)
+        {
+            if (!@event.IsActionPressed(PrototypeInput.CardActions[i], false))
+                continue;
+
+            TryPlayCard(i);
+            return;
+        }
+
+        if (@event.IsActionPressed(PrototypeInput.Dash, false))
+            TryDash();
+
+        if (@event.IsActionPressed(PrototypeInput.ShiftClamor, false))
+            CycleClamor();
 
         if (@event is not InputEventMouseButton mouse || !mouse.Pressed || mouse.ButtonIndex != MouseButton.Left)
             return;
@@ -193,7 +255,7 @@ public partial class CombatPrototype : Node2D
         }
     }
 
-    private void ResetArena()
+    private void ResetArena(bool showBriefing)
     {
         Vector2 size = GetViewportRect().Size;
         _arena = new Rect2(72f, 70f, MathF.Max(900f, size.X - 144f), MathF.Max(430f, size.Y - 255f));
@@ -207,11 +269,19 @@ public partial class CombatPrototype : Node2D
         _dashRemaining = 0f;
         _actionLock = 0f;
         _hitStop = 0f;
+        _playerReaction = 0f;
+        _elapsed = 0f;
+        _clamorForm = ClamorForm.Rest;
+        _clamorShiftDisplay = 0f;
+        _prototypePaused = false;
         _kills = 0;
         _actions = 0;
         _goodActions = 0;
         _perfectActions = 0;
         _effects.Clear();
+        StartSession(showBriefing);
+        _combatRhythmBridge?.RestartForArena();
+        _combatRhythmBridge?.SetPrototypePaused(showBriefing);
 
         SpawnEnemy();
         RebuildDeck();
@@ -222,6 +292,16 @@ public partial class CombatPrototype : Node2D
             _drawTimers[i] = 0f;
         }
 
+        QueueRedraw();
+    }
+
+    private void TogglePrototypePause()
+    {
+        if (!IsSessionRunning)
+            return;
+
+        _prototypePaused = !_prototypePaused;
+        _combatRhythmBridge?.SetPrototypePaused(_prototypePaused || IsBellMicroEchoActive);
         QueueRedraw();
     }
 
@@ -300,6 +380,8 @@ public partial class CombatPrototype : Node2D
         _dashCooldown = MathF.Max(0f, _dashCooldown - dt);
         _actionLock = MathF.Max(0f, _actionLock - dt);
         _gradeDisplay = MathF.Max(0f, _gradeDisplay - dt);
+        _playerReaction = MathF.Max(0f, _playerReaction - dt);
+        _clamorShiftDisplay = MathF.Max(0f, _clamorShiftDisplay - dt);
         _enemy.HitFlash = MathF.Max(0f, _enemy.HitFlash - dt);
         _requiemLock = MathF.Max(0f, _requiemLock - dt);
 
@@ -313,11 +395,11 @@ public partial class CombatPrototype : Node2D
 
     private void UpdatePlayer(float dt)
     {
-        Vector2 input = Vector2.Zero;
-        if (Input.IsPhysicalKeyPressed((Key)87)) input.Y -= 1f; // W
-        if (Input.IsPhysicalKeyPressed((Key)83)) input.Y += 1f; // S
-        if (Input.IsPhysicalKeyPressed((Key)65)) input.X -= 1f; // A
-        if (Input.IsPhysicalKeyPressed((Key)68)) input.X += 1f; // D
+        Vector2 input = Input.GetVector(
+            PrototypeInput.MoveLeft,
+            PrototypeInput.MoveRight,
+            PrototypeInput.MoveUp,
+            PrototypeInput.MoveDown);
 
         if (input.LengthSquared() > 0.01f)
         {
@@ -341,7 +423,7 @@ public partial class CombatPrototype : Node2D
 
     private void TryDash()
     {
-        if (_dashCooldown > 0f)
+        if (!IsSessionRunning || IsBellMicroEchoActive || _dashCooldown > 0f)
             return;
 
         Vector2 direction = _playerFacing.LengthSquared() < 0.01f ? Vector2.Right : _playerFacing;
@@ -364,9 +446,38 @@ public partial class CombatPrototype : Node2D
         });
     }
 
+    private void CycleClamor()
+    {
+        if (!IsSessionRunning || IsBellMicroEchoActive || _actionLock > 0f)
+            return;
+
+        _clamorForm = _clamorForm switch
+        {
+            ClamorForm.Rest => ClamorForm.DoubleBlade,
+            ClamorForm.DoubleBlade => ClamorForm.TwinBatons,
+            _ => ClamorForm.Rest
+        };
+        _clamorShiftDisplay = ClamorShiftFeedbackDuration;
+        QueueRedraw();
+    }
+
+    private string GetClamorFormName() => _clamorForm switch
+    {
+        ClamorForm.Rest => "BASTÃO / REPOUSO",
+        ClamorForm.DoubleBlade => "LÂMINA DUPLA",
+        _ => "DOIS BASTÕES"
+    };
+
+    private string GetClamorFormRole() => _clamorForm switch
+    {
+        ClamorForm.Rest => "apoio · alcance",
+        ClamorForm.DoubleBlade => "arco · pressão",
+        _ => "mobilidade · sequência"
+    };
+
     private void TryPlayCard(int slot)
     {
-        if (slot < 0 || slot >= _hand.Length || _hand[slot] == null || _actionLock > 0f || _playerHealth <= 0f)
+        if (!IsSessionRunning || IsBellMicroEchoActive || slot < 0 || slot >= _hand.Length || _hand[slot] == null || _actionLock > 0f || _playerHealth <= 0f)
             return;
 
         CardDefinition card = _hand[slot]!;
@@ -512,6 +623,13 @@ public partial class CombatPrototype : Node2D
 
         _kills++;
         AddCadence(5f);
+
+        if (_kills >= TargetKills)
+        {
+            CompleteSession(SessionState.Victory);
+            return;
+        }
+
         SpawnEnemyAtRandomEdge();
     }
 
@@ -556,12 +674,6 @@ public partial class CombatPrototype : Node2D
             _enemy.TelegraphRemaining = 0.48f;
         }
 
-        if (_playerHealth <= 0f)
-        {
-            _playerHealth = 100f;
-            _cadence = 0f;
-            _playerPosition = _arena.GetCenter() + new Vector2(-210f, 20f);
-        }
     }
 
     private void FinishEnemyAttack()
@@ -573,9 +685,13 @@ public partial class CombatPrototype : Node2D
             return;
 
         _playerHealth = MathF.Max(0f, _playerHealth - 18f);
+        _playerReaction = 0.24f;
         _cadence = MathF.Max(0f, _cadence - 20f);
         _hitStop = MathF.Max(_hitStop, 0.045f);
         AddRingEffect(_enemy.Position, 92f, Crimson, 0.18f);
+
+        if (_playerHealth <= 0f)
+            CompleteSession(SessionState.Defeat);
     }
 
     private void UpdateCadence(float dt)

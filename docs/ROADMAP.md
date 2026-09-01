@@ -13,7 +13,7 @@ O roadmap prova a sensação do jogo antes de aumentar conteúdo.
 - [x] Especificação inicial de combate
 - [x] Protótipo de arena sem assets finais
 - [ ] Validar compilação no Godot 4.7.1
-- [ ] Guia visual final de Nox
+- [ ] Guia visual final de Noah
 - [ ] Protótipo sonoro original
 
 **Saída:** projeto abre direto em uma arena funcional e a direção não possui contradições principais.
@@ -26,6 +26,7 @@ O roadmap prova a sensação do jogo antes de aumentar conteúdo.
 - [x] Baralho inicial de 8 cartas
 - [x] Corte Breve
 - [x] Agulha
+- [x] Clamor alternável em três formas visuais (modificadores aguardam playtest)
 - [x] Passo Fantasma
 - [x] Sino Partido
 - [x] Pulso provisório a 100 BPM
@@ -35,7 +36,7 @@ O roadmap prova a sensação do jogo antes de aumentar conteúdo.
 - [ ] Transformar valores mágicos em dados editáveis
 - [ ] Separar relógio de Pulso da cena
 - [ ] Separar mão/baralho da cena
-- [ ] FSM simples de Nox
+- [ ] FSM simples de Noah
 - [ ] hitbox/hurtbox de produção
 - [ ] suporte inicial a controle
 
@@ -43,7 +44,7 @@ O roadmap prova a sensação do jogo antes de aumentar conteúdo.
 
 ## M2 — Hit feel + som
 
-- [ ] Primeiro sprite/animatic de Nox
+- [ ] Primeiro sprite/animatic de Noah
 - [ ] poses-chave das quatro ações
 - [ ] hit-stop refinado
 - [ ] câmera leve
@@ -61,18 +62,18 @@ O roadmap prova a sensação do jogo antes de aumentar conteúdo.
 - [ ] blockout autoral da sala
 - [ ] tiles temporários ou CC0 documentados
 - [ ] água / reflexos provisórios
-- [ ] sino interativo
-- [ ] porta/foco visual
+- [x] sino responsivo provisório integrado à porta
+- [x] porta/foco visual no blockout procedural
 - [ ] Peregrino Oco final do slice
 - [ ] Cantor Partido
-- [ ] primeiro segredo mecânico
-- [ ] primeiro micro-Eco
+- [x] primeiro segredo mecânico provisório com pista e resultado
+- [x] primeiro micro-Eco visual provisório
 
 **Saída:** uma sala já transmite exploração, combate e mistério de Réquiem.
 
-## M4 — Nox e identidade visual
+## M4 — Noah e identidade visual
 
-- [ ] concept sheet de Nox
+- [ ] concept sheet de Noah
 - [ ] silhuetas alternativas
 - [ ] paleta fechada
 - [ ] sprite-base final

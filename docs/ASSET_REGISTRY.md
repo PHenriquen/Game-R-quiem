@@ -14,7 +14,7 @@ Para qualquer asset externo, registrar antes de considerar uso final:
 - alterações feitas;
 - status: candidato / protótipo / final / removido.
 
-Assets externos podem acelerar blockout. Eles **não** definem a identidade final de Nox, Dissonantes, UI, logo ou símbolos narrativos.
+Assets externos podem acelerar blockout. Eles **não** definem a identidade final de Noah, Dissonantes, UI, logo ou símbolos narrativos.
 
 ## Assets atuais
 

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Réquiem — Echo Trial Editor</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080a10;--panel:#10141d;--panel2:#151b26;--line:#28313e;--text:#e9e2d0;--muted:#8b96a6;--spectral:#54c7ce;--gold:#c4a35a;--crimson:#9e1738;--violet:#6651a6}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% 0,#10232b 0,transparent 35rem),var(--bg);color:var(--text);font:14px/1.45 Inter,system-ui,sans-serif}
+    button,input,select{font:inherit}.shell{width:min(1320px,calc(100% - 32px));margin:auto}.top{padding:28px 0 20px;display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line)}
+    h1{font-size:28px;margin:0;letter-spacing:-.03em}.eyebrow{color:var(--spectral);text-transform:uppercase;letter-spacing:.17em;font-size:10px}.top p{margin:6px 0 0;color:var(--muted)}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 12px;border-radius:10px;cursor:pointer}.btn:hover{border-color:#4a586b}.btn.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+    .layout{display:grid;grid-template-columns:320px 1fr;gap:16px;padding:18px 0 40px}.panel{background:rgba(16,20,29,.92);border:1px solid var(--line);border-radius:16px;padding:16px}.panel h2{font-size:13px;text-transform:uppercase;letter-spacing:.14em;margin:0 0 14px;color:#bcc5d1}
+    label{display:grid;gap:5px;color:var(--muted);font-size:11px;margin-bottom:11px}input,select{width:100%;background:#0b0e15;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px 10px}input:focus,select:focus{outline:1px solid var(--spectral)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}.stat{padding:10px;background:#0b0e15;border:1px solid var(--line);border-radius:10px}.stat strong{display:block;font-size:18px}.stat span{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em}
+    .timeline-wrap{overflow:auto;padding-bottom:6px}.timeline{position:relative;height:245px;min-width:760px;background:linear-gradient(#0b0e15,#0c1018);border:1px solid var(--line);border-radius:12px;overflow:hidden}.track{position:absolute;left:0;right:0;height:48px;border-bottom:1px solid #1b2330}.track-label{position:absolute;left:8px;top:7px;font-size:9px;color:#677487;text-transform:uppercase;letter-spacing:.12em;z-index:2}.beat{position:absolute;top:0;bottom:0;width:1px;background:#18202c}.beat.bar{background:#314052}.event{position:absolute;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid #091019;box-shadow:0 0 10px currentColor;cursor:pointer}.event.selected{outline:2px solid white;outline-offset:2px}.event:hover{scale:1.25}.playhead{position:absolute;top:0;bottom:0;width:2px;background:var(--gold);pointer-events:none;z-index:4}.time-row{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:5px}
+    .event-list{margin-top:14px;border-top:1px solid var(--line)}.row{display:grid;grid-template-columns:68px 1fr 1fr 34px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #1c2430;font-size:12px}.row code{color:var(--spectral)}.row small{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.iconbtn{background:none;border:0;color:#7e8999;cursor:pointer;font-size:18px}.iconbtn:hover{color:#ff778c}
+    .hint{color:var(--muted);font-size:11px}.drop{border:1px dashed #3a4658;border-radius:12px;padding:12px;text-align:center;color:var(--muted);margin-top:10px}.drop.drag{border-color:var(--spectral);color:var(--spectral)}
+    .event-form{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}.error{color:#ff788d;white-space:pre-wrap;font-size:11px}.ok{color:#70d7ae}.hidden{display:none}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}.top{align-items:start;gap:16px;flex-direction:column}.stats{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <header class="top shell"><div><div class="eyebrow">Réquiem / authoring tool</div><h1>Echo Trial Editor</h1><p>Timeline semântica: música guia o combate, não substitui o combate.</p></div><div class="actions"><button class="btn" id="newBtn">Novo</button><button class="btn" id="importBtn">Importar JSON</button><button class="btn primary" id="exportBtn">Exportar JSON</button><input class="hidden" type="file" id="fileInput" accept="application/json,.json" /></div></header>
+  <main class="layout shell">
+    <aside class="panel">
+      <h2>Beatmap</h2>
+      <label>ID<input id="mapId" /></label><label>Título<input id="title" /></label><label>Artista / fonte<input id="artist" /></label>
+      <div class="grid2"><label>BPM<input id="bpm" type="number" min="40" max="300" step="0.1" /></label><label>Offset (s)<input id="offset" type="number" step="0.001" /></label></div>
+      <div class="grid2"><label>Duração (s)<input id="duration" type="number" min="1" step="0.01" /></label><label>Beats/bar<input id="beatsPerBar" type="number" min="1" max="12" /></label></div>
+      <label>Dificuldade<select id="difficulty"><option>Echo</option><option>Pulse</option><option>Requiem</option></select></label><label>Audio path<input id="audio" placeholder="res://assets/audio/..." /></label>
+      <div class="drop" id="drop">Arraste um beatmap JSON aqui</div>
+      <div id="validation" class="hint" style="margin-top:10px"></div>
+      <section class="event-form">
+        <h2>Evento</h2>
+        <div class="grid2"><label>Tempo (s)<input id="evTime" type="number" min="0" step="0.001" /></label><label>Lane<input id="evLane" type="number" min="0" step="1" value="0" /></label></div>
+        <label>Tipo<select id="evType"><option>pulse</option><option>enemy_spawn</option><option>enemy_telegraph</option><option>arena_shift</option><option>card_window</option><option>accent</option><option>checkpoint</option></select></label>
+        <label>ID<input id="evId" placeholder="ex: mourner_a_01" /></label><label>Valor semântico<input id="evValue" placeholder="ex: ring / dodge / bell" /></label>
+        <div class="actions"><button class="btn primary" id="saveEvent">Adicionar evento</button><button class="btn hidden" id="cancelEdit">Cancelar</button></div>
+        <p class="hint">Dica: clique na timeline para preencher o tempo. Clique num evento para editar.</p>
+      </section>
+    </aside>
+    <section>
+      <div class="stats"><div class="stat"><strong id="eventCount">0</strong><span>eventos</span></div><div class="stat"><strong id="barCount">0</strong><span>bars</span></div><div class="stat"><strong id="spb">0.500</strong><span>s / beat</span></div><div class="stat"><strong id="selectedTime">—</strong><span>cursor</span></div></div>
+      <div class="panel"><h2>Timeline</h2><div class="timeline-wrap"><div class="timeline" id="timeline"><div class="playhead" id="playhead" style="left:0"></div></div><div class="time-row"><span>0s</span><span id="midTime"></span><span id="endTime"></span></div></div>
+        <div class="event-list" id="eventList"></div>
+      </div>
+    </section>
+  </main>
+<script>
+const types=["pulse","enemy_spawn","enemy_telegraph","arena_shift","card_window","accent","checkpoint"];
+const colors={pulse:"#8194ac",enemy_spawn:"#e05268",enemy_telegraph:"#f0a65a",arena_shift:"#6651a6",card_window:"#54c7ce",accent:"#c4a35a",checkpoint:"#e9e2d0"};
+const tracks={enemy_spawn:0,enemy_telegraph:0,card_window:1,arena_shift:2,pulse:3,accent:3,checkpoint:3};
+let map,editing=-1;
+const $=id=>document.getElementById(id);
+function fresh(){return {version:1,id:"echo_trial_new",title:"New Echo Trial",artist:"prototype",difficulty:"Echo",bpm:120,offset:0,beatsPerBar:4,duration:60,audio:"",events:[]}}
+function syncFieldsToMap(){map.id=$("mapId").value.trim();map.title=$("title").value.trim();map.artist=$("artist").value.trim();map.difficulty=$("difficulty").value;map.bpm=Number($("bpm").value);map.offset=Number($("offset").value);map.beatsPerBar=Number($("beatsPerBar").value);map.duration=Number($("duration").value);map.audio=$("audio").value.trim()}
+function syncMapToFields(){$("mapId").value=map.id;$("title").value=map.title;$("artist").value=map.artist;$("difficulty").value=map.difficulty;$("bpm").value=map.bpm;$("offset").value=map.offset;$("beatsPerBar").value=map.beatsPerBar;$("duration").value=map.duration;$("audio").value=map.audio}
+function validate(){syncFieldsToMap();const e=[];if(!map.id)e.push("ID obrigatório");if(!map.title)e.push("Título obrigatório");if(!(map.bpm>=40&&map.bpm<=300))e.push("BPM: 40–300");if(!(map.duration>0))e.push("Duração deve ser > 0");let last=-1;const ids=new Set();map.events.forEach((x,i)=>{if(x.time<0||x.time>map.duration)e.push(`Evento ${i}: tempo fora da duração`);if(x.time<last)e.push("Eventos fora de ordem");if(!types.includes(x.type))e.push(`Tipo desconhecido: ${x.type}`);if(x.id&&ids.has(x.id))e.push(`ID duplicado: ${x.id}`);if(x.id)ids.add(x.id);last=x.time});$("validation").className=e.length?"error":"ok";$("validation").textContent=e.length?e.join("\n"):"Beatmap válido para exportação";return !e.length}
+function render(){syncFieldsToMap();map.events.sort((a,b)=>a.time-b.time);const timeline=$("timeline");timeline.querySelectorAll(".track,.beat,.event").forEach(n=>n.remove());const labels=["Enemies","Cards","Arena","Music / accents"];labels.forEach((label,i)=>{const d=document.createElement("div");d.className="track";d.style.top=`${i*48}px`;d.innerHTML=`<span class=track-label>${label}</span>`;timeline.appendChild(d)});const spb=60/Math.max(1,map.bpm);for(let t=map.offset,b=0;t<=map.duration;t+=spb,b++){const d=document.createElement("div");d.className="beat"+(b%map.beatsPerBar===0?" bar":"");d.style.left=`${Math.max(0,Math.min(100,t/map.duration*100))}%`;timeline.appendChild(d)}
+map.events.forEach((ev,i)=>{const d=document.createElement("button");d.className="event"+(editing===i?" selected":"");d.style.left=`${ev.time/map.duration*100}%`;d.style.top=`${tracks[ev.type]*48+29}px`;d.style.color=colors[ev.type];d.style.background=colors[ev.type];d.title=`${ev.time.toFixed(3)} ${ev.type} ${ev.id||ev.value}`;d.onclick=e=>{e.stopPropagation();editEvent(i)};timeline.appendChild(d)});
+$("eventCount").textContent=map.events.length;$("barCount").textContent=Math.ceil(map.duration/(spb*map.beatsPerBar));$("spb").textContent=spb.toFixed(3);$("midTime").textContent=(map.duration/2).toFixed(1)+"s";$("endTime").textContent=map.duration.toFixed(1)+"s";renderList();validate()}
+function renderList(){const box=$("eventList");box.innerHTML="";map.events.forEach((ev,i)=>{const row=document.createElement("div");row.className="row";row.innerHTML=`<code>${ev.time.toFixed(3)}</code><span style="color:${colors[ev.type]}">${ev.type}</span><small>${ev.id||ev.value||"—"}</small><button class=iconbtn title="remover">×</button>`;row.onclick=e=>{if(e.target.tagName!=="BUTTON")editEvent(i)};row.querySelector("button").onclick=e=>{e.stopPropagation();map.events.splice(i,1);if(editing===i)cancelEdit();render()};box.appendChild(row)})}
+function editEvent(i){editing=i;const e=map.events[i];$("evTime").value=e.time;$("evType").value=e.type;$("evId").value=e.id||"";$("evLane").value=e.lane||0;$("evValue").value=e.value||"";$("saveEvent").textContent="Salvar alterações";$("cancelEdit").classList.remove("hidden");render()}
+function cancelEdit(){editing=-1;$("evId").value="";$("evValue").value="";$("evLane").value=0;$("saveEvent").textContent="Adicionar evento";$("cancelEdit").classList.add("hidden")}
+function saveEvent(){const e={time:Number($("evTime").value),type:$("evType").value,id:$("evId").value.trim(),lane:Number($("evLane").value)||0,value:$("evValue").value.trim()};if(editing>=0)map.events[editing]=e;else map.events.push(e);cancelEdit();render()}
+function load(obj){map={...fresh(),...obj,events:Array.isArray(obj.events)?obj.events:[]};syncMapToFields();cancelEdit();render()}
+function exportJson(){if(!validate())return;map.events.sort((a,b)=>a.time-b.time);const blob=new Blob([JSON.stringify(map,null,2)+"\n"],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(map.id||"echo_trial")+".json";a.click();URL.revokeObjectURL(a.href)}
+async function fileLoad(file){try{load(JSON.parse(await file.text()))}catch(e){$("validation").className="error";$("validation").textContent="JSON inválido: "+e.message}}
+["mapId","title","artist","difficulty","bpm","offset","beatsPerBar","duration","audio"].forEach(id=>$(id).addEventListener("input",render));
+$("timeline").addEventListener("click",e=>{const r=$("timeline").getBoundingClientRect();const p=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));const t=p*map.duration;$("evTime").value=t.toFixed(3);$("selectedTime").textContent=t.toFixed(3)+"s";$("playhead").style.left=(p*100)+"%"});
+$("saveEvent").onclick=saveEvent;$("cancelEdit").onclick=cancelEdit;$("newBtn").onclick=()=>load(fresh());$("exportBtn").onclick=exportJson;$("importBtn").onclick=()=>$("fileInput").click();$("fileInput").onchange=e=>e.target.files[0]&&fileLoad(e.target.files[0]);
+const drop=$("drop");["dragenter","dragover"].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add("drag")}));["dragleave","drop"].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove("drag")}));drop.addEventListener("drop",e=>e.dataTransfer.files[0]&&fileLoad(e.dataTransfer.files[0]));
+load(fresh());
+</script>
+</body>
+</html>
