@@ -112,6 +112,9 @@ public partial class CombatPrototype
 
     private void DrawPlayer()
     {
+        if (DrawNoahProductionSprite())
+            return;
+
         bool requiem = _cadence >= 90f;
         Vector2 forward = _playerFacing.LengthSquared() > 0.01f ? _playerFacing.Normalized() : Vector2.Right;
         Vector2 side = new(-forward.Y, forward.X);
